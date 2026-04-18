@@ -1,0 +1,25 @@
+<svg width="600" height="260" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="260" rx="0" fill="#F7F0EF"/>
+  <line x1="200" y1="60" x2="400" y2="60" stroke="#E0828F" stroke-width="0.5"/>
+  <text
+    x="300"
+    y="158"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', 'Georgia', serif"
+    font-size="88"
+    font-weight="300"
+    fill="#E0828F"
+    letter-spacing="22"
+  >FLEYA</text>
+  <text
+    x="300"
+    y="193"
+    text-anchor="middle"
+    font-family="'Jost', 'Helvetica Neue', sans-serif"
+    font-size="11"
+    font-weight="300"
+    fill="#B85A68"
+    letter-spacing="6"
+  >ACCESSORIES FOR WOMEN</text>
+  <line x1="200" y1="212" x2="400" y2="212" stroke="#E0828F" stroke-width="0.5"/>
+</svg>

@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleya — Accessories for Women</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background-color: #E0828F;
+      color: #F7F0EF;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-primary:hover  { background-color: #B85A68; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #B85A68; outline-offset: 3px; }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #2A2220;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 36px;
+      border: 0.5px solid #2A2220;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-outline:hover  { border-color: #E0828F; color: #E0828F; transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    .btn-ghost {
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(247,240,239,0.75);
+      text-decoration: none;
+      border-bottom: 0.5px solid rgba(247,240,239,0.35);
+      padding-bottom: 2px;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .btn-ghost:hover { color: #fff; border-color: rgba(247,240,239,0.8); }
+
+    /* ── Decorative lines ── */
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: #E0828F;
+    }
+    .deco-line-center { margin: 0 auto; }
+
+    /* ── Nav ── */
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover      { color: #E0828F; }
+    .nav-link:focus-visible { outline: 1px dotted #E0828F; }
+
+    /* ── Navbar scroll ── */
+    #navbar {
+      transition: background-color 0.35s ease, box-shadow 0.35s ease,
+                  backdrop-filter 0.35s ease;
+    }
+    #navbar.scrolled {
+      background-color: rgba(247, 240, 239, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.12);
+    }
+
+    /* ── Product cards ── */
+    .product-card { overflow: hidden; }
+    .product-card .card-img {
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .card-img { transform: scale(1.04); }
+
+    /* ── Scroll fade-up ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Marquee ── */
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      gap: 72px;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+
+    /* ── Grain ── */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    /* ── Hero animated gradient ── */
+    .hero-gl {
+      position: absolute;
+      inset: 0;
+      transition: opacity 2.8s cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    @keyframes heroGlow {
+      from {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    /* ── Misc ── */
+    input::placeholder { color: rgba(42,34,32,0.4); }
+    input:focus { outline: none; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     GRAIN TEXTURE
+════════════════════════════════════════════ -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <!-- Left links -->
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="#collection" class="nav-link">Collection</a>
+      <a href="#about"      class="nav-link">About</a>
+    </div>
+
+    <!-- Wordmark logo -->
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="#" aria-label="Fleya home">
+        <img src="brand_assets/fleya-logo.svg" alt="Fleya" class="h-14 w-auto" style="max-width: 180px;">
+      </a>
+    </div>
+
+    <!-- Right links -->
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="#journal"    class="nav-link">Journal</a>
+      <a href="#newsletter" class="nav-link">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Shop
+        </span>
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-end overflow-hidden"
+         style="padding-bottom: 96px;">
+
+  <!-- Animated gradient background -->
+  <div class="absolute inset-0 z-0" id="hero-bg">
+
+    <!-- Gradient layers — cycle via JS, crossfade with opacity transition -->
+    <div class="hero-gl" style="background: linear-gradient(135deg, #2A2220 0%, #8a3a4a 45%, #E0828F 100%); opacity:1;"></div>
+    <div class="hero-gl" style="background: linear-gradient(150deg, #1a0d10 0%, #B85A68 55%, #F2C4CE 100%); opacity:0;"></div>
+    <div class="hero-gl" style="background: linear-gradient(120deg, #2A2220 0%, #7a3040 50%, #E0828F 100%); opacity:0;"></div>
+    <div class="hero-gl" style="background: linear-gradient(145deg, #0f0608 0%, #B85A68 48%, #E0828F 100%); opacity:0;"></div>
+    <div class="hero-gl" style="background: linear-gradient(135deg, #3D1A22 0%, #c4687a 55%, #F2C4CE 100%); opacity:0;"></div>
+
+    <!-- Subtle animated grain shimmer layer -->
+    <div class="absolute inset-0"
+         style="background: radial-gradient(ellipse 80% 60% at 15% 20%,
+           rgba(242,196,206,0.18) 0%,
+           transparent 55%),
+           radial-gradient(ellipse 50% 40% at 85% 75%,
+           rgba(184,90,104,0.15) 0%,
+           transparent 50%);
+           animation: heroGlow 12s ease-in-out infinite alternate;">
+    </div>
+
+    <!-- Bottom-to-top dark vignette (ensures text legibility) -->
+    <div class="absolute inset-0"
+         style="background: linear-gradient(to bottom,
+           rgba(42,34,32,0.08) 0%,
+           rgba(42,34,32,0.72) 55%,
+           rgba(42,34,32,0.92) 100%);"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-8 lg:px-16 w-full">
+    <div style="max-width: 580px;">
+      <span class="deco-line" style="margin-bottom: 28px;"></span>
+      <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.28em;
+                text-transform:uppercase;color:rgba(247,240,239,0.65);
+                margin-bottom:20px;margin-top:28px;">
+        New Collection — Spring 2026
+      </p>
+      <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                 font-size:clamp(54px,8.5vw,100px);line-height:1.0;
+                 letter-spacing:0.01em;color:#F7F0EF;
+                 margin-bottom:28px;">
+        Carry it<br>
+        <em style="font-style:italic;color:#F2C4CE;">beautifully.</em>
+      </h1>
+      <p style="font-family:'Jost',sans-serif;font-weight:300;
+                letter-spacing:0.09em;font-size:13px;
+                color:rgba(247,240,239,0.75);
+                max-width:400px;line-height:1.95;
+                margin-bottom:40px;">
+        Refined accessories crafted for the modern woman.<br>
+        Where elegance meets intention.
+      </p>
+      <div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
+        <a href="#collection" class="btn-primary">Discover the Collection</a>
+        <a href="#about"      class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vertical scroll hint -->
+  <div class="absolute z-10"
+       style="bottom:36px;right:64px;display:flex;flex-direction:column;
+              align-items:center;gap:10px;">
+    <span style="font-family:'Jost',sans-serif;font-size:9px;
+                 letter-spacing:0.28em;text-transform:uppercase;
+                 color:rgba(247,240,239,0.4);writing-mode:vertical-rl;">Scroll</span>
+    <div style="width:0.5px;height:48px;
+                background:linear-gradient(to bottom,rgba(247,240,239,0.4),transparent);"></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     MARQUEE BANNER
+════════════════════════════════════════════ -->
+<div style="background-color:#E0828F;padding:12px 0;overflow:hidden;">
+  <div class="marquee-track">
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Handcrafted Luxury</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">New Arrivals 2026</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Women's Accessories</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Timeless Design</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Founded with Love</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Handcrafted Luxury</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">New Arrivals 2026</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Women's Accessories</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Timeless Design</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+    <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#F7F0EF;">Founded with Love</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(247,240,239,0.5);">✦</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     COLLECTION GRID
+════════════════════════════════════════════ -->
+<section id="collection" style="padding:112px 0;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+
+    <!-- Header -->
+    <div class="text-center fade-up" style="margin-bottom:72px;">
+      <span class="deco-line deco-line-center" style="margin-bottom:28px;"></span>
+      <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                text-transform:uppercase;color:#B85A68;margin-bottom:16px;">
+        Spring / Summer 2026
+      </p>
+      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                 font-size:clamp(38px,5vw,62px);letter-spacing:0.04em;color:#2A2220;">
+        The Collection
+      </h2>
+      <span class="deco-line deco-line-center" style="margin-top:28px;"></span>
+    </div>
+
+    <!-- Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;
+                grid-template-rows:auto auto;gap:16px;">
+
+      <!-- Card 1 — LARGE (spans 2 cols, 1 row) -->
+      <div class="product-card fade-up"
+           style="grid-column:1/3;border-radius:10px;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <div style="position:relative;overflow:hidden;aspect-ratio:16/9;border-radius:10px;">
+          <img src="https://placehold.co/960x540/F2C4CE/B85A68?text=."
+               alt="The Fleya Bag Hook"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(135deg,rgba(242,196,206,0.25) 0%,transparent 55%);"></div>
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:36px 40px;">
+            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.25em;
+                      text-transform:uppercase;color:rgba(247,240,239,0.6);margin-bottom:6px;">
+              Bestseller
+            </p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                       font-size:32px;color:#F7F0EF;letter-spacing:0.04em;
+                       margin-bottom:6px;">
+              The Fleya Bag Hook
+            </h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;
+                        flex-wrap:wrap;gap:12px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">€ 49.00</p>
+              <a href="#" class="btn-primary" style="padding:10px 24px;font-size:10px;">Shop Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 — portrait right -->
+      <div class="product-card fade-up"
+           style="grid-column:3/4;grid-row:1/3;border-radius:10px;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <div style="position:relative;overflow:hidden;height:100%;border-radius:10px;
+                    min-height:420px;background:#E0828F;">
+          <img src="https://placehold.co/480x700/E0828F/F7F0EF?text=."
+               alt="The Sculptural Clutch"
+               class="card-img w-full h-full object-cover"
+               style="min-height:420px;">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.70) 0%,transparent 45%);"></div>
+          <div style="position:absolute;top:24px;left:24px;">
+            <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.35);backdrop-filter:blur(4px);
+                         padding:4px 10px;border-radius:20px;">New</span>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:28px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                       font-size:24px;color:#F7F0EF;letter-spacing:0.04em;
+                       margin-bottom:4px;">
+              The Sculptural Clutch
+            </h3>
+            <p style="font-family:'Jost',sans-serif;font-size:11px;
+                      color:rgba(247,240,239,0.55);letter-spacing:0.12em;">€ 89.00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card fade-up"
+           style="grid-column:1/2;border-radius:10px;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:10px;
+                    background:#B85A68;">
+          <img src="https://placehold.co/480x640/B85A68/F2C4CE?text=."
+               alt="The Everyday Tote"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.65) 0%,transparent 50%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
+            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                      text-transform:uppercase;color:rgba(247,240,239,0.55);
+                      margin-bottom:4px;">Coming Soon</p>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                       font-size:22px;color:#F7F0EF;letter-spacing:0.04em;
+                       margin-bottom:4px;">
+              The Everyday Tote
+            </h3>
+            <a href="#newsletter"
+               style="font-family:'Jost',sans-serif;font-size:10px;
+                      letter-spacing:0.18em;text-transform:uppercase;
+                      color:rgba(247,240,239,0.6);text-decoration:none;
+                      border-bottom:0.5px solid rgba(247,240,239,0.3);
+                      padding-bottom:1px;transition:color 0.25s ease;">
+              Notify Me →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 — editorial banner -->
+      <div class="product-card fade-up"
+           style="grid-column:2/3;border-radius:10px;overflow:hidden;
+                  background:#2A2220;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:10px;">
+          <img src="https://placehold.co/480x640/2A2220/E0828F?text=."
+               alt=""
+               class="card-img w-full h-full object-cover"
+               style="opacity:0.6;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;
+                      justify-content:center;align-items:center;text-align:center;
+                      padding:32px;">
+            <span class="deco-line deco-line-center" style="margin-bottom:20px;"></span>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                       font-size:clamp(22px,3vw,30px);color:#F7F0EF;
+                       letter-spacing:0.04em;line-height:1.25;margin-bottom:20px;">
+              Designed to be seen.<br>
+              <em style="color:#F2C4CE;font-style:italic;">Built to last.</em>
+            </h3>
+            <a href="#" class="btn-primary" style="padding:10px 24px;font-size:10px;">View All</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     BRAND STORY / ABOUT
+════════════════════════════════════════════ -->
+<section id="about" style="padding:112px 0;overflow:hidden;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;"
+         class="lg-grid-story">
+
+      <!-- Image -->
+      <div class="fade-up" style="position:relative;">
+        <div style="border-radius:10px;overflow:hidden;
+                    box-shadow:0 24px 64px rgba(224,130,143,0.18);">
+          <img src="https://placehold.co/680x900/F2C4CE/B85A68?text=."
+               alt="Fleya brand story"
+               style="width:100%;object-fit:cover;aspect-ratio:3/4;display:block;">
+        </div>
+        <!-- Circle accent -->
+        <div style="position:absolute;top:-28px;left:-28px;width:110px;height:110px;
+                    border:0.5px solid #E0828F;border-radius:50%;
+                    opacity:0.3;pointer-events:none;"></div>
+        <!-- Floating stat card -->
+        <div style="position:absolute;bottom:40px;right:-36px;
+                    background:#F2C4CE;border-radius:8px;
+                    padding:20px 28px;
+                    box-shadow:0 8px 32px rgba(224,130,143,0.22);">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:28px;
+                    font-weight:300;color:#2A2220;line-height:1.1;
+                    margin-bottom:4px;">Founded</p>
+          <p style="font-family:'Jost',sans-serif;font-size:9px;
+                    letter-spacing:0.28em;text-transform:uppercase;
+                    color:#B85A68;">with love, 2024</p>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="fade-up">
+        <span class="deco-line" style="margin-bottom:28px;"></span>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                  text-transform:uppercase;color:#B85A68;margin-bottom:20px;
+                  margin-top:28px;">
+          Our Story
+        </p>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                   font-size:clamp(36px,4.5vw,58px);letter-spacing:0.03em;
+                   color:#2A2220;line-height:1.15;margin-bottom:28px;">
+          Born from a<br>love of beauty
+        </h2>
+        <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:13.5px;
+                  letter-spacing:0.06em;line-height:1.95;color:#2A2220;
+                  margin-bottom:18px;">
+          Fleya was created for women who believe every detail matters — from the way a bag rests on a table to the texture of a strap against your skin.
+        </p>
+        <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:13.5px;
+                  letter-spacing:0.06em;line-height:1.95;color:#2A2220;
+                  margin-bottom:40px;">
+          We design accessories that feel as good as they look. Timeless pieces made with intention, crafted to become part of your daily ritual.
+        </p>
+        <a href="#" class="btn-outline">Read Our Story</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    .lg-grid-story { grid-template-columns: 1fr !important; gap: 48px !important; }
+  }
+</style>
+
+
+<!-- ════════════════════════════════════════════
+     VALUES
+════════════════════════════════════════════ -->
+<section style="background-color:#2A2220;padding:96px 0;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+
+    <!-- Header -->
+    <div class="text-center fade-up" style="margin-bottom:64px;">
+      <span class="deco-line deco-line-center" style="margin-bottom:28px;"></span>
+      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                 font-size:clamp(34px,4vw,54px);letter-spacing:0.04em;color:#F7F0EF;">
+        The Fleya Promise
+      </h2>
+      <span class="deco-line deco-line-center" style="margin-top:28px;"></span>
+    </div>
+
+    <!-- Pillars -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
+                border:0.5px solid rgba(224,130,143,0.2);border-radius:10px;
+                overflow:hidden;">
+
+      <div class="fade-up"
+           style="padding:48px 40px;text-align:center;
+                  background:rgba(255,255,255,0.02);">
+        <div style="width:40px;height:40px;border:0.5px solid #E0828F;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;margin:0 auto 24px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;
+                       font-style:italic;color:#E0828F;">i</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                   font-size:22px;letter-spacing:0.07em;color:#F7F0EF;
+                   margin-bottom:14px;">Craftsmanship</h3>
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.9;
+                  color:rgba(247,240,239,0.45);">
+          Every piece is thoughtfully designed with attention to detail, materiality, and lasting quality.
+        </p>
+      </div>
+
+      <div class="fade-up"
+           style="padding:48px 40px;text-align:center;
+                  background:rgba(224,130,143,0.07);
+                  border-left:0.5px solid rgba(224,130,143,0.2);
+                  border-right:0.5px solid rgba(224,130,143,0.2);">
+        <div style="width:40px;height:40px;border:0.5px solid #E0828F;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;margin:0 auto 24px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;
+                       font-style:italic;color:#E0828F;">ii</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                   font-size:22px;letter-spacing:0.07em;color:#F7F0EF;
+                   margin-bottom:14px;">Timelessness</h3>
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.9;
+                  color:rgba(247,240,239,0.45);">
+          We design beyond trends. Fleya pieces are made to be loved for years, not seasons.
+        </p>
+      </div>
+
+      <div class="fade-up"
+           style="padding:48px 40px;text-align:center;
+                  background:rgba(255,255,255,0.02);">
+        <div style="width:40px;height:40px;border:0.5px solid #E0828F;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;margin:0 auto 24px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;
+                       font-style:italic;color:#E0828F;">iii</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                   font-size:22px;letter-spacing:0.07em;color:#F7F0EF;
+                   margin-bottom:14px;">Intentionality</h3>
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.9;
+                  color:rgba(247,240,239,0.45);">
+          Each accessory serves a purpose. Every design decision is deliberate, never arbitrary.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     EDITORIAL PULL QUOTE
+════════════════════════════════════════════ -->
+<section style="padding:128px 32px;
+                background:linear-gradient(150deg,#F7F0EF 55%,#F2C4CE 100%);">
+  <div class="max-w-4xl mx-auto text-center fade-up">
+    <span class="deco-line deco-line-center" style="margin-bottom:48px;"></span>
+    <blockquote style="font-family:'Cormorant Garamond',Georgia,serif;
+                       font-weight:300;font-size:clamp(26px,4.5vw,52px);
+                       letter-spacing:0.04em;color:#2A2220;line-height:1.3;
+                       font-style:italic;margin-bottom:48px;">
+      "A woman who wears Fleya carries elegance not as an accessory — but as her nature."
+    </blockquote>
+    <span class="deco-line deco-line-center" style="margin-bottom:24px;"></span>
+    <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+              text-transform:uppercase;color:#B85A68;">
+      — Fleya, founded 2024
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     INSTAGRAM / SOCIAL STRIP  (mock)
+════════════════════════════════════════════ -->
+<section id="journal" style="padding:96px 0 0;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+    <div class="text-center fade-up" style="margin-bottom:48px;">
+      <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                text-transform:uppercase;color:#B85A68;margin-bottom:12px;">
+        @fleya
+      </p>
+      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                 font-size:clamp(30px,4vw,48px);letter-spacing:0.04em;color:#2A2220;">
+        As Seen On
+      </h2>
+    </div>
+  </div>
+  <!-- Full-bleed strip -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;overflow:hidden;">
+    <div style="position:relative;aspect-ratio:1;overflow:hidden;background:#F2C4CE;">
+      <img src="https://placehold.co/400x400/F2C4CE/E0828F?text=."
+           alt="" class="card-img w-full h-full object-cover">
+      <div class="absolute inset-0"
+           style="background:rgba(224,130,143,0);
+                  transition:background 0.35s ease;cursor:pointer;"
+           onmouseover="this.style.background='rgba(224,130,143,0.25)'"
+           onmouseout="this.style.background='rgba(224,130,143,0)'"></div>
+    </div>
+    <div style="position:relative;aspect-ratio:1;overflow:hidden;background:#E0828F;">
+      <img src="https://placehold.co/400x400/E0828F/F7F0EF?text=."
+           alt="" class="card-img w-full h-full object-cover">
+      <div class="absolute inset-0"
+           style="background:rgba(224,130,143,0);transition:background 0.35s ease;cursor:pointer;"
+           onmouseover="this.style.background='rgba(224,130,143,0.25)'"
+           onmouseout="this.style.background='rgba(224,130,143,0)'"></div>
+    </div>
+    <div style="position:relative;aspect-ratio:1;overflow:hidden;background:#B85A68;">
+      <img src="https://placehold.co/400x400/B85A68/F2C4CE?text=."
+           alt="" class="card-img w-full h-full object-cover">
+      <div class="absolute inset-0"
+           style="background:rgba(224,130,143,0);transition:background 0.35s ease;cursor:pointer;"
+           onmouseover="this.style.background='rgba(224,130,143,0.25)'"
+           onmouseout="this.style.background='rgba(224,130,143,0)'"></div>
+    </div>
+    <div style="position:relative;aspect-ratio:1;overflow:hidden;background:#2A2220;">
+      <img src="https://placehold.co/400x400/2A2220/E0828F?text=."
+           alt="" class="card-img w-full h-full object-cover" style="opacity:0.7;">
+      <div class="absolute inset-0"
+           style="background:rgba(224,130,143,0);transition:background 0.35s ease;cursor:pointer;"
+           onmouseover="this.style.background='rgba(224,130,143,0.25)'"
+           onmouseout="this.style.background='rgba(224,130,143,0)'"></div>
+    </div>
+    <div style="position:relative;aspect-ratio:1;overflow:hidden;background:#F2C4CE;">
+      <img src="https://placehold.co/400x400/F2C4CE/B85A68?text=."
+           alt="" class="card-img w-full h-full object-cover">
+      <div class="absolute inset-0"
+           style="background:rgba(224,130,143,0);transition:background 0.35s ease;cursor:pointer;"
+           onmouseover="this.style.background='rgba(224,130,143,0.25)'"
+           onmouseout="this.style.background='rgba(224,130,143,0)'"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     NEWSLETTER
+════════════════════════════════════════════ -->
+<section id="newsletter" style="padding:112px 0;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+    <div class="max-w-xl mx-auto text-center fade-up">
+      <span class="deco-line deco-line-center" style="margin-bottom:28px;"></span>
+      <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                text-transform:uppercase;color:#B85A68;margin-bottom:16px;
+                margin-top:28px;">
+        Stay Close
+      </p>
+      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                 font-size:clamp(32px,4vw,52px);letter-spacing:0.04em;
+                 color:#2A2220;margin-bottom:16px;">
+        Join the Fleya Circle
+      </h2>
+      <p style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.07em;
+                line-height:1.85;color:rgba(42,34,32,0.65);
+                margin-bottom:36px;">
+        Be the first to discover new arrivals, exclusive offers,<br>and stories from behind the brand.
+      </p>
+      <form style="display:flex;gap:10px;flex-wrap:wrap;" onsubmit="return false;">
+        <input type="email"
+               placeholder="Your email address"
+               style="flex:1;min-width:200px;background:transparent;
+                      border:0.5px solid #E0828F;border-radius:4px;
+                      padding:14px 20px;font-family:'Jost',sans-serif;
+                      font-size:12px;letter-spacing:0.1em;color:#2A2220;
+                      transition:border-color 0.25s ease;"
+               onfocus="this.style.borderColor='#B85A68'"
+               onblur="this.style.borderColor='#E0828F'">
+        <button type="submit" class="btn-primary"
+                style="white-space:nowrap;flex-shrink:0;">Subscribe</button>
+      </form>
+      <p style="font-family:'Jost',sans-serif;font-size:10px;
+                letter-spacing:0.07em;color:rgba(42,34,32,0.35);
+                margin-top:14px;">
+        No spam, ever. Unsubscribe anytime.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background-color:#2A2220;padding:72px 32px 40px;"
+        class="lg:px-16">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Top row -->
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;
+                gap:64px;margin-bottom:64px;"
+         class="footer-grid">
+
+      <!-- Brand -->
+      <div>
+        <img src="brand_assets/fleya-logo.svg"
+             alt="Fleya"
+             style="height:52px;width:auto;margin-bottom:24px;
+                    filter:brightness(0.88);">
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.95;
+                  color:rgba(247,240,239,0.38);max-width:260px;
+                  margin-bottom:28px;">
+          Refined accessories for the modern woman. Designed with intention, made to last.
+        </p>
+        <div style="display:flex;gap:20px;">
+          <a href="#"
+             style="font-family:'Jost',sans-serif;font-size:9px;
+                    letter-spacing:0.22em;text-transform:uppercase;
+                    color:rgba(247,240,239,0.38);text-decoration:none;
+                    transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.38)'">Instagram</a>
+          <a href="#"
+             style="font-family:'Jost',sans-serif;font-size:9px;
+                    letter-spacing:0.22em;text-transform:uppercase;
+                    color:rgba(247,240,239,0.38);text-decoration:none;
+                    transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.38)'">Pinterest</a>
+          <a href="#"
+             style="font-family:'Jost',sans-serif;font-size:9px;
+                    letter-spacing:0.22em;text-transform:uppercase;
+                    color:rgba(247,240,239,0.38);text-decoration:none;
+                    transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.38)'">TikTok</a>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:rgba(247,240,239,0.28);
+                  margin-bottom:24px;">Navigate</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="#collection" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">Collection</a>
+          <a href="#about" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">About Fleya</a>
+          <a href="#journal" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">Journal</a>
+          <a href="#newsletter" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">Contact</a>
+        </div>
+      </div>
+
+      <!-- Customer care -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:rgba(247,240,239,0.28);
+                  margin-bottom:24px;">Customer Care</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="#" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">Shipping & Returns</a>
+          <a href="#" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">Size Guide</a>
+          <a href="#" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">FAQ</a>
+          <a href="#" class="nav-link"
+             style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'"
+             onmouseout="this.style.color='rgba(247,240,239,0.45)'">Privacy Policy</a>
+        </div>
+      </div>
+
+    </div><!-- /top row -->
+
+    <!-- Bottom bar -->
+    <div style="border-top:0.5px solid rgba(224,130,143,0.15);
+                padding-top:28px;display:flex;
+                justify-content:space-between;align-items:center;
+                flex-wrap:wrap;gap:12px;">
+      <p style="font-family:'Jost',sans-serif;font-size:10px;
+                letter-spacing:0.1em;color:rgba(247,240,239,0.2);">
+        © 2026 Fleya. All rights reserved.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:13px;
+                font-style:italic;color:rgba(224,130,143,0.3);
+                letter-spacing:0.08em;">
+        Designed with intention.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  }
+</style>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  // Scroll-triggered fade-ups
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // Navbar background on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Hero animated gradient — cycle through layers like framer-motion's animate array
+  (function () {
+    const layers = document.querySelectorAll('.hero-gl');
+    if (!layers.length) return;
+    let current = 0;
+    const INTERVAL  = 5500;   // ms between transitions (≈ 8s total cycle / 5 steps + overlap)
+    const DELAY     = 800;    // initial delay before first transition
+
+    function advance() {
+      layers[current].style.opacity = '0';
+      current = (current + 1) % layers.length;
+      layers[current].style.opacity = '1';
+    }
+
+    setTimeout(function () {
+      advance();
+      setInterval(advance, INTERVAL);
+    }, DELAY);
+  }());
+</script>
+
+</body>
+</html>
