@@ -130,14 +130,16 @@
 
     /* ── Navbar scroll ── */
     #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
       transition: background-color 0.35s ease, box-shadow 0.35s ease,
                   backdrop-filter 0.35s ease;
     }
     #navbar.scrolled {
-      background-color: rgba(247, 240, 239, 0.94);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 1px 0 rgba(224,130,143,0.12);
+      background-color: rgba(247, 240, 239, 0.98);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.22);
     }
 
     /* ── Product cards ── */
