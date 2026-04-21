@@ -753,10 +753,34 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  /* ── Placeholder actions ── */
+  /* ── Add to cart ── */
   function handleAddToCart() {
     const btn = document.querySelector('.btn-primary');
     const orig = btn.textContent;
+
+    const productId = 'bag-holder-' + currentColor;
+    const cartData = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
+
+    if (cartData[productId]) {
+      cartData[productId].qty += 1;
+    } else {
+      cartData[productId] = {
+        id: productId,
+        name: 'Fleya Bag Holder',
+        price: 39.99,
+        color: colorData[currentColor].label,
+        colorKey: currentColor,
+        qty: 1
+      };
+    }
+
+    localStorage.setItem('fleya-cart', JSON.stringify(cartData));
+    const totalQty = Object.values(cartData).reduce((s, i) => s + i.qty, 0);
+    localStorage.setItem('fleya-cart-count', totalQty);
+
+    var badge = document.getElementById('nav-cart-badge');
+    if (badge) { badge.textContent = totalQty; badge.style.display = 'flex'; }
+
     btn.textContent = '✓ Toegevoegd';
     btn.style.backgroundColor = '#B85A68';
     setTimeout(() => {

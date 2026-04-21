@@ -486,107 +486,8 @@
           <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Totaal</p>
         </div>
 
-        <!-- ── Cart items container ── -->
-        <div id="cart-items">
-
-          <!-- Item 1 -->
-          <div class="cart-item" data-id="1" data-price="39.99">
-            <!-- Thumbnail -->
-            <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(224,130,143,0.12);">
-              <div style="width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#e8dedd,#ddd0ce);display:flex;align-items:center;justify-content:center;position:relative;">
-                <!-- Bag holder silhouette -->
-                <div style="width:48px;height:80px;border:1.5px solid rgba(42,34,32,0.3);border-radius:24px 24px 0 0;position:relative;">
-                  <div style="width:24px;height:24px;border:1.5px solid rgba(42,34,32,0.3);border-radius:50%;position:absolute;top:-12px;left:50%;transform:translateX(-50%);"></div>
-                  <div style="width:1.5px;height:20px;background:rgba(42,34,32,0.3);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);"></div>
-                  <div style="width:14px;height:1.5px;background:rgba(42,34,32,0.3);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%) translateX(-7px);"></div>
-                </div>
-                <!-- Color overlay hint -->
-                <div style="position:absolute;inset:0;background:rgba(26,26,26,0.04);border-radius:8px;"></div>
-              </div>
-            </a>
-
-            <!-- Info -->
-            <div>
-              <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#E0828F;margin-bottom:4px;">Nieuw</p>
-              <a href="product.html" style="text-decoration:none;">
-                <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;transition:color 0.2s ease;"
-                    onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">
-                  Fleya Bag Holder
-                </h3>
-              </a>
-              <p style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.55);margin-bottom:16px;">Kleur: Zwart</p>
-
-              <!-- Quantity stepper -->
-              <div class="flex items-center gap-4 flex-wrap">
-                <div class="qty-stepper">
-                  <button class="qty-btn qty-minus" aria-label="Minder" data-id="1">−</button>
-                  <span class="qty-display" id="qty-1">1</span>
-                  <button class="qty-btn qty-plus"  aria-label="Meer"   data-id="1">+</button>
-                </div>
-                <button class="remove-btn" data-id="1" aria-label="Verwijder dit product">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Verwijderen
-                </button>
-              </div>
-            </div>
-
-            <!-- Price -->
-            <div class="cart-item-price-col" style="text-align:right;">
-              <span id="price-1"
-                    style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;white-space:nowrap;">
-                € 39,99
-              </span>
-            </div>
-          </div><!-- /Item 1 -->
-
-          <!-- Item 2 -->
-          <div class="cart-item" data-id="2" data-price="39.99">
-            <!-- Thumbnail -->
-            <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(224,130,143,0.12);">
-              <div style="width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#ede8df,#e0d5c3);display:flex;align-items:center;justify-content:center;position:relative;">
-                <div style="width:48px;height:80px;border:1.5px solid rgba(184,146,42,0.5);border-radius:24px 24px 0 0;position:relative;background:rgba(184,146,42,0.05);">
-                  <div style="width:24px;height:24px;border:1.5px solid rgba(184,146,42,0.5);border-radius:50%;position:absolute;top:-12px;left:50%;transform:translateX(-50%);"></div>
-                  <div style="width:1.5px;height:20px;background:rgba(184,146,42,0.5);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);"></div>
-                  <div style="width:14px;height:1.5px;background:rgba(184,146,42,0.5);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%) translateX(-7px);"></div>
-                </div>
-                <div style="position:absolute;inset:0;background:rgba(184,146,42,0.03);border-radius:8px;"></div>
-              </div>
-            </a>
-
-            <!-- Info -->
-            <div>
-              <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#E0828F;margin-bottom:4px;">Nieuw</p>
-              <a href="product.html" style="text-decoration:none;">
-                <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;transition:color 0.2s ease;"
-                    onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">
-                  Fleya Bag Holder
-                </h3>
-              </a>
-              <p style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.55);margin-bottom:16px;">Kleur: Goud</p>
-
-              <div class="flex items-center gap-4 flex-wrap">
-                <div class="qty-stepper">
-                  <button class="qty-btn qty-minus" aria-label="Minder" data-id="2">−</button>
-                  <span class="qty-display" id="qty-2">1</span>
-                  <button class="qty-btn qty-plus"  aria-label="Meer"   data-id="2">+</button>
-                </div>
-                <button class="remove-btn" data-id="2" aria-label="Verwijder dit product">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Verwijderen
-                </button>
-              </div>
-            </div>
-
-            <!-- Price -->
-            <div class="cart-item-price-col" style="text-align:right;">
-              <span id="price-2"
-                    style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;white-space:nowrap;">
-                € 39,99
-              </span>
-            </div>
-          </div><!-- /Item 2 -->
-
-        </div><!-- /cart-items -->
+        <!-- ── Cart items container (populated by JS from localStorage) ── -->
+        <div id="cart-items"></div><!-- /cart-items -->
 
         <!-- Continue shopping -->
         <div class="mt-8">
@@ -746,9 +647,71 @@
   const FREE_SHIPPING_THRESHOLD = 100;
   const SHIPPING_COST = 4.95;
 
-  let cart = {};
+  // Load full cart data (id, name, price, color, colorKey, qty) from localStorage
+  let cart = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
 
   let discount = 0; // € discount applied by promo code
+
+  /* ── Save cart to localStorage ── */
+  function saveCart() {
+    localStorage.setItem('fleya-cart', JSON.stringify(cart));
+    const totalQty = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+    localStorage.setItem('fleya-cart-count', totalQty);
+  }
+
+  /* ── Build HTML for one cart item ── */
+  function buildCartItemHTML(item) {
+    const colorVisuals = {
+      black:  { bg: 'linear-gradient(145deg,#e8dedd,#ddd0ce)', border: 'rgba(42,34,32,0.3)',    tint: 'rgba(26,26,26,0.04)' },
+      gold:   { bg: 'linear-gradient(145deg,#ede8df,#e0d5c3)', border: 'rgba(184,146,42,0.5)',  tint: 'rgba(184,146,42,0.03)' },
+      silver: { bg: 'linear-gradient(145deg,#e8eaec,#d5d8dc)', border: 'rgba(150,160,170,0.5)', tint: 'rgba(150,160,170,0.03)' },
+    };
+    const v = colorVisuals[item.colorKey] || colorVisuals.black;
+    const priceStr = (item.qty * item.price).toFixed(2).replace('.', ',');
+    return `
+      <div class="cart-item" data-id="${item.id}">
+        <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(224,130,143,0.12);">
+          <div style="width:100%;aspect-ratio:3/4;background:${v.bg};display:flex;align-items:center;justify-content:center;position:relative;">
+            <div style="width:48px;height:80px;border:1.5px solid ${v.border};border-radius:24px 24px 0 0;position:relative;background:${v.tint};">
+              <div style="width:24px;height:24px;border:1.5px solid ${v.border};border-radius:50%;position:absolute;top:-12px;left:50%;transform:translateX(-50%);"></div>
+              <div style="width:1.5px;height:20px;background:${v.border};position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);"></div>
+              <div style="width:14px;height:1.5px;background:${v.border};position:absolute;bottom:-20px;left:50%;transform:translateX(-50%) translateX(-7px);"></div>
+            </div>
+            <div style="position:absolute;inset:0;background:${v.tint};border-radius:8px;"></div>
+          </div>
+        </a>
+        <div>
+          <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#E0828F;margin-bottom:4px;">Nieuw</p>
+          <a href="product.html" style="text-decoration:none;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;transition:color 0.2s ease;"
+                onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">${item.name}</h3>
+          </a>
+          <p style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.55);margin-bottom:16px;">Kleur: ${item.color}</p>
+          <div class="flex items-center gap-4 flex-wrap">
+            <div class="qty-stepper">
+              <button class="qty-btn qty-minus" aria-label="Minder" data-id="${item.id}">−</button>
+              <span class="qty-display" id="qty-${item.id}">${item.qty}</span>
+              <button class="qty-btn qty-plus" aria-label="Meer" data-id="${item.id}">+</button>
+            </div>
+            <button class="remove-btn" data-id="${item.id}" aria-label="Verwijder dit product">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Verwijderen
+            </button>
+          </div>
+        </div>
+        <div class="cart-item-price-col" style="text-align:right;">
+          <span id="price-${item.id}" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;white-space:nowrap;">
+            € ${priceStr}
+          </span>
+        </div>
+      </div>`;
+  }
+
+  /* ── Populate cart items from loaded data ── */
+  const cartItemsContainer = document.getElementById('cart-items');
+  for (const item of Object.values(cart)) {
+    cartItemsContainer.insertAdjacentHTML('beforeend', buildCartItemHTML(item));
+  }
 
   /* ── Helpers ── */
   function fmt(n) {
@@ -826,53 +789,53 @@
     document.getElementById('empty-state').classList.toggle('visible', isEmpty);
   }
 
-  /* ── Quantity buttons ── */
-  document.querySelectorAll('.qty-plus').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
+  /* ── Qty + remove via event delegation ── */
+  cartItemsContainer.addEventListener('click', e => {
+    const plusBtn   = e.target.closest('.qty-plus');
+    const minusBtn  = e.target.closest('.qty-minus');
+    const removeBtn = e.target.closest('.remove-btn');
+
+    if (plusBtn) {
+      const id = plusBtn.dataset.id;
       if (!cart[id]) return;
       cart[id].qty = Math.min(99, cart[id].qty + 1);
       document.getElementById('qty-' + id).textContent = cart[id].qty;
+      saveCart();
       render();
-    });
-  });
+    }
 
-  document.querySelectorAll('.qty-minus').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
+    if (minusBtn) {
+      const id = minusBtn.dataset.id;
       if (!cart[id]) return;
       if (cart[id].qty > 1) {
         cart[id].qty--;
         document.getElementById('qty-' + id).textContent = cart[id].qty;
+        saveCart();
         render();
       }
-    });
-  });
+    }
 
-  /* ── Remove item ── */
-  document.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const row = btn.closest('.cart-item');
+    if (removeBtn) {
+      const id = removeBtn.dataset.id;
+      const row = removeBtn.closest('.cart-item');
       if (!row) return;
-
-      // Animate out
       row.style.transition = 'opacity 0.3s ease, transform 0.3s ease, max-height 0.4s ease';
       row.style.overflow   = 'hidden';
       row.style.maxHeight  = row.offsetHeight + 'px';
       requestAnimationFrame(() => {
-        row.style.opacity   = '0';
-        row.style.transform = 'translateX(-12px)';
-        row.style.maxHeight = '0';
+        row.style.opacity    = '0';
+        row.style.transform  = 'translateX(-12px)';
+        row.style.maxHeight  = '0';
         row.style.paddingTop = '0';
         row.style.paddingBottom = '0';
       });
       setTimeout(() => {
         row.remove();
         delete cart[id];
+        saveCart();
         render();
       }, 380);
-    });
+    }
   });
 
   /* ── Promo code ── */
