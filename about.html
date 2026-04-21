@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Over Fleya — Ons Verhaal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary {
+      background-color: #E0828F;
+      color: #F7F0EF;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-primary:hover  { background-color: #B85A68; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #B85A68; outline-offset: 3px; }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #2A2220;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 36px;
+      border: 0.5px solid #2A2220;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-outline:hover  { border-color: #E0828F; color: #E0828F; transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: #E0828F;
+    }
+    .deco-line-center { margin: 0 auto; }
+
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover      { color: #E0828F; }
+    .nav-link:focus-visible { outline: 1px dotted #E0828F; }
+    .nav-link.active     { color: #E0828F; }
+
+    #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+    }
+
+    /* Grain */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    /* Scroll fade-up */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Page hero divider */
+    .page-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 0%,
+        rgba(242,196,206,0.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Paragraph divider */
+    .section-divider {
+      width: 100%;
+      height: 0.5px;
+      background: linear-gradient(to right, transparent, rgba(224,130,143,0.3), transparent);
+      margin: 56px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- GRAIN -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <!-- Left links -->
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#collection" class="nav-link">Collection</a>
+      <a href="about.html"            class="nav-link active">About</a>
+    </div>
+
+    <!-- Wordmark logo -->
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;
+                letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+
+    <!-- Right links -->
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#journal" class="nav-link">Journal</a>
+      <a href="index.html#newsletter" class="nav-link">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Shop
+        </span>
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE HERO
+════════════════════════════════════════════ -->
+<section class="page-hero fade-up">
+  <div class="max-w-3xl mx-auto px-8 lg:px-16">
+    <span class="deco-line deco-line-center" style="margin-bottom:32px;"></span>
+    <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+              text-transform:uppercase;color:#B85A68;margin-bottom:20px;margin-top:32px;">
+      Ons Verhaal
+    </p>
+    <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+               font-size:clamp(52px,7vw,88px);line-height:1.0;letter-spacing:0.02em;
+               color:#2A2220;margin-bottom:0;">
+      Over<br>
+      <em style="font-style:italic;color:#E0828F;">Fleya</em>
+    </h1>
+    <span class="deco-line deco-line-center" style="margin-top:36px;"></span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════ -->
+<main style="padding:0 0 120px;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+
+    <!-- Opening statement — full width, large -->
+    <div class="fade-up" style="max-width:780px;margin:0 auto 80px;text-align:center;padding-top:24px;">
+      <p style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                font-size:clamp(22px,3vw,32px);letter-spacing:0.04em;
+                line-height:1.5;color:#2A2220;font-style:italic;">
+        Fleya is een jong lifestylemerk met een simpele overtuiging:<br>
+        <strong style="font-weight:400;color:#E0828F;">kleine details maken het verschil.</strong>
+      </p>
+    </div>
+
+    <!-- Two-column: image + intro -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+                margin-bottom:96px;" class="about-grid">
+
+      <!-- Image -->
+      <div class="fade-up" style="position:relative;">
+        <div style="border-radius:10px;overflow:hidden;
+                    box-shadow:0 24px 64px rgba(224,130,143,0.18);">
+          <img src="https://placehold.co/680x860/F2C4CE/B85A68?text=."
+               alt="Fleya bag holder"
+               style="width:100%;object-fit:cover;aspect-ratio:3/4;display:block;">
+          <div style="position:absolute;inset:0;
+                      background:linear-gradient(135deg,rgba(242,196,206,0.15) 0%,transparent 55%);
+                      border-radius:10px;"></div>
+        </div>
+        <!-- Circle accent -->
+        <div style="position:absolute;top:-24px;left:-24px;width:96px;height:96px;
+                    border:0.5px solid #E0828F;border-radius:50%;opacity:0.3;pointer-events:none;"></div>
+        <!-- Floating label -->
+        <div style="position:absolute;bottom:44px;right:-32px;
+                    background:#F2C4CE;border-radius:8px;padding:20px 28px;
+                    box-shadow:0 8px 32px rgba(224,130,143,0.22);">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:26px;
+                    font-weight:300;color:#2A2220;line-height:1.1;margin-bottom:4px;">Opgericht</p>
+          <p style="font-family:'Jost',sans-serif;font-size:9px;
+                    letter-spacing:0.28em;text-transform:uppercase;color:#B85A68;">met liefde, 2026</p>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="fade-up">
+        <span class="deco-line" style="margin-bottom:28px;"></span>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                  text-transform:uppercase;color:#B85A68;margin-bottom:20px;margin-top:28px;">
+          Wie wij zijn
+        </p>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                   font-size:clamp(32px,4vw,50px);letter-spacing:0.03em;
+                   color:#2A2220;line-height:1.15;margin-bottom:28px;">
+          Wij ontwikkelen elegante,<br>functionele accessoires
+        </h2>
+        <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:13.5px;
+                  letter-spacing:0.06em;line-height:1.95;color:#2A2220;margin-bottom:20px;">
+          die het dagelijks leven net iets comfortabeler en stijlvoller maken.
+        </p>
+        <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:13.5px;
+                  letter-spacing:0.06em;line-height:1.95;color:rgba(42,34,32,0.7);margin-bottom:0;">
+          Elk product dat we maken is ontworpen met aandacht voor detail, hoogwaardige materialen en een tijdloos design.
+        </p>
+      </div>
+    </div>
+
+    <style>
+      @media (max-width: 768px) {
+        .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        .about-grid > div:first-child { order: 2; }
+        .about-grid > div:last-child  { order: 1; }
+      }
+    </style>
+
+    <div class="section-divider"></div>
+
+    <!-- Product spotlight: Bag Holder -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+                margin-bottom:96px;" class="about-grid">
+
+      <!-- Text first on this block -->
+      <div class="fade-up">
+        <span class="deco-line" style="margin-bottom:28px;"></span>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                  text-transform:uppercase;color:#B85A68;margin-bottom:20px;margin-top:28px;">
+          Ons eerste product
+        </p>
+        <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                   font-size:clamp(32px,4vw,50px);letter-spacing:0.03em;
+                   color:#2A2220;line-height:1.15;margin-bottom:28px;">
+          De Fleya<br>Bag Holder
+        </h2>
+        <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:13.5px;
+                  letter-spacing:0.06em;line-height:1.95;color:#2A2220;margin-bottom:20px;">
+          Een compacte, premium accessoire waarmee je je tas veilig en hygiënisch aan tafel hangt. Of je nu in een restaurant zit, op kantoor werkt of onderweg bent: je tas hoeft nooit meer op de grond.
+        </p>
+        <a href="product.html" class="btn-primary" style="margin-top:8px;">Bekijk het product</a>
+      </div>
+
+      <!-- Image -->
+      <div class="fade-up" style="position:relative;">
+        <div style="border-radius:10px;overflow:hidden;
+                    box-shadow:0 24px 64px rgba(224,130,143,0.18);">
+          <img src="https://placehold.co/680x860/E0828F/F7F0EF?text=."
+               alt="Fleya Bag Holder"
+               style="width:100%;object-fit:cover;aspect-ratio:3/4;display:block;">
+        </div>
+        <!-- Tag badge -->
+        <div style="position:absolute;top:28px;left:28px;">
+          <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                       text-transform:uppercase;color:rgba(247,240,239,0.9);
+                       background:rgba(42,34,32,0.45);backdrop-filter:blur(6px);
+                       padding:5px 12px;border-radius:20px;">Bestseller</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Philosophy block -->
+    <div class="fade-up" style="max-width:860px;margin:0 auto 96px;text-align:center;">
+      <span class="deco-line deco-line-center" style="margin-bottom:32px;"></span>
+      <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+                text-transform:uppercase;color:#B85A68;margin-bottom:20px;margin-top:32px;">
+        Onze filosofie
+      </p>
+      <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+                 font-size:clamp(30px,4vw,48px);letter-spacing:0.04em;
+                 color:#2A2220;margin-bottom:32px;line-height:1.2;">
+        Functionaliteit en esthetiek<br>
+        <em style="font-style:italic;color:#E0828F;">hand in hand</em>
+      </h2>
+      <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:14px;
+                letter-spacing:0.07em;line-height:2;color:rgba(42,34,32,0.75);
+                max-width:620px;margin:0 auto 20px;">
+        Wij geloven dat functionaliteit en esthetiek hand in hand gaan. Elk product dat we maken is ontworpen met aandacht voor detail, hoogwaardige materialen en een tijdloos design.
+      </p>
+      <p style="font-family:'Jost',sans-serif;font-weight:300;font-size:14px;
+                letter-spacing:0.07em;line-height:2;color:rgba(42,34,32,0.75);
+                max-width:620px;margin:0 auto;">
+        Fleya richt zich op mensen die waarde hechten aan kwaliteit en uitstraling — en op bedrijven in de horeca en hospitality die hun gasten een niveautje extra willen bieden.
+      </p>
+      <span class="deco-line deco-line-center" style="margin-top:36px;"></span>
+    </div>
+
+    <!-- Values row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-bottom:96px;"
+         class="values-grid">
+
+      <div class="fade-up"
+           style="border:0.5px solid rgba(224,130,143,0.25);border-radius:10px;
+                  padding:48px 36px;text-align:center;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.07);background:#fff8f7;">
+        <div style="width:48px;height:48px;border:0.5px solid #E0828F;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;margin:0 auto 24px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:16px;
+                       font-style:italic;color:#E0828F;">i</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                   font-size:22px;letter-spacing:0.07em;color:#2A2220;
+                   margin-bottom:14px;">Detail</h3>
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.9;color:rgba(42,34,32,0.55);">
+          Elk ontwerp begint met een vraag: hoe kan dit nóg beter? Geen enkel detail is te klein.
+        </p>
+      </div>
+
+      <div class="fade-up"
+           style="border:0.5px solid rgba(224,130,143,0.25);border-radius:10px;
+                  padding:48px 36px;text-align:center;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);
+                  background:linear-gradient(135deg,#fff8f7 0%,rgba(242,196,206,0.18) 100%);">
+        <div style="width:48px;height:48px;border:0.5px solid #E0828F;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;margin:0 auto 24px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:16px;
+                       font-style:italic;color:#E0828F;">ii</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                   font-size:22px;letter-spacing:0.07em;color:#2A2220;
+                   margin-bottom:14px;">Kwaliteit</h3>
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.9;color:rgba(42,34,32,0.55);">
+          Hoogwaardige materialen die voelen zo goed als ze eruitzien. Gemaakt om jaren mee te gaan.
+        </p>
+      </div>
+
+      <div class="fade-up"
+           style="border:0.5px solid rgba(224,130,143,0.25);border-radius:10px;
+                  padding:48px 36px;text-align:center;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.07);background:#fff8f7;">
+        <div style="width:48px;height:48px;border:0.5px solid #E0828F;
+                    border-radius:50%;display:flex;align-items:center;
+                    justify-content:center;margin:0 auto 24px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:16px;
+                       font-style:italic;color:#E0828F;">iii</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
+                   font-size:22px;letter-spacing:0.07em;color:#2A2220;
+                   margin-bottom:14px;">Tijdloos</h3>
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.9;color:rgba(42,34,32,0.55);">
+          Voorbij trends. Fleya-stukken zijn ontworpen om bij te dragen aan jouw dagelijks ritueel.
+        </p>
+      </div>
+
+    </div>
+
+    <style>
+      @media (max-width: 768px) {
+        .values-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+      }
+    </style>
+
+  </div>
+</main>
+
+
+<!-- ════════════════════════════════════════════
+     CLOSING QUOTE
+════════════════════════════════════════════ -->
+<section style="padding:112px 32px;
+                background:linear-gradient(150deg,#2A2220 60%,#3D1A22 100%);">
+  <div class="max-w-3xl mx-auto text-center fade-up">
+    <span class="deco-line deco-line-center" style="margin-bottom:48px;"></span>
+    <blockquote style="font-family:'Cormorant Garamond',Georgia,serif;
+                       font-weight:300;font-size:clamp(26px,4vw,48px);
+                       letter-spacing:0.04em;color:#F7F0EF;line-height:1.3;
+                       font-style:italic;margin-bottom:40px;">
+      "Fleya. Stijl in elk detail."
+    </blockquote>
+    <span class="deco-line deco-line-center" style="margin-bottom:40px;"></span>
+    <a href="index.html#collection" class="btn-primary">Bekijk de collectie</a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background-color:#2A2220;padding:72px 32px 40px;border-top:0.5px solid rgba(224,130,143,0.1);"
+        class="lg:px-16">
+  <div class="max-w-7xl mx-auto">
+
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:64px;margin-bottom:64px;"
+         class="footer-grid">
+
+      <!-- Brand -->
+      <div>
+        <img src="brand_assets/fleya-logo.svg"
+             alt="Fleya"
+             style="height:52px;width:auto;margin-bottom:24px;filter:brightness(0.88);">
+        <p style="font-family:'Jost',sans-serif;font-size:12px;
+                  letter-spacing:0.07em;line-height:1.95;
+                  color:rgba(247,240,239,0.38);max-width:260px;margin-bottom:28px;">
+          Refined accessories for the modern woman. Designed with intention, made to last.
+        </p>
+        <div style="display:flex;gap:20px;">
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                             text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;
+                             transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">Instagram</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                             text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;
+                             transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">Pinterest</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                             text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;
+                             transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">TikTok</a>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:rgba(247,240,239,0.28);margin-bottom:24px;">Navigate</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="index.html#collection" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Collection</a>
+          <a href="about.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:#E0828F;
+                       text-decoration:none;">About Fleya</a>
+          <a href="index.html#journal" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Journal</a>
+          <a href="index.html#newsletter" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Contact</a>
+        </div>
+      </div>
+
+      <!-- Customer care -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:rgba(247,240,239,0.28);margin-bottom:24px;">Customer Care</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="#" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Shipping & Returns</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Size Guide</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">FAQ</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;
+                       letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);
+                       text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div style="border-top:0.5px solid rgba(224,130,143,0.12);padding-top:28px;
+                display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.12em;
+                color:rgba(247,240,239,0.22);">
+        © 2026 Fleya. All rights reserved.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;
+                color:rgba(247,240,239,0.2);letter-spacing:0.08em;">
+        Stijl in elk detail.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll animations -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
