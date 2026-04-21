@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Winkelwagen — Fleya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background-color: #E0828F;
+      color: #F7F0EF;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 16px 48px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-primary:hover  { background-color: #B85A68; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #B85A68; outline-offset: 3px; }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #2A2220;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 15px 48px;
+      border: 0.5px solid #2A2220;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-outline:hover  { border-color: #E0828F; color: #E0828F; transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    /* ── Deco line ── */
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: #E0828F;
+    }
+
+    /* ── Nav ── */
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover      { color: #E0828F; }
+    .nav-link:focus-visible { outline: 1px dotted #E0828F; }
+
+    #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+    }
+
+    /* ── Grain ── */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.5);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .breadcrumb-link:hover { color: #E0828F; }
+
+    /* ── Fade-up ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Cart item ── */
+    .cart-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 20px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 0.5px solid rgba(42,34,32,0.1);
+    }
+    @media (max-width: 640px) {
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto;
+      }
+      .cart-item-price-col {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 8px;
+      }
+    }
+
+    /* ── Quantity stepper ── */
+    .qty-stepper {
+      display: inline-flex;
+      align-items: center;
+      border: 0.5px solid rgba(42,34,32,0.18);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: #2A2220;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .qty-btn:hover  { background-color: rgba(224,130,143,0.1); color: #E0828F; }
+    .qty-btn:active { background-color: rgba(224,130,143,0.2); }
+    .qty-btn:focus-visible { outline: 1px dotted #E0828F; }
+    .qty-display {
+      width: 36px;
+      text-align: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      border-left: 0.5px solid rgba(42,34,32,0.12);
+      border-right: 0.5px solid rgba(42,34,32,0.12);
+      line-height: 36px;
+      user-select: none;
+    }
+
+    /* ── Remove btn ── */
+    .remove-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(42,34,32,0.3);
+      font-size: 10px;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+    .remove-btn:hover { color: #B85A68; }
+
+    /* ── Summary card ── */
+    .summary-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 32px;
+      box-shadow: 0 4px 32px rgba(224,130,143,0.1), 0 1px 4px rgba(42,34,32,0.05);
+    }
+
+    /* ── Promo input ── */
+    .promo-input {
+      flex: 1;
+      background: transparent;
+      border: 0.5px solid rgba(42,34,32,0.2);
+      border-radius: 4px 0 0 4px;
+      padding: 12px 16px;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #2A2220;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .promo-input:focus { border-color: #E0828F; }
+    .promo-input::placeholder { color: rgba(42,34,32,0.35); }
+
+    .promo-apply {
+      background: rgba(42,34,32,0.06);
+      border: 0.5px solid rgba(42,34,32,0.2);
+      border-left: none;
+      border-radius: 0 4px 4px 0;
+      padding: 12px 18px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #2A2220;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .promo-apply:hover { background: rgba(224,130,143,0.12); color: #E0828F; }
+    .promo-apply:focus-visible { outline: 1px dotted #E0828F; }
+
+    /* ── Empty state ── */
+    #empty-state { display: none; }
+    #empty-state.visible { display: block; }
+    #cart-content { display: block; }
+    #cart-content.hidden { display: none; }
+
+    /* ── Trust badges ── */
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: rgba(42,34,32,0.55);
+    }
+
+    /* ── Mobile menu overlay ── */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #F7F0EF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: #E0828F; }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    /* ── Cart badge on nav ── */
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      width: 16px;
+      height: 16px;
+      background: #E0828F;
+      border-radius: 50%;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0;
+    }
+
+    /* ── Separator line in summary ── */
+    .summary-sep {
+      height: 0.5px;
+      background: rgba(42,34,32,0.1);
+      margin: 16px 0;
+    }
+
+    /* ── Shipping progress bar ── */
+    .shipping-bar {
+      height: 2px;
+      background: rgba(42,34,32,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .shipping-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #E0828F, #B85A68);
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button id="mobile-menu-close" aria-label="Menu sluiten">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line" style="margin-bottom:12px;"></span>
+  <a href="index.html#collection" class="mobile-nav-link">Collectie</a>
+  <a href="about.html"            class="mobile-nav-link">Over</a>
+  <a href="journal.html"          class="mobile-nav-link">Journal</a>
+  <a href="winkelwagen.html"      class="mobile-nav-link">Winkelwagen</a>
+  <span class="deco-line" style="margin-top:12px;"></span>
+</div>
+
+<!-- GRAIN TEXTURE -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#collection" class="nav-link">Collectie</a>
+      <a href="about.html"            class="nav-link">Over</a>
+    </div>
+
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="journal.html" class="nav-link">Journal</a>
+      <a href="winkelwagen.html" class="nav-link" style="position:relative;">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Winkelwagen
+        </span>
+        <span id="nav-badge" class="cart-badge" aria-label="2 producten in winkelwagen">2</span>
+      </a>
+    </div>
+
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Menu openen">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="pt-28 pb-0 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto">
+    <nav aria-label="breadcrumb" class="flex items-center gap-2.5">
+      <a href="index.html" class="breadcrumb-link">Home</a>
+      <span style="color:rgba(42,34,32,0.3);font-size:10px;">—</span>
+      <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Winkelwagen</span>
+    </nav>
+  </div>
+</div>
+
+<!-- PAGE TITLE -->
+<section class="px-8 lg:px-16 pt-10 pb-0">
+  <div class="max-w-7xl mx-auto fade-up">
+    <span class="deco-line" style="margin-bottom:16px;"></span>
+    <h1 style="font-size:clamp(2rem,5vw,3.2rem);font-weight:300;letter-spacing:0.06em;line-height:1.15;margin-bottom:4px;">
+      Winkelwagen
+    </h1>
+    <p id="item-count-label" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.16em;color:rgba(42,34,32,0.5);text-transform:uppercase;">
+      2 producten
+    </p>
+  </div>
+</section>
+
+<!-- MAIN CART LAYOUT -->
+<section class="px-8 lg:px-16 py-12 lg:py-16">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- ══ CART CONTENT (shown when items exist) ══ -->
+    <div id="cart-content" class="grid lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-start">
+
+      <!-- LEFT: Cart items -->
+      <div class="fade-up">
+
+        <!-- Header row -->
+        <div class="hidden md:grid pb-4 mb-0"
+             style="grid-template-columns:100px 1fr auto;gap:20px;border-bottom:0.5px solid rgba(42,34,32,0.18);">
+          <div></div>
+          <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Product</p>
+          <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Totaal</p>
+        </div>
+
+        <!-- ── Cart items container ── -->
+        <div id="cart-items">
+
+          <!-- Item 1 -->
+          <div class="cart-item" data-id="1" data-price="39.99">
+            <!-- Thumbnail -->
+            <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(224,130,143,0.12);">
+              <div style="width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#e8dedd,#ddd0ce);display:flex;align-items:center;justify-content:center;position:relative;">
+                <!-- Bag holder silhouette -->
+                <div style="width:48px;height:80px;border:1.5px solid rgba(42,34,32,0.3);border-radius:24px 24px 0 0;position:relative;">
+                  <div style="width:24px;height:24px;border:1.5px solid rgba(42,34,32,0.3);border-radius:50%;position:absolute;top:-12px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:1.5px;height:20px;background:rgba(42,34,32,0.3);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:14px;height:1.5px;background:rgba(42,34,32,0.3);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%) translateX(-7px);"></div>
+                </div>
+                <!-- Color overlay hint -->
+                <div style="position:absolute;inset:0;background:rgba(26,26,26,0.04);border-radius:8px;"></div>
+              </div>
+            </a>
+
+            <!-- Info -->
+            <div>
+              <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#E0828F;margin-bottom:4px;">Nieuw</p>
+              <a href="product.html" style="text-decoration:none;">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;transition:color 0.2s ease;"
+                    onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">
+                  Fleya Bag Holder
+                </h3>
+              </a>
+              <p style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.55);margin-bottom:16px;">Kleur: Noir</p>
+
+              <!-- Quantity stepper -->
+              <div class="flex items-center gap-4 flex-wrap">
+                <div class="qty-stepper">
+                  <button class="qty-btn qty-minus" aria-label="Minder" data-id="1">−</button>
+                  <span class="qty-display" id="qty-1">1</span>
+                  <button class="qty-btn qty-plus"  aria-label="Meer"   data-id="1">+</button>
+                </div>
+                <button class="remove-btn" data-id="1" aria-label="Verwijder dit product">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  Verwijderen
+                </button>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="cart-item-price-col" style="text-align:right;">
+              <span id="price-1"
+                    style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;white-space:nowrap;">
+                € 39,99
+              </span>
+            </div>
+          </div><!-- /Item 1 -->
+
+          <!-- Item 2 -->
+          <div class="cart-item" data-id="2" data-price="39.99">
+            <!-- Thumbnail -->
+            <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(224,130,143,0.12);">
+              <div style="width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#ede8df,#e0d5c3);display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="width:48px;height:80px;border:1.5px solid rgba(184,146,42,0.5);border-radius:24px 24px 0 0;position:relative;background:rgba(184,146,42,0.05);">
+                  <div style="width:24px;height:24px;border:1.5px solid rgba(184,146,42,0.5);border-radius:50%;position:absolute;top:-12px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:1.5px;height:20px;background:rgba(184,146,42,0.5);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:14px;height:1.5px;background:rgba(184,146,42,0.5);position:absolute;bottom:-20px;left:50%;transform:translateX(-50%) translateX(-7px);"></div>
+                </div>
+                <div style="position:absolute;inset:0;background:rgba(184,146,42,0.03);border-radius:8px;"></div>
+              </div>
+            </a>
+
+            <!-- Info -->
+            <div>
+              <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#E0828F;margin-bottom:4px;">Nieuw</p>
+              <a href="product.html" style="text-decoration:none;">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;transition:color 0.2s ease;"
+                    onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">
+                  Fleya Bag Holder
+                </h3>
+              </a>
+              <p style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.55);margin-bottom:16px;">Kleur: Or</p>
+
+              <div class="flex items-center gap-4 flex-wrap">
+                <div class="qty-stepper">
+                  <button class="qty-btn qty-minus" aria-label="Minder" data-id="2">−</button>
+                  <span class="qty-display" id="qty-2">1</span>
+                  <button class="qty-btn qty-plus"  aria-label="Meer"   data-id="2">+</button>
+                </div>
+                <button class="remove-btn" data-id="2" aria-label="Verwijder dit product">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  Verwijderen
+                </button>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="cart-item-price-col" style="text-align:right;">
+              <span id="price-2"
+                    style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;white-space:nowrap;">
+                € 39,99
+              </span>
+            </div>
+          </div><!-- /Item 2 -->
+
+        </div><!-- /cart-items -->
+
+        <!-- Continue shopping -->
+        <div class="mt-8">
+          <a href="index.html#collection"
+             style="display:inline-flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.5);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(42,34,32,0.5)'">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Verder winkelen
+          </a>
+        </div>
+
+      </div><!-- /left col -->
+
+      <!-- RIGHT: Order summary -->
+      <div class="fade-up" style="transition-delay:0.12s;">
+        <div class="summary-card" style="position:sticky;top:96px;">
+
+          <h2 style="font-size:1.4rem;font-weight:300;letter-spacing:0.05em;margin-bottom:20px;">
+            Besteloverzicht
+          </h2>
+
+          <!-- Shipping progress -->
+          <div style="background:rgba(224,130,143,0.08);border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+            <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;color:rgba(42,34,32,0.7);margin-bottom:8px;" id="shipping-msg">
+              Nog <strong style="color:#E0828F" id="shipping-remaining">€ 20,02</strong> verwijderd van gratis verzending
+            </p>
+            <div class="shipping-bar">
+              <div class="shipping-bar-fill" id="shipping-bar-fill" style="width:66%;"></div>
+            </div>
+          </div>
+
+          <!-- Line items -->
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+            <span style="font-family:'Jost',sans-serif;font-size:12px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.65);">Subtotaal</span>
+            <span id="subtotal-display"
+                  style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#2A2220;">
+              € 79,98
+            </span>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+            <span style="font-family:'Jost',sans-serif;font-size:12px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.65);">Verzending</span>
+            <span id="shipping-display"
+                  style="font-family:'Jost',sans-serif;font-size:12px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.65);">
+              € 4,95
+            </span>
+          </div>
+
+          <!-- Promo code -->
+          <div style="margin:20px 0;">
+            <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:rgba(42,34,32,0.5);margin-bottom:8px;">Kortingscode</p>
+            <div style="display:flex;">
+              <input type="text" id="promo-input" class="promo-input" placeholder="Voer code in" aria-label="Kortingscode">
+              <button class="promo-apply" onclick="applyPromo()">Toepassen</button>
+            </div>
+            <p id="promo-msg" style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.12em;color:#B85A68;margin-top:6px;display:none;"></p>
+          </div>
+
+          <div class="summary-sep"></div>
+
+          <!-- Total -->
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px;">
+            <span style="font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:#2A2220;">Totaal</span>
+            <div style="text-align:right;">
+              <div id="total-display"
+                   style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:#2A2220;letter-spacing:0.04em;">
+                € 84,93
+              </div>
+              <div style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.4);">Incl. BTW</div>
+            </div>
+          </div>
+
+          <!-- Checkout button -->
+          <button class="btn-primary" onclick="handleCheckout()">
+            Afrekenen
+          </button>
+
+          <!-- Payment icons -->
+          <div class="flex justify-center gap-3 mt-5" style="opacity:0.45;">
+            <!-- Ideal -->
+            <svg width="48" height="30" viewBox="0 0 48 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="30" rx="4" fill="#2A2220" opacity="0.08"/>
+              <text x="50%" y="19" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="#2A2220" font-weight="400" letter-spacing="0.5">iDEAL</text>
+            </svg>
+            <!-- Visa -->
+            <svg width="48" height="30" viewBox="0 0 48 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="30" rx="4" fill="#2A2220" opacity="0.08"/>
+              <text x="50%" y="19" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="#2A2220" font-weight="400" letter-spacing="0.5">VISA</text>
+            </svg>
+            <!-- MC -->
+            <svg width="48" height="30" viewBox="0 0 48 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="30" rx="4" fill="#2A2220" opacity="0.08"/>
+              <text x="50%" y="19" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="#2A2220" font-weight="400" letter-spacing="0.5">MC</text>
+            </svg>
+            <!-- PayPal -->
+            <svg width="48" height="30" viewBox="0 0 48 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="30" rx="4" fill="#2A2220" opacity="0.08"/>
+              <text x="50%" y="19" text-anchor="middle" font-family="Jost,sans-serif" font-size="9" fill="#2A2220" font-weight="400" letter-spacing="0.5">PayPal</text>
+            </svg>
+          </div>
+
+          <div class="summary-sep"></div>
+
+          <!-- Trust badges -->
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="trust-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Veilig betalen via SSL
+            </div>
+            <div class="trust-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Gratis retourneren binnen 30 dagen
+            </div>
+            <div class="trust-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+              Verzending binnen 1–3 werkdagen
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /right col -->
+
+    </div><!-- /grid -->
+
+    <!-- ══ EMPTY STATE ══ -->
+    <div id="empty-state" class="text-center" style="padding:80px 0;">
+      <div style="margin-bottom:24px;opacity:0.25;">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#2A2220" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </div>
+      <span class="deco-line" style="margin:0 auto 20px;"></span>
+      <h2 style="font-size:1.8rem;font-weight:300;letter-spacing:0.06em;margin-bottom:8px;">Je winkelwagen is leeg</h2>
+      <p style="font-family:'Jost',sans-serif;font-size:12px;font-weight:300;letter-spacing:0.12em;color:rgba(42,34,32,0.55);margin-bottom:36px;">
+        Ontdek onze collectie en voeg producten toe.
+      </p>
+      <a href="index.html#collection" class="btn-primary" style="width:auto;display:inline-block;padding:14px 48px;">
+        Naar de collectie
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top:0.5px solid rgba(42,34,32,0.1);padding:32px;text-align:center;">
+  <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.35);">
+    © 2026 Fleya — Accessoires voor vrouwen
+  </p>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+  /* ══════════════════════════════════════
+     CART STATE
+  ══════════════════════════════════════ */
+  const FREE_SHIPPING_THRESHOLD = 100;
+  const SHIPPING_COST = 4.95;
+
+  let cart = {
+    1: { qty: 1, price: 39.99, name: 'Fleya Bag Holder – Noir' },
+    2: { qty: 1, price: 39.99, name: 'Fleya Bag Holder – Or'   },
+  };
+
+  let discount = 0; // € discount applied by promo code
+
+  /* ── Helpers ── */
+  function fmt(n) {
+    return '€ ' + n.toFixed(2).replace('.', ',');
+  }
+
+  function subtotal() {
+    return Object.values(cart).reduce((sum, item) => sum + item.qty * item.price, 0);
+  }
+
+  function shipping() {
+    return subtotal() - discount >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  }
+
+  function total() {
+    return Math.max(0, subtotal() - discount) + shipping();
+  }
+
+  function itemCount() {
+    return Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+  }
+
+  /* ── Render ── */
+  function render() {
+    const sub  = subtotal();
+    const ship = shipping();
+    const tot  = total();
+    const count = itemCount();
+
+    // Update prices per item
+    for (const [id, item] of Object.entries(cart)) {
+      const el = document.getElementById('price-' + id);
+      if (el) el.textContent = fmt(item.qty * item.price);
+    }
+
+    // Subtotal / shipping / total
+    document.getElementById('subtotal-display').textContent = fmt(sub - discount < 0 ? 0 : sub - discount + (discount > 0 ? discount : 0));
+    // Better: show raw subtotal, discount separately if applied
+    document.getElementById('subtotal-display').textContent = fmt(sub);
+
+    const shipEl = document.getElementById('shipping-display');
+    shipEl.textContent = ship === 0 ? 'Gratis' : fmt(ship);
+    shipEl.style.color = ship === 0 ? '#E0828F' : 'rgba(42,34,32,0.65)';
+
+    document.getElementById('total-display').textContent = fmt(tot);
+
+    // Shipping progress bar
+    const needed  = FREE_SHIPPING_THRESHOLD - (sub - discount);
+    const pct     = Math.min(100, ((sub - discount) / FREE_SHIPPING_THRESHOLD) * 100);
+    document.getElementById('shipping-bar-fill').style.width = pct + '%';
+    const msgEl   = document.getElementById('shipping-msg');
+    const remEl   = document.getElementById('shipping-remaining');
+    if (needed <= 0) {
+      msgEl.innerHTML = '<strong style="color:#E0828F">Je hebt gratis verzending!</strong> 🎉';
+    } else {
+      msgEl.innerHTML = 'Nog <strong style="color:#E0828F" id="shipping-remaining">' + fmt(needed) + '</strong> voor gratis verzending';
+    }
+
+    // Badge + count label
+    const badge = document.getElementById('nav-badge');
+    if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
+
+    const countLabel = document.getElementById('item-count-label');
+    if (countLabel) countLabel.textContent = count + ' ' + (count === 1 ? 'product' : 'producten');
+
+    // Show / hide empty state
+    const isEmpty = Object.keys(cart).length === 0;
+    document.getElementById('cart-content').classList.toggle('hidden', isEmpty);
+    document.getElementById('empty-state').classList.toggle('visible', isEmpty);
+  }
+
+  /* ── Quantity buttons ── */
+  document.querySelectorAll('.qty-plus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      if (!cart[id]) return;
+      cart[id].qty = Math.min(99, cart[id].qty + 1);
+      document.getElementById('qty-' + id).textContent = cart[id].qty;
+      render();
+    });
+  });
+
+  document.querySelectorAll('.qty-minus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      if (!cart[id]) return;
+      if (cart[id].qty > 1) {
+        cart[id].qty--;
+        document.getElementById('qty-' + id).textContent = cart[id].qty;
+        render();
+      }
+    });
+  });
+
+  /* ── Remove item ── */
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const row = btn.closest('.cart-item');
+      if (!row) return;
+
+      // Animate out
+      row.style.transition = 'opacity 0.3s ease, transform 0.3s ease, max-height 0.4s ease';
+      row.style.overflow   = 'hidden';
+      row.style.maxHeight  = row.offsetHeight + 'px';
+      requestAnimationFrame(() => {
+        row.style.opacity   = '0';
+        row.style.transform = 'translateX(-12px)';
+        row.style.maxHeight = '0';
+        row.style.paddingTop = '0';
+        row.style.paddingBottom = '0';
+      });
+      setTimeout(() => {
+        row.remove();
+        delete cart[id];
+        render();
+      }, 380);
+    });
+  });
+
+  /* ── Promo code ── */
+  function applyPromo() {
+    const code = document.getElementById('promo-input').value.trim().toUpperCase();
+    const msgEl = document.getElementById('promo-msg');
+    msgEl.style.display = 'block';
+
+    if (code === 'FLEYA10') {
+      discount = subtotal() * 0.10;
+      msgEl.textContent = '10% korting toegepast!';
+      msgEl.style.color = '#B85A68';
+    } else if (code === '') {
+      msgEl.textContent = 'Vul een code in.';
+      msgEl.style.color = 'rgba(42,34,32,0.5)';
+    } else {
+      discount = 0;
+      msgEl.textContent = 'Ongeldige code. Probeer opnieuw.';
+      msgEl.style.color = 'rgba(42,34,32,0.5)';
+    }
+    render();
+  }
+
+  /* Allow Enter key in promo field */
+  document.getElementById('promo-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') applyPromo();
+  });
+
+  /* ── Checkout ── */
+  function handleCheckout() {
+    alert('Bedankt! In een echte webshop gaat u hier naar de betaalpagina.');
+  }
+
+  /* ── Mobile menu ── */
+  const menu     = document.getElementById('mobile-menu');
+  const burger   = document.getElementById('hamburger');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  burger?.addEventListener('click',   () => menu.classList.add('open'));
+  closeBtn?.addEventListener('click', () => menu.classList.remove('open'));
+  menu?.addEventListener('click', e => { if (e.target === menu) menu.classList.remove('open'); });
+
+  /* ── Fade-up on scroll ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Initial render ── */
+  render();
+</script>
+</body>
+</html>
