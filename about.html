@@ -265,11 +265,12 @@
     <!-- Right links -->
     <div class="hidden lg:flex items-center gap-10">
       <a href="index.html#journal" class="nav-link">Journal</a>
-      <a href="winkelwagen.html" class="nav-link">
+      <a href="winkelwagen.html" class="nav-link" style="position:relative;">
         <span style="display:flex;align-items:center;gap:6px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          Shop
+          Winkelwagen
         </span>
+        <span id="nav-cart-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
       </a>
     </div>
 
@@ -669,6 +670,14 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){
+  var n = parseInt(localStorage.getItem('fleya-cart-count') || '0', 10);
+  var b = document.getElementById('nav-cart-badge');
+  if (b && n > 0) { b.textContent = n; b.style.display = 'flex'; }
+})();
 </script>
 
 </body>
