@@ -259,9 +259,65 @@
       transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .related-card:hover .card-img { transform: scale(1.04); }
+
+    /* ── Mobile menu overlay ── */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #F7F0EF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: #E0828F; }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
   </style>
 </head>
 <body>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button id="mobile-menu-close" aria-label="Close menu">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line deco-line-center" style="margin-bottom:12px;"></span>
+  <a href="index.html#collection" class="mobile-nav-link">Collection</a>
+  <a href="about.html"            class="mobile-nav-link">About</a>
+  <a href="index.html#journal"    class="mobile-nav-link">Journal</a>
+  <a href="index.html#newsletter" class="mobile-nav-link">Shop</a>
+  <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
 
 <!-- ════════════════════════════════════════════
      GRAIN TEXTURE
@@ -300,7 +356,7 @@
       </a>
     </div>
 
-    <button class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
       <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
       <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
     </button>
@@ -707,6 +763,20 @@
     btn.style.borderColor = '#E0828F';
     btn.style.color = '#E0828F';
   }
+
+  // Mobile menu
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuClose  = document.getElementById('mobile-menu-close');
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+
+  function openMenu()  { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+
+  hamburger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  mobileMenu.addEventListener('click', function(e) { if (e.target === mobileMenu) closeMenu(); });
 </script>
 </body>
 </html>

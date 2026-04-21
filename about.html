@@ -158,9 +158,81 @@
       background: linear-gradient(to right, transparent, rgba(224,130,143,0.3), transparent);
       margin: 56px 0;
     }
+
+    /* Mobile menu overlay */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #F7F0EF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: #E0828F; }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+    .deco-line { display: block; width: 52px; height: 0.5px; background-color: #E0828F; }
+    .deco-line-center { margin: 0 auto; }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .stat-card-float {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        margin-top: 20px !important;
+        display: inline-block;
+      }
+      .closing-quote-section { padding: 72px 24px !important; }
+      main { padding-bottom: 72px !important; }
+      .section-divider { margin: 36px 0 !important; }
+    }
   </style>
 </head>
 <body>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button id="mobile-menu-close" aria-label="Close menu">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line deco-line-center" style="margin-bottom:12px;"></span>
+  <a href="index.html#collection" class="mobile-nav-link">Collection</a>
+  <a href="about.html"            class="mobile-nav-link">About</a>
+  <a href="index.html#journal"    class="mobile-nav-link">Journal</a>
+  <a href="index.html#newsletter" class="mobile-nav-link">Shop</a>
+  <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
 
 <!-- GRAIN -->
 <svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
@@ -202,7 +274,7 @@
     </div>
 
     <!-- Mobile hamburger -->
-    <button class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
       <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
       <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
     </button>
@@ -266,7 +338,7 @@
         <div style="position:absolute;top:-24px;left:-24px;width:96px;height:96px;
                     border:0.5px solid #E0828F;border-radius:50%;opacity:0.3;pointer-events:none;"></div>
         <!-- Floating label -->
-        <div style="position:absolute;bottom:44px;right:-32px;
+        <div class="stat-card-float" style="position:absolute;bottom:44px;right:-32px;
                     background:#F2C4CE;border-radius:8px;padding:20px 28px;
                     box-shadow:0 8px 32px rgba(224,130,143,0.22);">
           <p style="font-family:'Cormorant Garamond',serif;font-size:26px;
@@ -455,7 +527,7 @@
 <!-- ════════════════════════════════════════════
      CLOSING QUOTE
 ════════════════════════════════════════════ -->
-<section style="padding:112px 32px;
+<section class="closing-quote-section" style="padding:112px 32px;
                 background:linear-gradient(150deg,#2A2220 60%,#3D1A22 100%);">
   <div class="max-w-3xl mx-auto text-center fade-up">
     <span class="deco-line deco-line-center" style="margin-bottom:48px;"></span>
@@ -570,8 +642,23 @@
   </div>
 </footer>
 
-<!-- Scroll animations -->
+<!-- Scroll animations + Mobile menu -->
 <script>
+  // Mobile menu
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuClose  = document.getElementById('mobile-menu-close');
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+
+  function openMenu()  { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+
+  hamburger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  mobileMenu.addEventListener('click', function(e) { if (e.target === mobileMenu) closeMenu(); });
+
+  // Scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
