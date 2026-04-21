@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleya Bag Holder — Fleya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background-color: #E0828F;
+      color: #F7F0EF;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 16px 48px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-primary:hover  { background-color: #B85A68; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #B85A68; outline-offset: 3px; }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #2A2220;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 15px 48px;
+      border: 0.5px solid #2A2220;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-outline:hover  { border-color: #E0828F; color: #E0828F; transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    /* ── Deco line ── */
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: #E0828F;
+    }
+
+    /* ── Nav ── */
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover      { color: #E0828F; }
+    .nav-link:focus-visible { outline: 1px dotted #E0828F; }
+
+    #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+    }
+
+    /* ── Grain ── */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.5);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .breadcrumb-link:hover { color: #E0828F; }
+
+    /* ── Thumbnail gallery ── */
+    .thumb-btn {
+      border: 0.5px solid transparent;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      background: none;
+      padding: 0;
+    }
+    .thumb-btn:hover  { transform: translateY(-2px); border-color: rgba(224,130,143,0.4); }
+    .thumb-btn.active { border-color: #E0828F; }
+    .thumb-btn:focus-visible { outline: 1px dotted #E0828F; }
+
+    /* ── Color swatches ── */
+    .swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.2s ease;
+      outline: none;
+    }
+    .swatch::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 0.5px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    .swatch:hover  { transform: scale(1.1); }
+    .swatch.active::after { border-color: #E0828F; }
+    .swatch:focus-visible::after { border-color: #B85A68; }
+
+    /* ── Accordion ── */
+    .accordion-btn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 18px 0;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #2A2220;
+      border-top: 0.5px solid rgba(42,34,32,0.12);
+      transition: color 0.2s ease;
+    }
+    .accordion-btn:hover { color: #E0828F; }
+    .accordion-btn:focus-visible { outline: 1px dotted #E0828F; }
+    .accordion-icon {
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      flex-shrink: 0;
+    }
+    .accordion-btn.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.35s ease;
+      opacity: 0;
+    }
+    .accordion-body.open {
+      max-height: 320px;
+      opacity: 1;
+    }
+
+    /* ── Fade-up ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Notify btn ── */
+    .notify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.55);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .notify-badge:hover { color: #E0828F; }
+
+    /* ── Sticky product image ── */
+    @media (min-width: 1024px) {
+      .sticky-image { position: sticky; top: 96px; }
+    }
+
+    /* ── Related card ── */
+    .related-card .card-img {
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .related-card:hover .card-img { transform: scale(1.04); }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     GRAIN TEXTURE
+════════════════════════════════════════════ -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#collection" class="nav-link">Collection</a>
+      <a href="index.html#about"      class="nav-link">About</a>
+    </div>
+
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#journal"    class="nav-link">Journal</a>
+      <a href="index.html#newsletter" class="nav-link">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Shop
+        </span>
+      </a>
+    </div>
+
+    <button class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     BREADCRUMB
+════════════════════════════════════════════ -->
+<div class="pt-28 pb-0 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto">
+    <nav aria-label="breadcrumb" class="flex items-center gap-2.5">
+      <a href="index.html" class="breadcrumb-link">Home</a>
+      <span style="color:rgba(42,34,32,0.3);font-size:10px;">—</span>
+      <a href="index.html#collection" class="breadcrumb-link">Collection</a>
+      <span style="color:rgba(42,34,32,0.3);font-size:10px;">—</span>
+      <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Bag Holder</span>
+    </nav>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PRODUCT SECTION
+════════════════════════════════════════════ -->
+<section class="px-8 lg:px-16 py-12 lg:py-16">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+      <!-- ── LEFT: Image gallery ── -->
+      <div class="sticky-image fade-up">
+        <!-- Main image -->
+        <div id="main-image-wrap" class="relative overflow-hidden rounded-lg"
+             style="background: linear-gradient(145deg, #e8dedd 0%, #ddd0ce 100%);
+                    box-shadow: 0 8px 48px rgba(224,130,143,0.14), 0 2px 12px rgba(42,34,32,0.07);">
+          <div id="main-image" class="w-full aspect-[4/5] flex items-center justify-center relative"
+               style="transition: opacity 0.35s ease;">
+            <!-- Image color layers — switched by JS -->
+            <div id="img-black" class="absolute inset-0 flex items-center justify-center"
+                 style="background: linear-gradient(145deg, #e8dedd 0%, #ddd0ce 100%);">
+              <div style="position:relative;">
+                <!-- Hook silhouette — black -->
+                <div style="width:120px;height:200px;border:2px solid #1a1a1a;border-radius:60px 60px 0 0;position:relative;margin:0 auto;">
+                  <div style="width:60px;height:60px;border:2px solid #1a1a1a;border-radius:50%;position:absolute;top:-31px;left:50%;transform:translateX(-50%);background:transparent;"></div>
+                  <div style="width:2px;height:50px;background:#1a1a1a;position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:32px;height:2px;background:#1a1a1a;position:absolute;bottom:-50px;left:50%;transform:translateX(-50%) translateX(-16px);"></div>
+                  <div style="width:32px;height:2px;background:#1a1a1a;position:absolute;bottom:-34px;left:50%;transform:translateX(-50%) translateX(-16px);"></div>
+                </div>
+                <!-- Decorative fill -->
+                <div style="width:120px;height:200px;border-radius:60px 60px 0 0;position:absolute;top:0;left:0;background:rgba(26,26,26,0.06);"></div>
+              </div>
+              <!-- Color label -->
+              <div style="position:absolute;bottom:28px;left:0;right:0;text-align:center;">
+                <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Noir</span>
+              </div>
+            </div>
+
+            <div id="img-gold" class="absolute inset-0 flex items-center justify-center" style="opacity:0;background:linear-gradient(145deg, #ede8df 0%, #e0d5c3 100%);transition:opacity 0.35s ease;">
+              <div style="position:relative;">
+                <div style="width:120px;height:200px;border:2px solid #b8922a;border-radius:60px 60px 0 0;position:relative;margin:0 auto;background:rgba(184,146,42,0.06);">
+                  <div style="width:60px;height:60px;border:2px solid #b8922a;border-radius:50%;position:absolute;top:-31px;left:50%;transform:translateX(-50%);background:transparent;"></div>
+                  <div style="width:2px;height:50px;background:#b8922a;position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:32px;height:2px;background:#b8922a;position:absolute;bottom:-50px;left:50%;transform:translateX(-50%) translateX(-16px);"></div>
+                  <div style="width:32px;height:2px;background:#b8922a;position:absolute;bottom:-34px;left:50%;transform:translateX(-50%) translateX(-16px);"></div>
+                </div>
+                <div style="width:120px;height:200px;border-radius:60px 60px 0 0;position:absolute;top:0;left:0;background:rgba(212,175,55,0.08);"></div>
+              </div>
+              <div style="position:absolute;bottom:28px;left:0;right:0;text-align:center;">
+                <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Or</span>
+              </div>
+            </div>
+
+            <div id="img-silver" class="absolute inset-0 flex items-center justify-center" style="opacity:0;background:linear-gradient(145deg, #ebebeb 0%, #d8d8d8 100%);transition:opacity 0.35s ease;">
+              <div style="position:relative;">
+                <div style="width:120px;height:200px;border:2px solid #9e9e9e;border-radius:60px 60px 0 0;position:relative;margin:0 auto;background:rgba(158,158,158,0.06);">
+                  <div style="width:60px;height:60px;border:2px solid #9e9e9e;border-radius:50%;position:absolute;top:-31px;left:50%;transform:translateX(-50%);background:transparent;"></div>
+                  <div style="width:2px;height:50px;background:#9e9e9e;position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);"></div>
+                  <div style="width:32px;height:2px;background:#9e9e9e;position:absolute;bottom:-50px;left:50%;transform:translateX(-50%) translateX(-16px);"></div>
+                  <div style="width:32px;height:2px;background:#9e9e9e;position:absolute;bottom:-34px;left:50%;transform:translateX(-50%) translateX(-16px);"></div>
+                </div>
+                <div style="width:120px;height:200px;border-radius:60px 60px 0 0;position:absolute;top:0;left:0;background:rgba(192,192,192,0.1);"></div>
+              </div>
+              <div style="position:absolute;bottom:28px;left:0;right:0;text-align:center;">
+                <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Argent</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subtle rose overlay -->
+          <div class="absolute inset-0 pointer-events-none"
+               style="background: radial-gradient(ellipse 70% 50% at 80% 20%, rgba(242,196,206,0.15) 0%, transparent 60%);"></div>
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="flex gap-3 mt-4">
+          <button class="thumb-btn active" id="thumb-black" onclick="selectColor('black')"
+                  aria-label="View in Noir">
+            <div style="width:72px;height:88px;background:linear-gradient(145deg,#e8dedd,#ddd0ce);display:flex;align-items:center;justify-content:center;border-radius:3px;">
+              <div style="width:28px;height:46px;border:1.5px solid #1a1a1a;border-radius:14px 14px 0 0;"></div>
+            </div>
+          </button>
+          <button class="thumb-btn" id="thumb-gold" onclick="selectColor('gold')"
+                  aria-label="View in Or">
+            <div style="width:72px;height:88px;background:linear-gradient(145deg,#ede8df,#e0d5c3);display:flex;align-items:center;justify-content:center;border-radius:3px;">
+              <div style="width:28px;height:46px;border:1.5px solid #b8922a;border-radius:14px 14px 0 0;"></div>
+            </div>
+          </button>
+          <button class="thumb-btn" id="thumb-silver" onclick="selectColor('silver')"
+                  aria-label="View in Argent">
+            <div style="width:72px;height:88px;background:linear-gradient(145deg,#ebebeb,#d8d8d8);display:flex;align-items:center;justify-content:center;border-radius:3px;">
+              <div style="width:28px;height:46px;border:1.5px solid #9e9e9e;border-radius:14px 14px 0 0;"></div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── RIGHT: Product info ── -->
+      <div class="flex flex-col fade-up" style="transition-delay:0.12s;">
+
+        <!-- Category tag -->
+        <div class="flex items-center gap-3 mb-6">
+          <span class="deco-line"></span>
+          <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#E0828F;">Accessories</span>
+        </div>
+
+        <!-- Product name -->
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.4rem,4vw,3.2rem);letter-spacing:0.04em;line-height:1.15;color:#2A2220;margin-bottom:16px;">
+          Fleya<br>Bag Holder
+        </h1>
+
+        <!-- Price -->
+        <div class="flex items-baseline gap-3 mb-8">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 39,99</span>
+          <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;color:rgba(42,34,32,0.4);text-transform:uppercase;">Incl. BTW</span>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:0.5px;background:rgba(42,34,32,0.1);margin-bottom:28px;"></div>
+
+        <!-- Color selector -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-4">
+            <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Kleur</span>
+            <span id="color-label" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.14em;color:rgba(42,34,32,0.55);">Noir</span>
+          </div>
+          <div class="flex gap-4">
+            <!-- Black -->
+            <button class="swatch active" id="swatch-black" onclick="selectColor('black')"
+                    aria-label="Noir"
+                    style="background: radial-gradient(circle at 35% 35%, #4a4a4a, #111111);
+                           box-shadow: 0 2px 8px rgba(0,0,0,0.25);">
+            </button>
+            <!-- Gold -->
+            <button class="swatch" id="swatch-gold" onclick="selectColor('gold')"
+                    aria-label="Or"
+                    style="background: radial-gradient(circle at 35% 35%, #e8c84a, #a8740e);
+                           box-shadow: 0 2px 8px rgba(184,146,42,0.3);">
+            </button>
+            <!-- Silver -->
+            <button class="swatch" id="swatch-silver" onclick="selectColor('silver')"
+                    aria-label="Argent"
+                    style="background: radial-gradient(circle at 35% 35%, #f0f0f0, #8a8a8a);
+                           box-shadow: 0 2px 8px rgba(0,0,0,0.14);">
+            </button>
+          </div>
+        </div>
+
+        <!-- Short description -->
+        <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:1.8;color:rgba(42,34,32,0.75);margin-bottom:28px;">
+          Een elegante bag holder die jouw tas veilig van de grond houdt. Gemaakt van hoogwaardig metaal met een zijdezacht afwerking — discreet, functioneel en onmisbaar.
+        </p>
+
+        <!-- Trust badges row -->
+        <div class="flex items-center gap-6 mb-8"
+             style="padding:14px 0;border-top:0.5px solid rgba(42,34,32,0.08);border-bottom:0.5px solid rgba(42,34,32,0.08);">
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.55);">Premium kwaliteit</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.55);">Gratis verzending</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.55);">30 dagen retour</span>
+          </div>
+        </div>
+
+        <!-- CTA buttons -->
+        <div class="flex flex-col gap-3 mb-6">
+          <button class="btn-primary" onclick="handleAddToCart()">
+            Toevoegen aan winkelwagen
+          </button>
+          <button class="btn-outline" onclick="handleWishlist()">
+            <span style="display:flex;align-items:center;justify-content:center;gap:8px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Bewaar in verlanglijst
+            </span>
+          </button>
+        </div>
+
+        <!-- Notify -->
+        <div class="flex justify-center">
+          <button class="notify-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Meld mij als terug op voorraad
+          </button>
+        </div>
+
+        <!-- Accordion: details, care, shipping -->
+        <div class="mt-10">
+
+          <!-- Details -->
+          <button class="accordion-btn" id="acc-details" onclick="toggleAccordion('details')">
+            <span>Productdetails</span>
+            <svg class="accordion-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#2A2220" stroke-width="1.2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+          </button>
+          <div class="accordion-body" id="body-details">
+            <div style="padding-bottom:20px;">
+              <ul style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:2;color:rgba(42,34,32,0.7);list-style:none;">
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Afmeting: ø 6 cm × hoogte 7,5 cm</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Materiaal: Zinc alloy met galvanische afwerking</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Maximale draagkracht: 5 kg</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Opvouwbaar ontwerp voor onderweg</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Geleverd in Fleya signature giftbox</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Care -->
+          <button class="accordion-btn" id="acc-care" onclick="toggleAccordion('care')">
+            <span>Onderhoud</span>
+            <svg class="accordion-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#2A2220" stroke-width="1.2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+          </button>
+          <div class="accordion-body" id="body-care">
+            <div style="padding-bottom:20px;">
+              <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:1.9;color:rgba(42,34,32,0.7);">
+                Reinig met een zachte, droge doek. Vermijd contact met water, parfum en chemische reinigingsmiddelen. Bewaar in de bijgeleverde pouch om krassen te voorkomen.
+              </p>
+            </div>
+          </div>
+
+          <!-- Shipping -->
+          <button class="accordion-btn" id="acc-ship" onclick="toggleAccordion('ship')">
+            <span>Verzending &amp; retour</span>
+            <svg class="accordion-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#2A2220" stroke-width="1.2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+          </button>
+          <div class="accordion-body" id="body-ship">
+            <div style="padding-bottom:20px;">
+              <ul style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:2;color:rgba(42,34,32,0.7);list-style:none;">
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Gratis standaardverzending (2–4 werkdagen)</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Expreslevering beschikbaar</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Gratis retour binnen 30 dagen</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Discreet verpakt in Fleya branded box</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Last border -->
+          <div style="height:0.5px;background:rgba(42,34,32,0.12);"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     YOU MAY ALSO LIKE
+════════════════════════════════════════════ -->
+<section class="px-8 lg:px-16 py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-14 fade-up">
+      <span class="deco-line deco-line-center" style="margin-bottom:18px;"></span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:0.06em;color:#2A2220;margin-bottom:8px;">Compleet de look</h2>
+      <span class="deco-line deco-line-center" style="margin-top:18px;"></span>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+      <!-- Card 1 -->
+      <article class="related-card fade-up" style="transition-delay:0.05s;">
+        <div class="overflow-hidden rounded-lg mb-4"
+             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
+          <div class="card-img w-full aspect-[3/4]"
+               style="background:linear-gradient(145deg,#f0e8e6,#e8d8d4);display:flex;align-items:center;justify-content:center;">
+            <div style="width:80px;height:130px;border:1.5px solid rgba(42,34,32,0.15);border-radius:40px 40px 0 0;position:relative;">
+              <div style="width:38px;height:38px;border:1.5px solid rgba(42,34,32,0.15);border-radius:50%;position:absolute;top:-20px;left:50%;transform:translateX(-50%);"></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:#E0828F;margin-bottom:6px;">Nieuw</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">Bag Holder Set</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ 74,99</p>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="related-card fade-up" style="transition-delay:0.12s;">
+        <div class="overflow-hidden rounded-lg mb-4"
+             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
+          <div class="card-img w-full aspect-[3/4]"
+               style="background:linear-gradient(145deg,#ede8df,#e2d8cc);display:flex;align-items:center;justify-content:center;">
+            <div style="width:65px;height:90px;border:1.5px solid rgba(42,34,32,0.15);border-radius:6px;position:relative;">
+              <div style="width:30px;height:10px;border:1.5px solid rgba(42,34,32,0.15);border-radius:10px;position:absolute;top:-6px;left:50%;transform:translateX(-50%);"></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.4);margin-bottom:6px;">Binnenkort</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">Mini Bag</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ —</p>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="related-card fade-up" style="transition-delay:0.19s;">
+        <div class="overflow-hidden rounded-lg mb-4"
+             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
+          <div class="card-img w-full aspect-[3/4]"
+               style="background:linear-gradient(145deg,#f2ede8,#e8ddd6);display:flex;align-items:center;justify-content:center;">
+            <div style="width:90px;height:50px;border:1.5px solid rgba(42,34,32,0.15);border-radius:6px 6px 0 0;"></div>
+          </div>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.4);margin-bottom:6px;">Binnenkort</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">Tote Bag</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ —</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER STRIP
+════════════════════════════════════════════ -->
+<footer style="border-top:0.5px solid rgba(42,34,32,0.1);padding:32px 32px;text-align:center;">
+  <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.35);">
+    © 2026 Fleya — Accessories for Women
+  </p>
+</footer>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  /* ── Color switcher ── */
+  const colorData = {
+    black:  { label: 'Noir',   imgId: 'img-black',  swatchId: 'swatch-black',  thumbId: 'thumb-black' },
+    gold:   { label: 'Or',     imgId: 'img-gold',   swatchId: 'swatch-gold',   thumbId: 'thumb-gold'  },
+    silver: { label: 'Argent', imgId: 'img-silver', swatchId: 'swatch-silver', thumbId: 'thumb-silver'},
+  };
+
+  let currentColor = 'black';
+
+  function selectColor(color) {
+    if (color === currentColor) return;
+
+    // Fade out old image
+    document.getElementById(colorData[currentColor].imgId).style.opacity = '0';
+    // Remove active states
+    document.getElementById(colorData[currentColor].swatchId).classList.remove('active');
+    document.getElementById(colorData[currentColor].thumbId).classList.remove('active');
+
+    // Fade in new image
+    document.getElementById(colorData[color].imgId).style.opacity = '1';
+    // Add active states
+    document.getElementById(colorData[color].swatchId).classList.add('active');
+    document.getElementById(colorData[color].thumbId).classList.add('active');
+
+    // Update label
+    document.getElementById('color-label').textContent = colorData[color].label;
+
+    currentColor = color;
+  }
+
+  /* ── Accordion ── */
+  function toggleAccordion(id) {
+    const btn  = document.getElementById('acc-' + id);
+    const body = document.getElementById('body-' + id);
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+  }
+
+  /* ── Scroll fade-up ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Placeholder actions ── */
+  function handleAddToCart() {
+    const btn = document.querySelector('.btn-primary');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Toegevoegd';
+    btn.style.backgroundColor = '#B85A68';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.backgroundColor = '';
+    }, 2000);
+  }
+
+  function handleWishlist() {
+    const btn = document.querySelector('.btn-outline');
+    btn.style.borderColor = '#E0828F';
+    btn.style.color = '#E0828F';
+  }
+</script>
+</body>
+</html>
