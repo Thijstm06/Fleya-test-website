@@ -394,6 +394,7 @@
   <a href="index.html#collection" class="mobile-nav-link">Collectie</a>
   <a href="about.html"            class="mobile-nav-link">Over</a>
   <a href="journal.html"          class="mobile-nav-link">Journal</a>
+  <a href="verlanglijst.html"     class="mobile-nav-link">Verlanglijst</a>
   <a href="winkelwagen.html"      class="mobile-nav-link">Winkelwagen</a>
   <span class="deco-line" style="margin-top:12px;"></span>
 </div>
@@ -423,6 +424,10 @@
 
     <div class="hidden lg:flex items-center gap-10">
       <a href="journal.html" class="nav-link">Journal</a>
+      <a href="verlanglijst.html" class="nav-link" aria-label="Verlanglijst" style="position:relative;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="nav-wish-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
       <a href="winkelwagen.html" class="nav-link" style="position:relative;">
         <span style="display:flex;align-items:center;gap:6px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -806,6 +811,11 @@
     const badge = document.getElementById('nav-badge');
     if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
     localStorage.setItem('fleya-cart-count', count);
+
+    // Wishlist badge
+    var wn = parseInt(localStorage.getItem('fleya-wishlist-count') || '0', 10);
+    var wb = document.getElementById('nav-wish-badge');
+    if (wb) { if (wn > 0) { wb.textContent = wn; wb.style.display = 'flex'; } else { wb.style.display = 'none'; } }
 
     const countLabel = document.getElementById('item-count-label');
     if (countLabel) countLabel.textContent = count + ' ' + (count === 1 ? 'product' : 'producten');
