@@ -306,23 +306,12 @@
 
 <!-- JAVASCRIPT -->
 <script>
-  /* ── Color visual data ── */
-  const colorVisuals = {
-    black: {
-      bg: 'linear-gradient(145deg, #e8dedd 0%, #ddd0ce 100%)',
-      border: '#1a1a1a',
-      fill: 'rgba(26,26,26,0.06)',
-    },
-    gold: {
-      bg: 'linear-gradient(145deg, #ede8df 0%, #e0d5c3 100%)',
-      border: '#b8922a',
-      fill: 'linear-gradient(160deg, rgba(212,175,55,0.45), rgba(184,130,10,0.55))',
-    },
-    silver: {
-      bg: 'linear-gradient(145deg, #ebebeb 0%, #d8d8d8 100%)',
-      border: '#9e9e9e',
-      fill: 'linear-gradient(160deg, rgba(230,230,230,0.7), rgba(160,160,160,0.55))',
-    },
+  /* ── Product image map by colorKey ── */
+  const productImages = {
+    black:  'product_images/bagholder-zwart.jpg',
+    gold:   'product_images/bagholder-goud.jpg',
+    silver: 'product_images/bagholder-zilver.jpg',
+    rose:   'product_images/bagholder-roze.jpg',
   };
 
   function getWishlist() {
@@ -340,25 +329,13 @@
     if (b) { b.textContent = count; b.style.display = count > 0 ? 'flex' : 'none'; }
   }
 
-  function buildProductIllustration(colorKey) {
-    const v = colorVisuals[colorKey] || colorVisuals.black;
-    const isFill = typeof v.fill === 'string' && v.fill.startsWith('linear');
-    const fillStyle = isFill
-      ? `background:${v.fill};`
-      : `background:${v.fill};`;
-
+  function buildProductIllustration(colorKey, name, color) {
+    const imgSrc = productImages[colorKey] || productImages.black;
     return `
-      <div style="width:72px;height:100px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:${v.bg};flex-shrink:0;position:relative;overflow:hidden;">
-        <div style="position:relative;">
-          <div style="width:32px;height:54px;border:1.5px solid ${v.border};border-radius:16px 16px 0 0;position:relative;margin:0 auto;${fillStyle}">
-            <div style="width:16px;height:16px;border:1.5px solid ${v.border};border-radius:50%;position:absolute;top:-9px;left:50%;transform:translateX(-50%);${fillStyle}"></div>
-            <div style="width:1.5px;height:14px;background:${v.border};position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);"></div>
-            <div style="width:10px;height:1.5px;background:${v.border};position:absolute;bottom:-14px;left:50%;transform:translateX(-50%) translateX(-5px);"></div>
-            <div style="width:10px;height:1.5px;background:${v.border};position:absolute;bottom:-8px;left:50%;transform:translateX(-50%) translateX(-5px);"></div>
-          </div>
-        </div>
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 80% 20%, rgba(242,196,206,0.18) 0%, transparent 60%);pointer-events:none;"></div>
-      </div>`;
+      <a href="product.html" style="display:block;flex-shrink:0;border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(224,130,143,0.12);">
+        <img src="${imgSrc}" alt="${name} — ${color}"
+             style="width:88px;height:116px;object-fit:cover;display:block;border-radius:8px;">
+      </a>`;
   }
 
   function renderWishlist() {
@@ -383,8 +360,8 @@
       <div style="border-top:0.5px solid rgba(42,34,32,0.09);">
         ${wishlist.map((item, i) => `
           <div class="wish-item" id="wish-item-${i}" data-index="${i}">
-            <!-- Illustration -->
-            ${buildProductIllustration(item.colorKey)}
+            <!-- Product image -->
+            ${buildProductIllustration(item.colorKey, item.name, item.color)}
 
             <!-- Info -->
             <div style="flex:1;min-width:0;">
