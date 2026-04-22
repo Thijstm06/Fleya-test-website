@@ -19,6 +19,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 | `contact.html` | Compleet — contactformulier |
 | `verzending-retour.html` | Compleet — verzending & retourinfo |
 | `faq.html` | Compleet — accordion FAQ |
+| `voor-bedrijven.html` | Compleet — B2B landingspagina (bag holders voor horeca/events) |
 
 ---
 
@@ -40,6 +41,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 - [x] **Productfoto's in about.html** — placehold.co vervangen door echte productfoto's
 - [x] **Winkelwagen popup** — slide-in paneel rechts bij toevoegen product; toont alle huidige cart-items met aantal, prijs en subtotaal; knoppen voor +/−/Verwijder; navbar badge en localStorage live bijgewerkt
 - [x] **`serve.mjs` herschreven** — van Python naar Node.js ES module; bevat no-cache headers
+- [x] **`voor-bedrijven.html`** — B2B landingspagina met hero, how-it-works, features, B2B designs (QR/nummer/logo/hybrid/NFC), afwerkingen (zwart/goud/zilver/roze), en CTA; toegevoegd aan navbar en footer van alle pagina's
 - [ ] **Echte Fleya-copy** — generieke placeholder-tekst op alle pagina's vervangen door echte merktekst
   - Productnamen / beschrijvingen
   - Over-ons tekst (about.html) — al grotendeels brand-specifiek

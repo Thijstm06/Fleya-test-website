@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleya — Voor Bedrijven</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:    #E0828F;
+      --petal:   #F2C4CE;
+      --mauve:   #B85A68;
+      --cream:   #F7F0EF;
+      --espresso:#2A2220;
+      --muted:   rgba(42,34,32,0.52);
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--espresso);
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Nav ── */
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--espresso);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover { color: var(--rose); }
+
+    #navbar {
+      background-color: rgba(247,240,239,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+      transition: background-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    #navbar.scrolled {
+      background-color: rgba(247,240,239,0.98);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.22);
+    }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: var(--espresso);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: var(--rose); }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px; right: 28px;
+      background: none; border: none; cursor: pointer;
+      padding: 8px;
+      display: flex; flex-direction: column;
+      gap: 6px; align-items: flex-end;
+    }
+
+    /* ── Deco ── */
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: var(--rose);
+    }
+    .deco-line-center { margin: 0 auto; }
+
+    /* ── Section eyebrow ── */
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* ── Grain ── */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 72px);
+      margin-top: 72px;
+      overflow: hidden;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 80px;
+      background: var(--espresso);
+      position: relative;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 4.5vw, 5.5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.08;
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--petal);
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(247,240,239,0.55);
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 40px;
+      font-weight: 300;
+      letter-spacing: 0.07em;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--rose);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border-radius: 4px;
+      align-self: flex-start;
+      transition: background-color 0.3s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .btn-primary:hover { background: var(--mauve); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .hero-visual {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.75;
+      mix-blend-mode: multiply;
+      background: var(--petal);
+    }
+    .hero-visual-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--petal) 0%, var(--mauve) 100%);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--espresso) 0%, transparent 25%);
+    }
+
+    /* ── BADGES ── */
+    .badges {
+      background: #fff;
+      border-bottom: 0.5px solid rgba(224,130,143,0.2);
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 24px 5vw;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .badge-icon {
+      color: var(--rose);
+      flex-shrink: 0;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(224,130,143,0.15);
+      margin-top: 56px;
+    }
+    .how-step {
+      background: var(--cream);
+      padding: 40px 32px;
+    }
+    .how-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 300;
+      color: var(--petal);
+      line-height: 1;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .how-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .how-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 56px;
+    }
+    .feature-card {
+      border-top: 0.5px solid var(--petal);
+      padding-top: 32px;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--petal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--espresso);
+    }
+    .feature-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── B2B DESIGNS ── */
+    .designs-section {
+      background: var(--espresso);
+    }
+    .designs-section .eyebrow { color: var(--petal); opacity: 0.7; }
+    .designs-section h2 { color: #fff; }
+    .designs-categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 56px;
+      margin-top: 56px;
+    }
+    .design-cat-title {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 0.5px solid rgba(242,196,206,0.2);
+    }
+    .discs {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .disc {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      position: relative;
+      flex-direction: column;
+      text-align: center;
+      padding: 0.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .disc.zwart {
+      background: radial-gradient(circle at 35% 35%, #4a4a4a, #111111);
+      color: rgba(247,240,239,0.85);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .disc.goud {
+      background: radial-gradient(circle at 35% 35%, #e8c84a, #a8740e);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(184,146,42,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .disc.zilver {
+      background: radial-gradient(circle at 35% 35%, #f0f0f0, #8a8a8a);
+      color: #2A2220;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .disc.roze {
+      background: radial-gradient(circle at 35% 35%, #f0a0b0, #c9687a);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(224,130,143,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .disc-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-top: 2px;
+    }
+    .disc-num {
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .disc-qr {
+      font-size: 0.48rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    /* ── FINISHES ── */
+    .finish-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .finish-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .finish-swatch {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(224,130,143,0.2);
+    }
+    .finish-chip span {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .sw-zwart   { background: radial-gradient(circle at 35% 35%, #4a4a4a, #111111); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+    .sw-goud    { background: radial-gradient(circle at 35% 35%, #e8c84a, #a8740e); box-shadow: 0 4px 16px rgba(184,146,42,0.3); }
+    .sw-zilver  { background: radial-gradient(circle at 35% 35%, #f0f0f0, #8a8a8a); box-shadow: 0 4px 16px rgba(0,0,0,0.14); }
+    .sw-roze    { background: radial-gradient(circle at 35% 35%, #f0a0b0, #c9687a); box-shadow: 0 4px 16px rgba(224,130,143,0.35); }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 48px;
+      background: rgba(224,130,143,0.15);
+    }
+    .detail-item {
+      background: var(--cream);
+      padding: 32px;
+      text-align: center;
+    }
+    .detail-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--espresso);
+      margin-bottom: 8px;
+    }
+    .detail-desc {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 300;
+      letter-spacing: 0.07em;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--mauve) 0%, var(--rose) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 100px 8vw;
+    }
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .cta-section p {
+      font-size: 14px;
+      opacity: 0.85;
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .btn-white {
+      display: inline-block;
+      background: #fff;
+      color: var(--mauve);
+      text-decoration: none;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 40px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    .footer-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(247,240,239,0.45);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .footer-link:hover { color: var(--rose); }
+
+    /* ── Fade up ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Section padding ── */
+    .section-pad { padding: 100px 8vw; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { height: 55vw; }
+      .hero-text { padding: 64px 32px; }
+      .how-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: 1fr; }
+      .designs-categories { grid-template-columns: 1fr; }
+      .details-grid { grid-template-columns: 1fr; }
+      .section-pad { padding: 72px 6vw; }
+    }
+    @media (max-width: 768px) {
+      .hidden-mobile { display: none !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    }
+
+    /* ── Hero animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-1 { animation: fadeUp 0.8s ease both 0.1s; }
+    .anim-2 { animation: fadeUp 0.8s ease both 0.25s; }
+    .anim-3 { animation: fadeUp 0.8s ease both 0.4s; }
+    .anim-4 { animation: fadeUp 0.8s ease both 0.55s; }
+  </style>
+</head>
+<body>
+
+<!-- GRAIN -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button id="mobile-menu-close" aria-label="Menu sluiten">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line deco-line-center" style="margin-bottom:12px;"></span>
+  <a href="index.html#collection" class="mobile-nav-link">Collectie</a>
+  <a href="about.html" class="mobile-nav-link">Over</a>
+  <a href="journal.html" class="mobile-nav-link">Blog</a>
+  <a href="voor-bedrijven.html" class="mobile-nav-link" style="color:#E0828F;">Voor Bedrijven</a>
+  <a href="verlanglijst.html" class="mobile-nav-link">Verlanglijst</a>
+  <a href="winkelwagen.html" class="mobile-nav-link">Winkelwagen</a>
+  <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <!-- Left links -->
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#collection" class="nav-link">Collectie</a>
+      <a href="about.html" class="nav-link">Over</a>
+      <a href="journal.html" class="nav-link">Blog</a>
+    </div>
+
+    <!-- Wordmark logo -->
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+
+    <!-- Right links -->
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="voor-bedrijven.html" class="nav-link" style="color:#E0828F;font-weight:400;">Voor Bedrijven</a>
+      <a href="verlanglijst.html" class="nav-link" style="position:relative;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </a>
+      <a href="winkelwagen.html" class="nav-link" style="position:relative;">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Winkelwagen
+        </span>
+      </a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Menu openen">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════
+     HERO
+════════════════════════ -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="eyebrow anim-1" style="color:var(--petal);opacity:0.7;">Premium Bag Holders</span>
+    <h1 class="hero-title anim-2">
+      Elegantie &amp;<br><em>functionaliteit</em><br>aan tafel
+    </h1>
+    <p class="hero-sub anim-3">
+      Houd de tas van uw gasten veilig en uw tafel stijlvol — met een gepersonaliseerde bag holder die ook dient als QR-menu, tafelnummer of NFC-verbinding.
+    </p>
+    <a href="#designs" class="btn-primary anim-4">Bekijk designs</a>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-visual-bg"></div>
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80"
+         alt="Restaurant sfeer">
+    <div class="hero-overlay"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     BADGES
+════════════════════════ -->
+<div class="badges">
+  <div class="badge">
+    <svg class="badge-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Premium Kwaliteit
+  </div>
+  <div class="badge">
+    <svg class="badge-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Veilig &amp; Stabiel — tot 7 kg
+  </div>
+  <div class="badge">
+    <svg class="badge-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3m0 4h4v-4m-4 0v4"/></svg>
+    Past op elke tafel — tot 4 cm
+  </div>
+  <div class="badge">
+    <svg class="badge-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+    Laser Gegraveerd
+  </div>
+  <div class="badge">
+    <svg class="badge-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+    Stijlvol Geschenk
+  </div>
+</div>
+
+<!-- ════════════════════════
+     HOW IT WORKS
+════════════════════════ -->
+<section class="section-pad" style="background:#fff;" id="how">
+  <div class="max-w-7xl mx-auto">
+    <span class="eyebrow fade-up">Gebruiksgemak</span>
+    <h2 class="fade-up" style="font-size:clamp(2rem,3.5vw,3.2rem);margin-bottom:8px;">Hoe het werkt</h2>
+    <div class="how-grid fade-up">
+      <div class="how-step">
+        <span class="how-number">01</span>
+        <span class="how-label">Gesloten</span>
+        <p class="how-desc">De bag holder ligt compact en stijlvol op tafel — als een elegante schijf die bij het interieur past.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-number">02</span>
+        <span class="how-label">Openklappen</span>
+        <p class="how-desc">Een lichte druk op de zijkant en de haak klapt soepel en geruisloos open.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-number">03</span>
+        <span class="how-label">Uitklappen</span>
+        <p class="how-desc">De haak schuift over de tafelrand en klikt precies vast — geen geratel, geen verschuiven.</p>
+      </div>
+      <div class="how-step">
+        <span class="how-number">04</span>
+        <span class="how-label">Vergrendeld</span>
+        <p class="how-desc">Veilig vergrendeld, draagt tot 7 kg. Uw gasten genieten zorgeloos van hun bezoek.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     FEATURES
+════════════════════════ -->
+<section class="section-pad" style="background:var(--cream);">
+  <div class="max-w-7xl mx-auto">
+    <span class="eyebrow fade-up">Voordelen</span>
+    <h2 class="fade-up" style="font-size:clamp(2rem,3.5vw,3.2rem);">Meer dan een bag holder</h2>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="#B85A68" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="feature-title">Luxe &amp; Functioneel</h3>
+        <p class="feature-text">Uw gasten bewaren hun tas veilig, uw tafels blijven netjes. Beschikbaar in vijf premium afwerkingen die aansluiten bij elk interieur.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="#B85A68" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3m0 4h4v-4m-4 0v4"/></svg>
+        </div>
+        <h3 class="feature-title">Scan &amp; Bestel</h3>
+        <p class="feature-text">Direct toegang tot menu, betalen of reviews via een gepersonaliseerde QR-gravure — geen extra hardware of losse menukaarten nodig.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg width="22" height="22" fill="none" stroke="#B85A68" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-title">Sterk &amp; Duurzaam</h3>
+        <p class="feature-text">Anti-slip siliconen pad houdt de holder op zijn plek. Draagt tot 7 kg zonder ook maar een millimeter te verschuiven — sessie na sessie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     B2B DESIGNS
+════════════════════════ -->
+<section class="section-pad designs-section" id="designs">
+  <div class="max-w-7xl mx-auto">
+    <span class="eyebrow fade-up">Op maat gemaakt</span>
+    <h2 class="fade-up" style="font-size:clamp(2rem,3.5vw,3.2rem);">B2B Designs</h2>
+
+    <div class="designs-categories">
+
+      <div class="fade-up">
+        <div class="design-cat-title">QR Code Design</div>
+        <div class="discs">
+          <div class="disc zwart">
+            <span class="disc-qr">▦▦▦<br>▦▦▦<br>Scan to<br>Order</span>
+          </div>
+          <div class="disc goud">
+            <span class="disc-qr">▦▦▦<br>▦▦▦<br>Scan to<br>Pay</span>
+          </div>
+          <div class="disc zilver">
+            <span class="disc-qr">▦▦▦<br>▦▦▦<br>Menu<br>&amp; Pay</span>
+          </div>
+          <div class="disc roze">
+            <span class="disc-qr">▦▦▦<br>▦▦▦<br>Review<br>&amp; Win</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <div class="design-cat-title">Tafelnummer Design</div>
+        <div class="discs">
+          <div class="disc zwart"><span class="disc-num">12</span></div>
+          <div class="disc goud"><span class="disc-num">24</span></div>
+          <div class="disc zilver"><span class="disc-num">07</span></div>
+          <div class="disc roze"><span class="disc-num">03</span></div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <div class="design-cat-title">Logo / Branding Design</div>
+        <div class="discs">
+          <div class="disc zwart" style="font-size:0.6rem;letter-spacing:0.08em;text-align:center;">⚜<br>CONSERVATORIUM<br><span class="disc-sub">Amsterdam</span></div>
+          <div class="disc goud" style="font-size:1.5rem;text-align:center;">D<br><span class="disc-sub">The Duchess</span></div>
+          <div class="disc zilver" style="font-size:1.8rem;text-align:center;">B<br><span class="disc-sub">Blue Ocean</span></div>
+          <div class="disc roze" style="font-size:1.4rem;text-align:center;">F<br><span class="disc-sub">Fleya</span></div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <div class="design-cat-title">Hybrid Design (Logo + QR + Nummer)</div>
+        <div class="discs">
+          <div class="disc zwart" style="font-size:0.55rem;text-align:center;">⚜ 12<br><span class="disc-sub">#fleya</span></div>
+          <div class="disc goud" style="font-size:0.6rem;text-align:center;">D<br><span class="disc-sub">The Duchess<br>QR 07</span></div>
+          <div class="disc zilver" style="font-size:0.6rem;text-align:center;">07<br><span class="disc-sub">Scan to Order</span></div>
+          <div class="disc roze" style="font-size:0.6rem;text-align:center;">03<br><span class="disc-sub">Menu &amp; Pay</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NFC -->
+    <div style="margin-top:56px;padding-top:40px;border-top:0.5px solid rgba(242,196,206,0.15);"
+         class="fade-up">
+      <div class="design-cat-title">NFC Smart Design — Tap to Connect</div>
+      <div class="discs" style="align-items:center;gap:32px;">
+        <div class="disc zwart" style="width:100px;height:100px;font-size:1.4rem;">
+          <span style="opacity:0.7;">))))</span>
+        </div>
+        <p style="color:rgba(247,240,239,0.45);font-size:13px;max-width:340px;line-height:1.8;font-weight:300;letter-spacing:0.06em;">
+          Tap met een smartphone en open direct het menu, de betaalpagina of een welkomstpagina — geen app nodig. Beschikbaar als upgrade op elk design.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     FINISHES
+════════════════════════ -->
+<section class="section-pad" style="background:var(--cream);" id="finishes">
+  <div class="max-w-7xl mx-auto">
+    <span class="eyebrow fade-up">Materialen</span>
+    <h2 class="fade-up" style="font-size:clamp(2rem,3.5vw,3.2rem);">Kleuren &amp; Afwerkingen</h2>
+    <div class="finish-row fade-up">
+      <div class="finish-chip"><div class="finish-swatch sw-zwart"></div><span>Zwart</span></div>
+      <div class="finish-chip"><div class="finish-swatch sw-goud"></div><span>Goud</span></div>
+      <div class="finish-chip"><div class="finish-swatch sw-zilver"></div><span>Zilver</span></div>
+      <div class="finish-chip"><div class="finish-swatch sw-roze"></div><span>Roze</span></div>
+    </div>
+
+    <div style="margin-top:64px;">
+      <span class="eyebrow fade-up">Details</span>
+      <h3 class="fade-up" style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;margin-bottom:0;">Premium Details</h3>
+    </div>
+    <div class="details-grid fade-up">
+      <div class="detail-item">
+        <div class="detail-title">Subtiele Gravure</div>
+        <div class="detail-desc">Laser gegraveerd voor een scherp en duurzaam resultaat dat niet slijt</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-title">Hoogwaardige Afwerking</div>
+        <div class="detail-desc">Geborsteld metaal met premium coating die niet verkleurt of oxideert</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-title">Anti-slip Siliconen Pad</div>
+        <div class="detail-desc">Beschermt het tafelblad en voorkomt verschuiven bij elke belasting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CTA
+════════════════════════ -->
+<section class="cta-section" id="contact">
+  <span class="eyebrow" style="color:rgba(255,255,255,0.6);">Zakelijk of Persoonlijk</span>
+  <h2>Klaar voor uw eigen <em style="font-style:italic;">Fleya</em> design?</h2>
+  <p>Bestel gepersonaliseerde bag holders voor uw restaurant, hotel of evenement — of geef ze weg als stijlvol relatiegeschenk.</p>
+  <a href="contact.html" class="btn-white">Neem contact op</a>
+</section>
+
+<!-- ════════════════════════
+     FOOTER
+════════════════════════ -->
+<footer style="background-color:#2A2220;padding:72px 32px 40px;" class="lg:px-16">
+  <div class="max-w-7xl mx-auto">
+
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:64px;margin-bottom:64px;"
+         class="footer-grid">
+
+      <!-- Brand -->
+      <div>
+        <img src="brand_assets/fleya-logo.svg" alt="Fleya"
+             style="height:52px;width:auto;margin-bottom:24px;filter:brightness(0.88);">
+        <p style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;line-height:1.95;
+                  color:rgba(247,240,239,0.38);max-width:260px;margin-bottom:28px;">
+          Verfijnde accessoires voor de moderne vrouw. Ontworpen met intentie, gemaakt om te duren.
+        </p>
+        <div style="display:flex;gap:20px;">
+          <a href="#" class="footer-link" style="font-size:9px;letter-spacing:0.22em;">Instagram</a>
+          <a href="#" class="footer-link" style="font-size:9px;letter-spacing:0.22em;">Pinterest</a>
+          <a href="#" class="footer-link" style="font-size:9px;letter-spacing:0.22em;">TikTok</a>
+        </div>
+      </div>
+
+      <!-- Navigate -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;
+                  color:rgba(247,240,239,0.28);margin-bottom:24px;">Navigatie</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="index.html#collection" class="footer-link">Collectie</a>
+          <a href="about.html" class="footer-link">Over Fleya</a>
+          <a href="journal.html" class="footer-link">Blog</a>
+          <a href="voor-bedrijven.html" class="footer-link" style="color:var(--rose);">Voor Bedrijven</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+
+      <!-- Customer care -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;
+                  color:rgba(247,240,239,0.28);margin-bottom:24px;">Klantenservice</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="verzending-retour.html" class="footer-link">Verzending &amp; Retour</a>
+          <a href="faq.html" class="footer-link">FAQ</a>
+          <a href="privacybeleid.html" class="footer-link">Privacybeleid</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:0.5px solid rgba(224,130,143,0.15);padding-top:28px;
+                display:flex;justify-content:space-between;align-items:center;
+                flex-wrap:wrap;gap:12px;">
+      <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.1em;color:rgba(247,240,239,0.2);">
+        © 2026 Fleya. Alle rechten voorbehouden.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;
+                color:rgba(224,130,143,0.3);letter-spacing:0.08em;">
+        Ontworpen met intentie.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  }
+</style>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeBtn   = document.getElementById('mobile-menu-close');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  closeBtn.addEventListener('click',  () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
