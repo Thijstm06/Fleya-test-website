@@ -43,6 +43,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 - [x] **`serve.mjs` herschreven** — van Python naar Node.js ES module; bevat no-cache headers
 - [x] **`voor-bedrijven.html`** — B2B landingspagina met hero, how-it-works, features, B2B designs (QR/nummer/logo/hybrid/NFC), afwerkingen (zwart/goud/zilver/roze), en CTA; toegevoegd aan navbar en footer van alle pagina's
 - [x] **Klikbare productfoto homepage** — foto in "De Collectie" (Fleya Bag Holder — Roze) is nu klikbaar en linkt naar product.html, net als de "Bestel Nu" knop
+- [x] **"De Collectie" upgrade (index.html)** — grid herschreven van 3-koloms (2 editorial placeholders + 1 product) naar 4-koloms met alle echte productfoto's (roze/zilver/goud/zwart); kleurswatches per kaart; hover-overlay met "Bekijk Product" + verlanglijst-hartje; CTA "Bekijk de volledige collectie" onder het grid toegevoegd; dode link verwijderd
 - [ ] **Echte Fleya-copy** — generieke placeholder-tekst op alle pagina's vervangen door echte merktekst
   - Productnamen / beschrijvingen
   - Over-ons tekst (about.html) — al grotendeels brand-specifiek
@@ -62,6 +63,9 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
   - `<meta property="og:image">` voor social sharing
   - Unieke `<title>` tags nalopen
 - [ ] **Cookie/consent banner** — pas toevoegen als analytics of tracking live gaat
+- [ ] **Collectie-filterbalk** — tabs (Alles / Bag Holders / Nieuw) boven het grid in "De Collectie"; schaalt mee als het assortiment groeit
+- [ ] **Productkaart-reviews** — sterrenrating (bijv. 4.9 ★) zichtbaar op kaarten in De Collectie voor social proof
+- [ ] **"Binnenkort" teaser** — The Everyday Tote als coming-soon banner onder het collectiegrid, zodra er een productfoto beschikbaar is
 
 ---
 

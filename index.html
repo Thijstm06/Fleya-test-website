@@ -148,6 +148,10 @@
       transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .product-card:hover .card-img { transform: scale(1.04); }
+    .product-card:hover .card-hover-overlay { opacity: 1 !important; }
+    .product-card:hover .wishlist-card-btn { opacity: 1 !important; }
+    .wishlist-card-btn:hover { background: #F2C4CE !important; transform: scale(1.1); }
+    .wishlist-card-btn { transition: opacity 0.3s ease, transform 0.2s ease; }
 
     /* ── Scroll fade-up ── */
     .fade-up {
@@ -539,132 +543,206 @@
       <span class="deco-line deco-line-center" style="margin-top:28px;"></span>
     </div>
 
-    <!-- Grid -->
-    <div class="collection-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;
-                grid-template-rows:auto auto;gap:16px;">
+    <!-- Grid — alle 4 kleuren -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
 
-      <!-- Card 1 — LARGE editorial (spans 2 cols, 1 row) -->
-      <div class="product-card fade-up"
-           style="grid-column:1/3;border-radius:10px;
+      <!-- Card 1 — Roze (Bestseller) -->
+      <div class="product-card fade-up" style="border-radius:10px;overflow:hidden;
                   box-shadow:0 4px 24px rgba(224,130,143,0.12);">
-        <div style="position:relative;overflow:hidden;aspect-ratio:16/9;border-radius:10px;
-                    background:#2A2220;">
-          <img src="https://placehold.co/960x540/2A2220/E0828F?text=."
-               alt=""
-               class="card-img w-full h-full object-cover"
-               style="opacity:0.35;">
-          <div class="absolute inset-0"
-               style="background:radial-gradient(ellipse 80% 80% at 30% 50%, rgba(242,196,206,0.18) 0%, transparent 60%);"></div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;
-                      justify-content:center;padding:40px 48px;">
-            <span class="deco-line" style="margin-bottom:20px;"></span>
-            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
-                      text-transform:uppercase;color:rgba(242,196,206,0.65);margin-bottom:14px;">
-              Lente / Zomer 2026
-            </p>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
-                       font-size:clamp(28px,3.5vw,46px);color:#F7F0EF;letter-spacing:0.04em;
-                       line-height:1.2;margin-bottom:20px;">
-              Ontworpen om op te vallen.<br>
-              <em style="color:#F2C4CE;font-style:italic;">Gemaakt om te duren.</em>
-            </h3>
-            <a href="product.html" class="btn-primary" style="padding:10px 28px;font-size:10px;align-self:flex-start;">Bekijk de Collectie</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 — portrait right (Fleya Bag Holder — Roze) -->
-      <div class="product-card fade-up"
-           style="grid-column:3/4;grid-row:1/3;border-radius:10px;
-                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
-        <div class="portrait-card" style="position:relative;overflow:hidden;height:100%;border-radius:10px;
-                    min-height:420px;background:#F2C4CE;">
-          <a href="product.html" style="display:block;position:absolute;inset:0;z-index:1;" aria-label="Bekijk Fleya Bag Holder"></a>
+        <a href="product.html" style="display:block;position:relative;overflow:hidden;
+                    aspect-ratio:3/4;background:#F2C4CE;border-radius:10px;">
           <img src="product_images/bagholder-roze.jpg"
                alt="Fleya Bag Holder — Roze"
-               class="portrait-card card-img w-full h-full object-cover"
-               style="min-height:420px;cursor:pointer;">
-          <div class="absolute inset-0"
-               style="background:linear-gradient(to top,rgba(42,34,32,0.70) 0%,transparent 45%);"></div>
-          <div style="position:absolute;top:24px;left:24px;z-index:2;">
-            <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
-                         text-transform:uppercase;color:rgba(247,240,239,0.7);
-                         background:rgba(42,34,32,0.35);backdrop-filter:blur(4px);
-                         padding:4px 10px;border-radius:20px;">Bestseller</span>
-          </div>
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:28px;z-index:2;">
-            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
-                       font-size:24px;color:#F7F0EF;letter-spacing:0.04em;
-                       margin-bottom:4px;">
-              Fleya Bag Holder
-            </h3>
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-              <p style="font-family:'Jost',sans-serif;font-size:11px;
-                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">€ 39,99</p>
-              <a href="product.html" class="btn-primary" style="padding:8px 18px;font-size:10px;">Bestel Nu</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="product-card fade-up"
-           style="grid-column:1/2;border-radius:10px;
-                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
-        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:10px;
-                    background:#B85A68;">
-          <img src="https://placehold.co/480x640/B85A68/F2C4CE?text=."
-               alt="The Everyday Tote"
                class="card-img w-full h-full object-cover">
           <div class="absolute inset-0"
-               style="background:linear-gradient(to top,rgba(42,34,32,0.65) 0%,transparent 50%);"></div>
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;">
-            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
-                      text-transform:uppercase;color:rgba(247,240,239,0.55);
-                      margin-bottom:4px;">Binnenkort</p>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
-                       font-size:22px;color:#F7F0EF;letter-spacing:0.04em;
-                       margin-bottom:4px;">
-              The Everyday Tote
-            </h3>
-            <a href="#newsletter"
-               style="font-family:'Jost',sans-serif;font-size:10px;
-                      letter-spacing:0.18em;text-transform:uppercase;
-                      color:rgba(247,240,239,0.6);text-decoration:none;
-                      border-bottom:0.5px solid rgba(247,240,239,0.3);
-                      padding-bottom:1px;transition:color 0.25s ease;">
-              Houd mij op de hoogte →
-            </a>
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <!-- Hover overlay -->
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
           </div>
-        </div>
+          <!-- Wishlist -->
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('roze')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <!-- Badge -->
+          <div style="position:absolute;top:14px;left:14px;z-index:2;">
+            <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:rgba(247,240,239,0.9);
+                         background:rgba(42,34,32,0.4);backdrop-filter:blur(4px);
+                         padding:4px 10px;border-radius:20px;">Bestseller</span>
+          </div>
+          <!-- Info -->
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Roze · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#C9A84C;display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
 
-      <!-- Card 4 — editorial banner -->
-      <div class="product-card fade-up"
-           style="grid-column:2/3;border-radius:10px;overflow:hidden;
-                  background:#2A2220;
+      <!-- Card 2 — Zilver -->
+      <div class="product-card fade-up" style="border-radius:10px;overflow:hidden;
                   box-shadow:0 4px 24px rgba(224,130,143,0.12);">
-        <div style="position:relative;overflow:hidden;aspect-ratio:3/4;border-radius:10px;">
-          <img src="https://placehold.co/480x640/2A2220/E0828F?text=."
-               alt=""
-               class="card-img w-full h-full object-cover"
-               style="opacity:0.6;">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;
-                      justify-content:center;align-items:center;text-align:center;
-                      padding:32px;">
-            <span class="deco-line deco-line-center" style="margin-bottom:20px;"></span>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;
-                       font-size:clamp(22px,3vw,30px);color:#F7F0EF;
-                       letter-spacing:0.04em;line-height:1.25;margin-bottom:20px;">
-              Ontworpen om op te vallen.<br>
-              <em style="color:#F2C4CE;font-style:italic;">Gemaakt om te duren.</em>
-            </h3>
-            <a href="#" class="btn-primary" style="padding:10px 24px;font-size:10px;">Bekijk Alles</a>
+        <a href="product.html" style="display:block;position:relative;overflow:hidden;
+                    aspect-ratio:3/4;background:#D0D0D0;border-radius:10px;">
+          <img src="product_images/bagholder-zilver.jpg"
+               alt="Fleya Bag Holder — Zilver"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
           </div>
-        </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('zilver')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Zilver · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#C9A84C;display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Card 3 — Goud -->
+      <div class="product-card fade-up" style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product.html" style="display:block;position:relative;overflow:hidden;
+                    aspect-ratio:3/4;background:#C9A84C;border-radius:10px;">
+          <img src="product_images/bagholder-goud.jpg"
+               alt="Fleya Bag Holder — Goud"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('goud')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Goud · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#C9A84C;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Card 4 — Zwart -->
+      <div class="product-card fade-up" style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product.html" style="display:block;position:relative;overflow:hidden;
+                    aspect-ratio:3/4;background:#2A2220;border-radius:10px;">
+          <img src="product_images/bagholder-zwart.jpg"
+               alt="Fleya Bag Holder — Zwart"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('zwart')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Zwart · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#C9A84C;display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
 
     </div><!-- /grid -->
+
+    <!-- CTA -->
+    <div class="text-center fade-up" style="margin-top:56px;">
+      <a href="product.html" class="btn-outline">Bekijk de volledige collectie</a>
+    </div>
+
   </div>
 </section>
 
@@ -1142,6 +1220,24 @@
   var wb = document.getElementById('nav-wish-badge');
   if (wb && wn > 0) { wb.textContent = wn; wb.style.display = 'flex'; }
 })();
+
+function toggleWishlistCard(kleur) {
+  var wishlist = JSON.parse(localStorage.getItem('fleya_wishlist') || '[]');
+  var product = {
+    id: 'bag-holder-' + kleur,
+    name: 'Fleya Bag Holder',
+    variant: kleur,
+    price: 39.99,
+    img: 'product_images/bagholder-' + kleur + '.jpg'
+  };
+  var idx = wishlist.findIndex(function(i){ return i.id === product.id; });
+  if (idx === -1) { wishlist.push(product); } else { wishlist.splice(idx, 1); }
+  localStorage.setItem('fleya_wishlist', JSON.stringify(wishlist));
+  var count = wishlist.length;
+  localStorage.setItem('fleya-wishlist-count', count);
+  var wb = document.getElementById('nav-wish-badge');
+  if (wb) { wb.textContent = count; wb.style.display = count > 0 ? 'flex' : 'none'; }
+}
 </script>
 
 </body>
