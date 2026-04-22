@@ -544,7 +544,7 @@
     </div>
 
     <!-- Grid — alle 4 kleuren -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+    <div class="collectie-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
 
       <!-- Card 1 — Roze (Bestseller) -->
       <div class="product-card fade-up" style="border-radius:10px;overflow:hidden;
@@ -814,6 +814,12 @@
 <style>
   @media (max-width: 768px) {
     .lg-grid-story { grid-template-columns: 1fr !important; gap: 48px !important; }
+  }
+  @media (max-width: 640px) {
+    .collectie-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  }
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .collectie-grid { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
   }
 </style>
 
