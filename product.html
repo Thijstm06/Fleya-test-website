@@ -260,6 +260,100 @@
     }
     .related-card:hover .card-img { transform: scale(1.04); }
 
+    /* ══════════════════════════════════════
+       CART POPUP / SIDE PANEL
+    ══════════════════════════════════════ */
+    #cart-popup-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(42,34,32,0.35);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #cart-popup-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #cart-popup {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(420px, 100vw);
+      background: #F7F0EF;
+      z-index: 301;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -8px 0 48px rgba(224,130,143,0.16);
+    }
+    #cart-popup.open {
+      transform: translateX(0);
+    }
+    #cart-popup-header {
+      padding: 28px 28px 20px;
+      border-bottom: 0.5px solid rgba(224,130,143,0.2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #cart-popup-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 28px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(224,130,143,0.3) transparent;
+    }
+    #cart-popup-items::-webkit-scrollbar { width: 4px; }
+    #cart-popup-items::-webkit-scrollbar-track { background: transparent; }
+    #cart-popup-items::-webkit-scrollbar-thumb { background: rgba(224,130,143,0.3); border-radius: 2px; }
+    .popup-cart-item {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 20px 0;
+      border-bottom: 0.5px solid rgba(42,34,32,0.08);
+    }
+    #cart-popup-footer {
+      padding: 20px 28px 28px;
+      border-top: 0.5px solid rgba(224,130,143,0.2);
+      flex-shrink: 0;
+      background: #F7F0EF;
+    }
+    .popup-close-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(42,34,32,0.45);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .popup-close-btn:hover { color: #2A2220; transform: rotate(90deg); }
+    .popup-added-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F7F0EF;
+      background: #E0828F;
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+
     /* ── Mobile menu overlay ── */
     #mobile-menu {
       position: fixed;
@@ -318,6 +412,51 @@
   <a href="verlanglijst.html" class="mobile-nav-link">Verlanglijst</a>
   <a href="winkelwagen.html" class="mobile-nav-link">Winkelwagen</a>
   <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
+
+<!-- ════════════════════════════════════════════
+     CART POPUP
+════════════════════════════════════════════ -->
+<div id="cart-popup-overlay" aria-hidden="true"></div>
+<div id="cart-popup" role="dialog" aria-modal="true" aria-label="Winkelwagen">
+  <!-- Header -->
+  <div id="cart-popup-header">
+    <div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.5rem;letter-spacing:0.06em;color:#2A2220;margin-bottom:4px;">Winkelwagen</h2>
+      <span class="popup-added-badge">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Toegevoegd
+      </span>
+    </div>
+    <button class="popup-close-btn" id="cart-popup-close" aria-label="Sluit winkelwagen">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- Items list -->
+  <div id="cart-popup-items">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- Footer -->
+  <div id="cart-popup-footer">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;">
+      <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.12em;color:rgba(42,34,32,0.55);">Subtotaal</span>
+      <span id="cart-popup-subtotal" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 0,00</span>
+    </div>
+    <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.4);margin-bottom:16px;line-height:1.6;">
+      Verzendkosten worden berekend bij het afrekenen.
+    </p>
+    <a href="winkelwagen.html"
+       style="display:block;background:#E0828F;color:#F7F0EF;font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;text-align:center;text-decoration:none;padding:16px;border-radius:4px;transition:background-color 0.3s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);margin-bottom:10px;"
+       onmouseover="this.style.backgroundColor='#B85A68';this.style.transform='translateY(-1px)'"
+       onmouseout="this.style.backgroundColor='#E0828F';this.style.transform=''"
+    >Naar winkelwagen</a>
+    <button id="cart-popup-continue"
+       style="display:block;width:100%;background:transparent;color:rgba(42,34,32,0.55);font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;text-align:center;border:none;cursor:pointer;padding:10px;transition:color 0.2s ease;"
+       onmouseover="this.style.color='#2A2220'" onmouseout="this.style.color='rgba(42,34,32,0.55)'"
+    >Verder winkelen</button>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════════
@@ -737,6 +876,130 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  /* ── Cart popup ── */
+  const productImages = {
+    black:  'product_images/bagholder-zwart.jpg',
+    gold:   'product_images/bagholder-goud.jpg',
+    silver: 'product_images/bagholder-zilver.jpg',
+    rose:   'product_images/bagholder-roze.jpg',
+  };
+
+  function popupCart() {
+    return JSON.parse(localStorage.getItem('fleya-cart') || '{}');
+  }
+
+  function savePopupCart(data) {
+    localStorage.setItem('fleya-cart', JSON.stringify(data));
+    const total = Object.values(data).reduce((s, i) => s + i.qty, 0);
+    localStorage.setItem('fleya-cart-count', total);
+    const badge = document.getElementById('nav-cart-badge');
+    if (badge) { badge.textContent = total; badge.style.display = total > 0 ? 'flex' : 'none'; }
+  }
+
+  function renderPopupItems() {
+    const data = popupCart();
+    const items = Object.values(data);
+    const itemsEl = document.getElementById('cart-popup-items');
+    const subtotalEl = document.getElementById('cart-popup-subtotal');
+
+    if (items.length === 0) {
+      itemsEl.innerHTML = `
+        <div style="padding:48px 0;text-align:center;">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;letter-spacing:0.05em;color:rgba(42,34,32,0.4);">Je winkelwagen is leeg</p>
+        </div>`;
+      subtotalEl.textContent = '€ 0,00';
+      return;
+    }
+
+    itemsEl.innerHTML = items.map(item => {
+      const imgSrc = productImages[item.colorKey] || productImages.black;
+      const linePrice = (item.qty * item.price).toFixed(2).replace('.', ',');
+      return `
+        <div class="popup-cart-item" data-id="${item.id}">
+          <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 16px rgba(224,130,143,0.12);">
+            <img src="${imgSrc}" alt="${item.name}" style="width:76px;height:96px;object-fit:cover;display:block;border-radius:8px;">
+          </a>
+          <div style="min-width:0;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:2px;">${item.name}</h3>
+            <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.5);margin-bottom:10px;">Kleur: ${item.color}</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+              <!-- Qty stepper -->
+              <div style="display:inline-flex;align-items:center;border:0.5px solid rgba(42,34,32,0.18);border-radius:4px;overflow:hidden;">
+                <button class="popup-qty-btn" data-action="minus" data-id="${item.id}"
+                  style="width:30px;height:30px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:#2A2220;display:flex;align-items:center;justify-content:center;transition:background-color 0.2s ease,color 0.2s ease;"
+                  onmouseover="this.style.backgroundColor='rgba(224,130,143,0.1)';this.style.color='#E0828F'"
+                  onmouseout="this.style.backgroundColor='';this.style.color='#2A2220'">−</button>
+                <span style="width:30px;text-align:center;font-family:'Jost',sans-serif;font-size:12px;font-weight:300;letter-spacing:0.06em;color:#2A2220;border-left:0.5px solid rgba(42,34,32,0.12);border-right:0.5px solid rgba(42,34,32,0.12);line-height:30px;user-select:none;">${item.qty}</span>
+                <button class="popup-qty-btn" data-action="plus" data-id="${item.id}"
+                  style="width:30px;height:30px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:#2A2220;display:flex;align-items:center;justify-content:center;transition:background-color 0.2s ease,color 0.2s ease;"
+                  onmouseover="this.style.backgroundColor='rgba(224,130,143,0.1)';this.style.color='#E0828F'"
+                  onmouseout="this.style.backgroundColor='';this.style.color='#2A2220'">+</button>
+              </div>
+              <!-- Price + remove -->
+              <div style="display:flex;align-items:center;gap:12px;">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ ${linePrice}</span>
+                <button class="popup-remove-btn" data-id="${item.id}"
+                  style="background:none;border:none;cursor:pointer;color:rgba(42,34,32,0.28);font-family:'Jost',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px;padding:0;transition:color 0.2s ease;"
+                  onmouseover="this.style.color='#B85A68'" onmouseout="this.style.color='rgba(42,34,32,0.28)'">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  Verwijder
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    const sub = items.reduce((s, i) => s + i.qty * i.price, 0);
+    subtotalEl.textContent = '€ ' + sub.toFixed(2).replace('.', ',');
+  }
+
+  function openCartPopup() {
+    renderPopupItems();
+    document.getElementById('cart-popup-overlay').classList.add('open');
+    document.getElementById('cart-popup').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCartPopup() {
+    document.getElementById('cart-popup-overlay').classList.remove('open');
+    document.getElementById('cart-popup').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Delegated click handler for qty + remove buttons inside popup
+  document.getElementById('cart-popup-items').addEventListener('click', function(e) {
+    const qtyBtn    = e.target.closest('.popup-qty-btn');
+    const removeBtn = e.target.closest('.popup-remove-btn');
+
+    if (qtyBtn) {
+      const id     = qtyBtn.dataset.id;
+      const action = qtyBtn.dataset.action;
+      const data   = popupCart();
+      if (!data[id]) return;
+      if (action === 'plus') {
+        data[id].qty += 1;
+      } else {
+        data[id].qty -= 1;
+        if (data[id].qty <= 0) delete data[id];
+      }
+      savePopupCart(data);
+      renderPopupItems();
+    }
+
+    if (removeBtn) {
+      const id   = removeBtn.dataset.id;
+      const data = popupCart();
+      delete data[id];
+      savePopupCart(data);
+      renderPopupItems();
+    }
+  });
+
+  document.getElementById('cart-popup-overlay').addEventListener('click', closeCartPopup);
+  document.getElementById('cart-popup-close').addEventListener('click', closeCartPopup);
+  document.getElementById('cart-popup-continue').addEventListener('click', closeCartPopup);
+
   /* ── Add to cart ── */
   function handleAddToCart() {
     const btn = document.querySelector('.btn-primary');
@@ -765,12 +1028,8 @@
     var badge = document.getElementById('nav-cart-badge');
     if (badge) { badge.textContent = totalQty; badge.style.display = 'flex'; }
 
-    btn.textContent = '✓ Toegevoegd';
-    btn.style.backgroundColor = '#B85A68';
-    setTimeout(() => {
-      btn.textContent = orig;
-      btn.style.backgroundColor = '';
-    }, 2000);
+    // Show cart popup
+    openCartPopup();
   }
 
   function handleWishlist() {

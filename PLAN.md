@@ -38,6 +38,8 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 - [x] **`privacybeleid.html`** — Aangemaakt met AVG-conforme placeholdertekst; gebruiker vervangt waar nodig
 - [x] **Productfoto's in winkelwagen & verlanglijst** — echte foto's (bagholder-zwart/goud/zilver/roze.jpg) per kleur
 - [x] **Productfoto's in about.html** — placehold.co vervangen door echte productfoto's
+- [x] **Winkelwagen popup** — slide-in paneel rechts bij toevoegen product; toont alle huidige cart-items met aantal, prijs en subtotaal; knoppen voor +/−/Verwijder; navbar badge en localStorage live bijgewerkt
+- [x] **`serve.mjs` herschreven** — van Python naar Node.js ES module; bevat no-cache headers
 - [ ] **Echte Fleya-copy** — generieke placeholder-tekst op alle pagina's vervangen door echte merktekst
   - Productnamen / beschrijvingen
   - Over-ons tekst (about.html) — al grotendeels brand-specifiek
