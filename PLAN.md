@@ -42,6 +42,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 - [x] **Winkelwagen popup** — slide-in paneel rechts bij toevoegen product; toont alle huidige cart-items met aantal, prijs en subtotaal; knoppen voor +/−/Verwijder; navbar badge en localStorage live bijgewerkt
 - [x] **`serve.mjs` herschreven** — van Python naar Node.js ES module; bevat no-cache headers
 - [x] **`voor-bedrijven.html`** — B2B landingspagina met hero, how-it-works, features, B2B designs (QR/nummer/logo/hybrid/NFC), afwerkingen (zwart/goud/zilver/roze), en CTA; toegevoegd aan navbar en footer van alle pagina's
+- [x] **Klikbare productfoto homepage** — foto in "De Collectie" (Fleya Bag Holder — Roze) is nu klikbaar en linkt naar product.html, net als de "Bestel Nu" knop
 - [ ] **Echte Fleya-copy** — generieke placeholder-tekst op alle pagina's vervangen door echte merktekst
   - Productnamen / beschrijvingen
   - Over-ons tekst (about.html) — al grotendeels brand-specifiek
