@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Fleya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover      { color: #E0828F; }
+    .nav-link:focus-visible { outline: 1px dotted #E0828F; }
+    .nav-link.active     { color: #E0828F; }
+
+    #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+    }
+
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .page-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 0%,
+        rgba(242,196,206,0.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 0.5px;
+      background: linear-gradient(to right, transparent, rgba(224,130,143,0.3), transparent);
+      margin: 56px 0;
+    }
+
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #F7F0EF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: #E0828F; }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+    .deco-line { display: block; width: 52px; height: 0.5px; background-color: #E0828F; }
+    .deco-line-center { margin: 0 auto; }
+
+    /* Form */
+    .form-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.55);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .form-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 0.5px solid rgba(42,34,32,0.25);
+      padding: 10px 0;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #2A2220;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .form-input:focus { border-bottom-color: #E0828F; }
+    .form-input::placeholder { color: rgba(42,34,32,0.3); }
+    textarea.form-input { resize: none; min-height: 120px; }
+
+    .btn-primary {
+      background-color: #E0828F;
+      color: #F7F0EF;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 48px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-primary:hover  { background-color: #B85A68; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .footer-grid { grid-template-columns: 2fr 1fr 1fr !important; }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button id="mobile-menu-close" aria-label="Close menu">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line deco-line-center" style="margin-bottom:12px;"></span>
+  <a href="index.html#collection" class="mobile-nav-link">Collectie</a>
+  <a href="about.html"            class="mobile-nav-link">Over</a>
+  <a href="journal.html"          class="mobile-nav-link">Blog</a>
+  <a href="verlanglijst.html"     class="mobile-nav-link">Verlanglijst</a>
+  <a href="winkelwagen.html"      class="mobile-nav-link">Winkelwagen</a>
+  <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
+
+<!-- GRAIN -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- NAVIGATION -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#collection" class="nav-link">Collectie</a>
+      <a href="about.html"            class="nav-link">Over</a>
+    </div>
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;
+                letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="journal.html" class="nav-link">Blog</a>
+      <a href="verlanglijst.html" class="nav-link" aria-label="Verlanglijst" style="position:relative;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="nav-wish-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
+      <a href="winkelwagen.html" class="nav-link" style="position:relative;">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Winkelwagen
+        </span>
+        <span id="nav-cart-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero fade-up">
+  <div class="max-w-3xl mx-auto px-8 lg:px-16">
+    <span class="deco-line deco-line-center" style="margin-bottom:32px;"></span>
+    <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.3em;
+              text-transform:uppercase;color:#B85A68;margin-bottom:20px;margin-top:32px;">
+      Neem contact op
+    </p>
+    <h1 style="font-size:clamp(2.8rem,6vw,4.4rem);line-height:1.1;color:#2A2220;margin-bottom:20px;">
+      Contact
+    </h1>
+    <span class="deco-line deco-line-center" style="margin-top:28px;"></span>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main style="padding-bottom:120px;">
+  <div class="max-w-5xl mx-auto px-8 lg:px-16">
+
+    <!-- Two-column layout: form left, info right -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;"
+         class="contact-grid">
+
+      <!-- Contact Form -->
+      <div class="fade-up">
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:#B85A68;margin-bottom:28px;">Stuur een bericht</p>
+
+        <form style="display:flex;flex-direction:column;gap:32px;"
+              onsubmit="handleSubmit(event)">
+
+          <div>
+            <label class="form-label" for="name">Naam</label>
+            <input type="text" id="name" name="name" class="form-input"
+                   placeholder="Jouw naam" required>
+          </div>
+
+          <div>
+            <label class="form-label" for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" class="form-input"
+                   placeholder="jouw@email.nl" required>
+          </div>
+
+          <div>
+            <label class="form-label" for="subject">Onderwerp</label>
+            <input type="text" id="subject" name="subject" class="form-input"
+                   placeholder="Waar gaat je bericht over?">
+          </div>
+
+          <div>
+            <label class="form-label" for="message">Bericht</label>
+            <textarea id="message" name="message" class="form-input"
+                      placeholder="Schrijf hier je bericht..." required></textarea>
+          </div>
+
+          <div>
+            <button type="submit" class="btn-primary">Verstuur</button>
+          </div>
+
+          <div id="form-success" style="display:none;font-family:'Jost',sans-serif;font-size:12px;
+               letter-spacing:0.08em;color:#B85A68;">
+            Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.
+          </div>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="fade-up" style="transition-delay:0.15s;">
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:#B85A68;margin-bottom:28px;">Onze gegevens</p>
+
+        <div style="display:flex;flex-direction:column;gap:36px;">
+
+          <div>
+            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                      text-transform:uppercase;color:rgba(42,34,32,0.45);margin-bottom:10px;">E-mail</p>
+            <p style="font-size:13px;color:#2A2220;">hello@fleya.nl</p>
+          </div>
+
+          <div>
+            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                      text-transform:uppercase;color:rgba(42,34,32,0.45);margin-bottom:10px;">Reactietijd</p>
+            <p style="font-size:13px;color:#2A2220;">We reageren doorgaans binnen 1–2 werkdagen.</p>
+          </div>
+
+          <div>
+            <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                      text-transform:uppercase;color:rgba(42,34,32,0.45);margin-bottom:10px;">Volg ons</p>
+            <div style="display:flex;gap:20px;">
+              <a href="#" style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.15em;
+                                 text-transform:uppercase;color:#2A2220;text-decoration:none;
+                                 transition:color 0.25s ease;"
+                 onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">Instagram</a>
+              <a href="#" style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.15em;
+                                 text-transform:uppercase;color:#2A2220;text-decoration:none;
+                                 transition:color 0.25s ease;"
+                 onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">Pinterest</a>
+              <a href="#" style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.15em;
+                                 text-transform:uppercase;color:#2A2220;text-decoration:none;
+                                 transition:color 0.25s ease;"
+                 onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='#2A2220'">TikTok</a>
+            </div>
+          </div>
+
+          <div style="height:0.5px;background:linear-gradient(to right,rgba(224,130,143,0.3),transparent);"></div>
+
+          <div>
+            <p style="font-family:'Cormorant Garamond',serif;font-style:italic;
+                      font-size:1.35rem;line-height:1.6;color:rgba(42,34,32,0.6);">
+              "Heb je een vraag over een bestelling, product of retour? We helpen je graag."
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer style="background-color:#2A2220;padding:72px 32px 40px;border-top:0.5px solid rgba(224,130,143,0.1);"
+        class="lg:px-16">
+  <div class="max-w-7xl mx-auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:64px;margin-bottom:64px;"
+         class="footer-grid">
+      <!-- Brand -->
+      <div>
+        <img src="brand_assets/fleya-logo.svg" alt="Fleya"
+             style="height:52px;width:auto;margin-bottom:24px;filter:brightness(0.88);">
+        <p style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;line-height:1.95;
+                  color:rgba(247,240,239,0.38);max-width:260px;margin-bottom:28px;">
+          Verfijnde accessoires voor de moderne vrouw. Ontworpen met intentie, gemaakt om te duren.
+        </p>
+        <div style="display:flex;gap:20px;">
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">Instagram</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">Pinterest</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">TikTok</a>
+        </div>
+      </div>
+      <!-- Navigate -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(247,240,239,0.28);margin-bottom:24px;">Navigatie</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="index.html#collection" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Collectie</a>
+          <a href="about.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Over Fleya</a>
+          <a href="journal.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Blog</a>
+          <a href="contact.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#E0828F;text-decoration:none;">Contact</a>
+        </div>
+      </div>
+      <!-- Customer care -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(247,240,239,0.28);margin-bottom:24px;">Klantenservice</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="verzending-retour.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Verzending &amp; Retour</a>
+          <a href="faq.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">FAQ</a>
+          <a href="privacybeleid.html" style="font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Privacybeleid</a>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom -->
+    <div style="border-top:0.5px solid rgba(224,130,143,0.12);padding-top:28px;
+                display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.12em;color:rgba(247,240,239,0.22);">
+        © 2026 Fleya. Alle rechten voorbehouden.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;
+                color:rgba(247,240,239,0.2);letter-spacing:0.08em;">
+        Stijl in elk detail.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr !important; gap: 56px !important; }
+  }
+</style>
+
+<script>
+  // Mobile menu
+  const hamburger  = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuClose  = document.getElementById('mobile-menu-close');
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+
+  function openMenu()  { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+
+  hamburger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  mobileMenu.addEventListener('click', function(e) { if (e.target === mobileMenu) closeMenu(); });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+  }
+</script>
+
+<script>
+(function(){
+  var n = parseInt(localStorage.getItem('fleya-cart-count') || '0', 10);
+  var b = document.getElementById('nav-cart-badge');
+  if (b && n > 0) { b.textContent = n; b.style.display = 'flex'; }
+  var wn = parseInt(localStorage.getItem('fleya-wishlist-count') || '0', 10);
+  var wb = document.getElementById('nav-wish-badge');
+  if (wb && wn > 0) { wb.textContent = wn; wb.style.display = 'flex'; }
+})();
+</script>
+
+</body>
+</html>
