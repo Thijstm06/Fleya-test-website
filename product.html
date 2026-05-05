@@ -254,6 +254,30 @@
       .sticky-image { position: sticky; top: 96px; }
     }
 
+    /* ── Sticky mobile CTA ── */
+    #mobile-sticky-cta {
+      display: none;
+    }
+    @media (max-width: 1023px) {
+      #mobile-sticky-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(247,240,239,0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 14px 20px;
+        border-top: 0.5px solid rgba(224,130,143,0.18);
+        box-shadow: 0 -4px 24px rgba(224,130,143,0.1);
+      }
+      body { padding-bottom: 76px; }
+    }
+
     /* ── Related card ── */
     .related-card .card-img {
       transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -532,65 +556,69 @@
 
       <!-- ── LEFT: Image gallery ── -->
       <div class="sticky-image fade-up">
-        <!-- Main image -->
-        <div id="main-image-wrap" class="relative overflow-hidden rounded-lg"
-             style="background: linear-gradient(145deg, #e8dedd 0%, #ddd0ce 100%);
-                    box-shadow: 0 8px 48px rgba(224,130,143,0.14), 0 2px 12px rgba(42,34,32,0.07);">
-          <div id="main-image" class="w-full aspect-[4/5] flex items-center justify-center relative"
-               style="transition: opacity 0.35s ease;">
-            <!-- Image color layers — switched by JS -->
-            <div id="img-black" class="absolute inset-0">
+        <div class="flex gap-3">
+
+          <!-- Vertical thumbnail strip -->
+          <div class="flex flex-col gap-2.5" style="flex-shrink:0;">
+            <button class="thumb-btn active" id="thumb-black" onclick="selectColor('black')"
+                    aria-label="View in Zwart">
               <img src="product_images/bagholder-zwart.jpg"
-                   alt="Fleya Bag Holder — Zwart"
-                   class="w-full h-full object-cover" style="border-radius:inherit;">
-            </div>
-
-            <div id="img-gold" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                   alt="Zwart" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+            </button>
+            <button class="thumb-btn" id="thumb-gold" onclick="selectColor('gold')"
+                    aria-label="View in Goud">
               <img src="product_images/bagholder-goud.jpg"
-                   alt="Fleya Bag Holder — Goud"
-                   class="w-full h-full object-cover" style="border-radius:inherit;">
-            </div>
-
-            <div id="img-silver" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                   alt="Goud" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+            </button>
+            <button class="thumb-btn" id="thumb-silver" onclick="selectColor('silver')"
+                    aria-label="View in Zilver">
               <img src="product_images/bagholder-zilver.jpg"
-                   alt="Fleya Bag Holder — Zilver"
-                   class="w-full h-full object-cover" style="border-radius:inherit;">
-            </div>
-
-            <div id="img-rose" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                   alt="Zilver" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+            </button>
+            <button class="thumb-btn" id="thumb-rose" onclick="selectColor('rose')"
+                    aria-label="View in Roze">
               <img src="product_images/bagholder-roze.jpg"
-                   alt="Fleya Bag Holder — Roze"
-                   class="w-full h-full object-cover" style="border-radius:inherit;">
-            </div>
+                   alt="Roze" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+            </button>
           </div>
 
-          <!-- Subtle rose overlay -->
-          <div class="absolute inset-0 pointer-events-none"
-               style="background: radial-gradient(ellipse 70% 50% at 80% 20%, rgba(242,196,206,0.15) 0%, transparent 60%);"></div>
-        </div>
+          <!-- Main image -->
+          <div id="main-image-wrap" class="relative overflow-hidden rounded-lg flex-1"
+               style="background: linear-gradient(145deg, #e8dedd 0%, #ddd0ce 100%);
+                      box-shadow: 0 8px 48px rgba(224,130,143,0.14), 0 2px 12px rgba(42,34,32,0.07);">
+            <div id="main-image" class="w-full aspect-[4/5] flex items-center justify-center relative"
+                 style="transition: opacity 0.35s ease;">
+              <!-- Image color layers — switched by JS -->
+              <div id="img-black" class="absolute inset-0">
+                <img src="product_images/bagholder-zwart.jpg"
+                     alt="Fleya Bag Holder — Zwart"
+                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              </div>
 
-        <!-- Thumbnails -->
-        <div class="flex gap-3 mt-4">
-          <button class="thumb-btn active" id="thumb-black" onclick="selectColor('black')"
-                  aria-label="View in Zwart">
-            <img src="product_images/bagholder-zwart.jpg"
-                 alt="Zwart" style="width:72px;height:88px;object-fit:cover;border-radius:3px;display:block;">
-          </button>
-          <button class="thumb-btn" id="thumb-gold" onclick="selectColor('gold')"
-                  aria-label="View in Goud">
-            <img src="product_images/bagholder-goud.jpg"
-                 alt="Goud" style="width:72px;height:88px;object-fit:cover;border-radius:3px;display:block;">
-          </button>
-          <button class="thumb-btn" id="thumb-silver" onclick="selectColor('silver')"
-                  aria-label="View in Zilver">
-            <img src="product_images/bagholder-zilver.jpg"
-                 alt="Zilver" style="width:72px;height:88px;object-fit:cover;border-radius:3px;display:block;">
-          </button>
-          <button class="thumb-btn" id="thumb-rose" onclick="selectColor('rose')"
-                  aria-label="View in Roze">
-            <img src="product_images/bagholder-roze.jpg"
-                 alt="Roze" style="width:72px;height:88px;object-fit:cover;border-radius:3px;display:block;">
-          </button>
+              <div id="img-gold" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/bagholder-goud.jpg"
+                     alt="Fleya Bag Holder — Goud"
+                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              </div>
+
+              <div id="img-silver" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/bagholder-zilver.jpg"
+                     alt="Fleya Bag Holder — Zilver"
+                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              </div>
+
+              <div id="img-rose" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/bagholder-roze.jpg"
+                     alt="Fleya Bag Holder — Roze"
+                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              </div>
+            </div>
+
+            <!-- Subtle rose overlay -->
+            <div class="absolute inset-0 pointer-events-none"
+                 style="background: radial-gradient(ellipse 70% 50% at 80% 20%, rgba(242,196,206,0.15) 0%, transparent 60%);"></div>
+          </div>
+
         </div>
       </div>
 
@@ -625,29 +653,59 @@
           </div>
           <div class="flex gap-4">
             <!-- Black -->
-            <button class="swatch active" id="swatch-black" onclick="selectColor('black')"
-                    aria-label="Zwart"
-                    style="background: radial-gradient(circle at 35% 35%, #4a4a4a, #111111);
-                           box-shadow: 0 2px 8px rgba(0,0,0,0.25);">
-            </button>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+              <button class="swatch active" id="swatch-black" onclick="selectColor('black')"
+                      aria-label="Zwart"
+                      style="background: radial-gradient(circle at 35% 35%, #4a4a4a, #111111);
+                             box-shadow: 0 2px 8px rgba(0,0,0,0.25);">
+              </button>
+              <span id="cart-count-black" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
+            </div>
             <!-- Gold -->
-            <button class="swatch" id="swatch-gold" onclick="selectColor('gold')"
-                    aria-label="Goud"
-                    style="background: radial-gradient(circle at 35% 35%, #e8c84a, #a8740e);
-                           box-shadow: 0 2px 8px rgba(184,146,42,0.3);">
-            </button>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+              <button class="swatch" id="swatch-gold" onclick="selectColor('gold')"
+                      aria-label="Goud"
+                      style="background: radial-gradient(circle at 38% 38%, #f0d055 0%, #c89010 50%, #a07010 100%);
+                             box-shadow: 0 2px 8px rgba(184,146,42,0.3);">
+              </button>
+              <span id="cart-count-gold" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
+            </div>
             <!-- Silver -->
-            <button class="swatch" id="swatch-silver" onclick="selectColor('silver')"
-                    aria-label="Zilver"
-                    style="background: radial-gradient(circle at 35% 35%, #f0f0f0, #8a8a8a);
-                           box-shadow: 0 2px 8px rgba(0,0,0,0.14);">
-            </button>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+              <button class="swatch" id="swatch-silver" onclick="selectColor('silver')"
+                      aria-label="Zilver"
+                      style="background: radial-gradient(circle at 38% 38%, #d8d8d8 0%, #b4b4b4 50%, #787878 100%);
+                             box-shadow: 0 2px 8px rgba(0,0,0,0.14);">
+              </button>
+              <span id="cart-count-silver" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
+            </div>
             <!-- Rose -->
-            <button class="swatch" id="swatch-rose" onclick="selectColor('rose')"
-                    aria-label="Roze"
-                    style="background: radial-gradient(circle at 35% 35%, #f0a0b0, #c9687a);
-                           box-shadow: 0 2px 8px rgba(224,130,143,0.35);">
-            </button>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+              <button class="swatch" id="swatch-rose" onclick="selectColor('rose')"
+                      aria-label="Roze"
+                      style="background: radial-gradient(circle at 35% 35%, #f0a0b0, #c9687a);
+                             box-shadow: 0 2px 8px rgba(224,130,143,0.35);">
+              </button>
+              <span id="cart-count-rose" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Qty stepper -->
+        <div class="flex items-center justify-between mb-6">
+          <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Aantal</span>
+          <div style="display:inline-flex;align-items:center;border:0.5px solid rgba(42,34,32,0.2);border-radius:4px;overflow:hidden;">
+            <button onclick="changeQty(-1)"
+              style="width:36px;height:36px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:17px;font-weight:300;color:#2A2220;display:flex;align-items:center;justify-content:center;transition:background-color 0.2s ease,color 0.2s ease;"
+              onmouseover="this.style.backgroundColor='rgba(224,130,143,0.1)';this.style.color='#E0828F'"
+              onmouseout="this.style.backgroundColor='';this.style.color='#2A2220'"
+              aria-label="Minder">−</button>
+            <span id="qty-display" style="width:40px;text-align:center;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.06em;color:#2A2220;border-left:0.5px solid rgba(42,34,32,0.12);border-right:0.5px solid rgba(42,34,32,0.12);line-height:36px;user-select:none;">1</span>
+            <button onclick="changeQty(1)"
+              style="width:36px;height:36px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:17px;font-weight:300;color:#2A2220;display:flex;align-items:center;justify-content:center;transition:background-color 0.2s ease,color 0.2s ease;"
+              onmouseover="this.style.backgroundColor='rgba(224,130,143,0.1)';this.style.color='#E0828F'"
+              onmouseout="this.style.backgroundColor='';this.style.color='#2A2220'"
+              aria-label="Meer">+</button>
           </div>
         </div>
 
@@ -686,12 +744,10 @@
           </button>
         </div>
 
-        <!-- Notify -->
-        <div class="flex justify-center">
-          <button class="notify-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-            Meld mij als terug op voorraad
-          </button>
+        <!-- Gift box badge -->
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.5);">Geleverd in Fleya signature giftbox</span>
         </div>
 
         <!-- Accordion: details, care, shipping -->
@@ -767,15 +823,20 @@
 
     <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
-      <!-- Card 1 -->
-      <article class="related-card fade-up" style="transition-delay:0.05s;">
+      <!-- Card 1 — Bag Holder Set (echte foto's) -->
+      <article class="related-card fade-up" style="transition-delay:0.05s;cursor:pointer;" onclick="location.href='product.html'">
         <div class="overflow-hidden rounded-lg mb-4"
-             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
-          <div class="card-img w-full aspect-[3/4]"
-               style="background:linear-gradient(145deg,#f0e8e6,#e8d8d4);display:flex;align-items:center;justify-content:center;">
-            <div style="width:80px;height:130px;border:1.5px solid rgba(42,34,32,0.15);border-radius:40px 40px 0 0;position:relative;">
-              <div style="width:38px;height:38px;border:1.5px solid rgba(42,34,32,0.15);border-radius:50%;position:absolute;top:-20px;left:50%;transform:translateX(-50%);"></div>
+             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);position:relative;">
+          <div class="card-img w-full aspect-[3/4]" style="position:relative;overflow:hidden;">
+            <!-- Twee foto's naast elkaar als "set" -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;height:100%;gap:2px;">
+              <img src="product_images/bagholder-zwart.jpg" alt="Bag Holder Zwart"
+                   style="width:100%;height:100%;object-fit:cover;object-position:center;">
+              <img src="product_images/bagholder-goud.jpg" alt="Bag Holder Goud"
+                   style="width:100%;height:100%;object-fit:cover;object-position:center;">
             </div>
+            <!-- overlay -->
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,34,32,0.28) 0%,transparent 55%);pointer-events:none;"></div>
           </div>
         </div>
         <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:#E0828F;margin-bottom:6px;">Nieuw</p>
@@ -783,39 +844,67 @@
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ 74,99</p>
       </article>
 
-      <!-- Card 2 -->
+      <!-- Card 2 — Mini Bag (binnenkort, editorial placeholder) -->
       <article class="related-card fade-up" style="transition-delay:0.12s;">
         <div class="overflow-hidden rounded-lg mb-4"
              style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
           <div class="card-img w-full aspect-[3/4]"
-               style="background:linear-gradient(145deg,#ede8df,#e2d8cc);display:flex;align-items:center;justify-content:center;">
-            <div style="width:65px;height:90px;border:1.5px solid rgba(42,34,32,0.15);border-radius:6px;position:relative;">
-              <div style="width:30px;height:10px;border:1.5px solid rgba(42,34,32,0.15);border-radius:10px;position:absolute;top:-6px;left:50%;transform:translateX(-50%);"></div>
+               style="background:linear-gradient(160deg, #e8d8d4 0%, #d4c4c0 40%, #c8b4b0 100%);position:relative;overflow:hidden;">
+            <!-- Editorial texture layer -->
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 30% 40%, rgba(242,196,206,0.35) 0%, transparent 65%),radial-gradient(ellipse 50% 70% at 80% 80%, rgba(184,90,104,0.12) 0%, transparent 60%);"></div>
+            <!-- "Binnenkort" label centraal -->
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.25);">Mini</span>
+              <span style="display:block;width:28px;height:0.5px;background:rgba(224,130,143,0.5);"></span>
+              <span style="font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(42,34,32,0.3);">Binnenkort</span>
             </div>
           </div>
         </div>
-        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.4);margin-bottom:6px;">Binnenkort</p>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.35);margin-bottom:6px;">Binnenkort</p>
         <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">Mini Bag</h3>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ —</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.4);">€ —</p>
       </article>
 
-      <!-- Card 3 -->
+      <!-- Card 3 — Tote Bag (binnenkort, editorial placeholder) -->
       <article class="related-card fade-up" style="transition-delay:0.19s;">
         <div class="overflow-hidden rounded-lg mb-4"
              style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
           <div class="card-img w-full aspect-[3/4]"
-               style="background:linear-gradient(145deg,#f2ede8,#e8ddd6);display:flex;align-items:center;justify-content:center;">
-            <div style="width:90px;height:50px;border:1.5px solid rgba(42,34,32,0.15);border-radius:6px 6px 0 0;"></div>
+               style="background:linear-gradient(160deg, #ede6e0 0%, #ddd4ca 40%, #cec4b8 100%);position:relative;overflow:hidden;">
+            <!-- Editorial texture layer -->
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 65% 35%, rgba(242,196,206,0.3) 0%, transparent 60%),radial-gradient(ellipse 60% 60% at 20% 75%, rgba(184,90,104,0.1) 0%, transparent 55%);"></div>
+            <!-- "Binnenkort" label centraal -->
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.25);">Tote</span>
+              <span style="display:block;width:28px;height:0.5px;background:rgba(224,130,143,0.5);"></span>
+              <span style="font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(42,34,32,0.3);">Binnenkort</span>
+            </div>
           </div>
         </div>
-        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.4);margin-bottom:6px;">Binnenkort</p>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(42,34,32,0.35);margin-bottom:6px;">Binnenkort</p>
         <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">Tote Bag</h3>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ —</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.4);">€ —</p>
       </article>
 
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════════
+     STICKY MOBILE CTA
+════════════════════════════════════════════ -->
+<div id="mobile-sticky-cta" aria-hidden="true">
+  <div>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 39,99</span>
+    <span style="display:block;font-family:'Jost',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(42,34,32,0.4);">Incl. BTW</span>
+  </div>
+  <button onclick="handleAddToCart()"
+    style="background:#E0828F;color:#F7F0EF;font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;padding:14px 32px;border:none;border-radius:4px;cursor:pointer;transition:background-color 0.3s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);"
+    onmouseover="this.style.backgroundColor='#B85A68';this.style.transform='translateY(-1px)'"
+    onmouseout="this.style.backgroundColor='#E0828F';this.style.transform=''">
+    Toevoegen
+  </button>
+</div>
 
 <!-- ════════════════════════════════════════════
      FOOTER STRIP
@@ -839,6 +928,56 @@
   };
 
   let currentColor = 'black';
+  let currentQty = 1;
+
+  function getCartQtyForColor(color) {
+    const cart = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
+    const id = 'bag-holder-' + color;
+    return cart[id] ? cart[id].qty : 0;
+  }
+
+  function syncSwatchBadges() {
+    ['black', 'gold', 'silver', 'rose'].forEach(function(color) {
+      const qty = getCartQtyForColor(color);
+      const badge = document.getElementById('cart-count-' + color);
+      if (!badge) return;
+      if (qty > 0) {
+        badge.textContent = qty;
+        badge.style.display = 'inline-block';
+      } else {
+        badge.style.display = 'none';
+      }
+    });
+  }
+
+  function syncQtyStepper() {
+    const inCart = getCartQtyForColor(currentColor);
+    currentQty = inCart > 0 ? inCart : 1;
+    document.getElementById('qty-display').textContent = currentQty;
+    updateAddBtn();
+  }
+
+  function updateAddBtn() {
+    const btn = document.querySelector('.btn-primary');
+    if (!btn) return;
+    if (currentQty === 0) {
+      btn.textContent = 'Verwijder uit winkelwagen';
+      btn.style.backgroundColor = 'transparent';
+      btn.style.color = '#B85A68';
+      btn.style.border = '0.5px solid #B85A68';
+    } else {
+      btn.textContent = 'Toevoegen aan winkelwagen';
+      btn.style.backgroundColor = '#E0828F';
+      btn.style.color = '#F7F0EF';
+      btn.style.border = 'none';
+    }
+  }
+
+  function changeQty(delta) {
+    currentQty = Math.max(0, currentQty + delta);
+    document.getElementById('qty-display').textContent = currentQty;
+    updateAddBtn();
+  }
 
   function selectColor(color) {
     if (color === currentColor) return;
@@ -860,6 +999,7 @@
 
     currentColor = color;
     syncWishlistButton();
+    syncQtyStepper();
   }
 
   /* ── Accordion ── */
@@ -986,6 +1126,8 @@
       }
       savePopupCart(data);
       renderPopupItems();
+      syncQtyStepper();
+      syncSwatchBadges();
     }
 
     if (removeBtn) {
@@ -994,6 +1136,8 @@
       delete data[id];
       savePopupCart(data);
       renderPopupItems();
+      syncQtyStepper();
+      syncSwatchBadges();
     }
   });
 
@@ -1003,22 +1147,21 @@
 
   /* ── Add to cart ── */
   function handleAddToCart() {
-    const btn = document.querySelector('.btn-primary');
-    const orig = btn.textContent;
-
     const productId = 'bag-holder-' + currentColor;
     const cartData = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
 
-    if (cartData[productId]) {
-      cartData[productId].qty += 1;
+    if (currentQty === 0) {
+      // Remove from cart
+      delete cartData[productId];
     } else {
+      // Set quantity (not add on top)
       cartData[productId] = {
         id: productId,
         name: 'Fleya Bag Holder',
         price: 39.99,
         color: colorData[currentColor].label,
         colorKey: currentColor,
-        qty: 1
+        qty: currentQty
       };
     }
 
@@ -1027,10 +1170,14 @@
     localStorage.setItem('fleya-cart-count', totalQty);
 
     var badge = document.getElementById('nav-cart-badge');
-    if (badge) { badge.textContent = totalQty; badge.style.display = 'flex'; }
+    if (badge) { badge.textContent = totalQty; badge.style.display = totalQty > 0 ? 'flex' : 'none'; }
 
-    // Show cart popup
-    openCartPopup();
+    if (currentQty > 0) {
+      openCartPopup();
+    } else {
+      syncQtyStepper();
+    }
+    syncSwatchBadges();
   }
 
   function handleWishlist() {
@@ -1129,6 +1276,8 @@
 
   // Sync wishlist button state on load
   syncWishlistButton();
+  syncQtyStepper();
+  syncSwatchBadges();
 })();
 </script>
 </body>

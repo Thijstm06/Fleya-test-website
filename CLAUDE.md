@@ -3,6 +3,20 @@
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
+## Skills
+Custom skills for this project live in `.claude/skills/`. Invoke them via `/skill-name` in the chat.
+
+| Skill | Bestand | Gebruik |
+|-------|---------|---------|
+| `blog-write` | `.claude/skills/SKILL_blog.md` | Schrijft een volledig HTML blogartikel in Fleya-stijl met SEO meta, Cormorant Garamond/Jost styling, en merkspecifieke CTAs. Gebruik: `/blog-write <onderwerp>` |
+
+## Git & GitHub Rules — Never Push Without Approval
+- **Never push to GitHub automatically.** All changes stay local until I explicitly approve them.
+- After making changes, always serve them locally first (`node serve.mjs`) so I can review them in the browser.
+- When a change is ready, ask me: *"I've made [short description of change]. Want me to push this to GitHub?"*
+- Only run `git push` after I say yes, approve, or give explicit confirmation.
+- Never run `git add`, `git commit`, or `git push` as part of a task without asking first.
+
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
 - If no reference image: design from scratch with high craft (see guardrails below).

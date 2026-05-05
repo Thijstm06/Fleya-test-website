@@ -52,12 +52,25 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 
 ---
 
+## Prioriteit 2b — Product.html verbeteringen ✓
+
+- [x] **Verticale thumbnailstrip** — 4 thumbnails links naast de hoofdfoto (verticaal gestapeld); meer editorial/luxe look
+- [x] **Gift box badge zichtbaar bij CTA** — klein icon-badge "Geleverd in Fleya signature giftbox" direct onder de CTA-knoppen
+- [x] **Aantal-selector (qty stepper)** — `− 1 +` control tussen kleurkiezer en beschrijving; synct met winkelwagen; kan naar 0 (verwijder); knoptekst wisselt naar "Verwijder uit winkelwagen" bij 0
+- [x] **Winkelwagen-aantallen per kleur** — kleine roze pill-badge onder elk kleurbolletje toont hoeveel er van die kleur in de cart zit; live bijgewerkt
+- [x] **"Meld mij als terug op voorraad" verborgen** — knop verwijderd; product is op voorraad
+- [x] **"Compleet de look" sectie** — SVG-wireframes vervangen: Bag Holder Set toont twee echte productfoto's naast elkaar; Mini Bag & Tote Bag tonen editorial gradient placeholders met "Binnenkort" tekst
+- [x] **Sticky mobiele CTA-balk** — vaste balk onderin op mobiel met prijs + "Toevoegen"; verborgen op desktop
+- [x] **Kleurswatches goud & zilver** — radial gradient (past bij cirkelvorm); geen donkere randlijnen meer
+
+---
+
 ## Prioriteit 3 — Later
 
 - [ ] **Checkout flow** — werkende bestelpagina (checkout.html), eventueel koppeling met Stripe of Mollie
 - [ ] **Meer productpagina's** — extra producten / varianten, categoriepagina
 - [ ] **Echte sociale links** — Instagram, Pinterest, TikTok (nu allemaal `href="#"`)
-- [ ] **Meer blog-content** — extra artikelen in journal.html + detailpagina's
+- [ ] **Meer blog-content** — extra artikelen in journal.html + detailpagina's — gebruik `/blog-write <onderwerp>` skill
 - [ ] **SEO basics**
   - `<meta name="description">` per pagina
   - `<meta property="og:image">` voor social sharing
@@ -76,6 +89,16 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 - JavaScript: vanilla, geen framework
 - Opslag: `localStorage` voor winkelwagen en verlanglijst
 - Hosting: GitHub → Thijstm06/Fleya-test-website
+
+---
+
+## Claude Skills (`.claude/skills/`)
+
+Projectspecifieke skills voor herbruikbare taken. Aanroepen via `/skill-name` in de chat.
+
+| Skill | Bestand | Wat doet het |
+|-------|---------|--------------|
+| `blog-write` | `SKILL_blog.md` | Genereert volledig HTML blogartikel met Fleya brand styling, SEO meta, FAQ sectie en interne links |
 
 ---
 
