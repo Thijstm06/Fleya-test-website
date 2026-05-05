@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seizoenstrends in Accessoires: Zo Draag Je Elk Seizoen met Stijl — Fleya Blog</title>
+  <meta name="description" content="Ontdek de mooiste seizoenstrends in accessoires. Van lichte lentedetails tot rijke herfststukken — zo draag je elk seizoen met stijl en gevoel.">
+  <meta property="og:title" content="Seizoenstrends in Accessoires: Zo Draag Je Elk Seizoen met Stijl — Fleya Blog">
+  <meta property="og:description" content="Ontdek de mooiste seizoenstrends in accessoires. Van lichte lentedetails tot rijke herfststukken — zo draag je elk seizoen met stijl en gevoel.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=85&fit=crop&auto=format">
+  <link rel="canonical" href="/journal-seizoenstrends-accessoires.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: #E0828F;
+    }
+    .deco-line-center { margin: 0 auto; }
+
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover      { color: #E0828F; }
+    .nav-link.active     { color: #E0828F; }
+
+    #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+    }
+
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Hero image */
+    .article-hero {
+      position: relative;
+      height: clamp(300px, 55vw, 560px);
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    .article-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(247,240,239,0) 30%,
+        rgba(247,240,239,0.85) 90%,
+        rgba(247,240,239,1) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Article layout */
+    .article-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .article-body p {
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      line-height: 1.85;
+      color: rgba(42,34,32,0.82);
+      margin-bottom: 24px;
+    }
+
+    .article-body h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 52px 0 18px;
+      color: #2A2220;
+      border-top: 0.5px solid rgba(224,130,143,0.25);
+      padding-top: 40px;
+    }
+
+    /* Inline images */
+    .inline-image {
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+    .inline-image img {
+      width: 100%;
+      height: clamp(220px, 42vw, 420px);
+      object-fit: cover;
+      display: block;
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .inline-image:hover img { transform: scale(1.02); }
+    .inline-image figcaption {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.35);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      border-left: 0.5px solid #E0828F;
+      padding: 18px 32px;
+      margin: 48px 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-style: italic;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
+      color: #2A2220;
+      background: linear-gradient(to right, rgba(242,196,206,0.2), transparent);
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Section divider */
+    .section-divider {
+      width: 100%;
+      height: 0.5px;
+      background: linear-gradient(to right, transparent, rgba(224,130,143,0.3), transparent);
+      margin: 52px 0;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.5);
+      text-decoration: none;
+      transition: color 0.25s ease, gap 0.25s ease;
+    }
+    .back-link:hover { color: #E0828F; gap: 4px; }
+
+    /* CTA card */
+    .cta-card {
+      background: linear-gradient(135deg, #2A2220 0%, #3d2f2d 100%);
+      border-radius: 12px;
+      padding: 52px 48px;
+      text-align: center;
+      margin: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 0%, rgba(224,130,143,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #F7F0EF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: #E0828F; }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .cta-card { padding: 40px 24px; }
+      .pull-quote { padding: 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <button id="mobile-menu-close" aria-label="Close menu">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line deco-line-center" style="margin-bottom:12px;"></span>
+  <a href="index.html#collection" class="mobile-nav-link">Collectie</a>
+  <a href="about.html"            class="mobile-nav-link">Over</a>
+  <a href="journal.html"          class="mobile-nav-link" style="color:#E0828F;">Blog</a>
+  <a href="verlanglijst.html"     class="mobile-nav-link">Verlanglijst</a>
+  <a href="winkelwagen.html"      class="mobile-nav-link">Winkelwagen</a>
+  <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
+
+<!-- GRAIN -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="index.html#collection" class="nav-link">Collectie</a>
+      <a href="about.html"            class="nav-link">Over</a>
+    </div>
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;
+                letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="journal.html" class="nav-link active">Blog</a>
+      <a href="verlanglijst.html" class="nav-link" aria-label="Verlanglijst" style="position:relative;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="nav-wish-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
+      <a href="winkelwagen.html" class="nav-link" style="position:relative;">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Winkelwagen
+        </span>
+        <span id="nav-cart-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Open menu">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:16px;height:0.5px;background:#2A2220;"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     HERO IMAGE
+════════════════════════════════════════════ -->
+<div class="article-hero">
+  <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1400&h=700&q=85&fit=crop&auto=format"
+       alt="Vrouw met seizoensaccessoires — Fleya Blog">
+</div>
+
+<!-- ════════════════════════════════════════════
+     ARTICLE
+════════════════════════════════════════════ -->
+<article style="padding-bottom: 120px;">
+  <div class="article-container">
+
+    <!-- Back nav -->
+    <div class="fade-up" style="margin-bottom: 40px;">
+      <a href="journal.html" class="back-link">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
+          <path d="M14 5H2M5.5 1L1.5 5l4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Terug naar Blog
+      </a>
+    </div>
+
+    <!-- Article header -->
+    <header class="fade-up" style="margin-bottom: 52px; text-align: center;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:20px;">
+        <span style="font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#E0828F;">Stijl</span>
+        <span class="deco-line" style="width:24px;"></span>
+        <span style="font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#E0828F;">Seizoenstrends</span>
+      </div>
+      <h1 style="font-size:clamp(2.2rem,5.5vw,3.8rem);line-height:1.12;color:#2A2220;margin-bottom:28px;">
+        Seizoenstrends in Accessoires:<br>Zo Draag Je Elk Seizoen met Stijl
+      </h1>
+      <span class="deco-line deco-line-center" style="margin-bottom:24px;"></span>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.45);">5 maart 2026</span>
+        <span style="width:3px;height:3px;border-radius:50%;background:rgba(224,130,143,0.4);display:inline-block;"></span>
+        <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.45);">Door Thijs</span>
+        <span style="width:3px;height:3px;border-radius:50%;background:rgba(224,130,143,0.4);display:inline-block;"></span>
+        <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.45);">5 min lezen</span>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <div class="article-body fade-up" style="transition-delay:0.1s;">
+
+      <p>
+        Een nieuw seizoen begint niet met je kledingkast. Het begint met een gevoel. Die lichte onrust in maart als de eerste zon doorbijt. Die drang naar diepte en warmte als de bladeren vallen. Accessoires zijn de stille tolk van die gevoelens — ze vertalen een seizoen naar een look, subtiel maar onmiskenbaar.
+      </p>
+
+      <p>
+        In dit artikel nemen we je mee langs de seizoenstrends in accessoires die dit jaar het verschil maken. Van delicate lentedetails tot rijke herfststukken. Van tijdloze investeringen tot slimme seizoensaccenten. Zo draag je elk seizoen met stijl en gevoel.
+      </p>
+
+      <div class="section-divider"></div>
+
+      <h2>Lente &amp; Zomer — Licht, Luchtig en Vol Expressie</h2>
+
+      <p>
+        De lente vraagt om lucht. In accessoires vertaalt dat zich naar fijne texturen, zachte pastels en delicate details die het licht vangen. Denk aan gevlochten materialen, subtiele goudinten en vormen die leven als jij beweegt. Niet overdreven. Niet luid. Eerder als een gefluisterde opmerking die toch blijft hangen.
+      </p>
+
+      <figure class="inline-image">
+        <img src="https://images.unsplash.com/photo-1722340321028-5c7ce4d082f3?w=900&h=480&q=80&fit=crop&auto=format"
+             alt="Lente accessoires — schoenen en tas in zachte kleuren">
+        <figcaption>Lente-looks: fris, luchtig en doordacht gecombineerd</figcaption>
+      </figure>
+
+      <p>
+        De zomer versterkt dat gevoel nog verder. Accessoires nemen de hoofdrol. Een jurk wordt een canvas, en wat je eraan toevoegt bepaalt de toon. Dit seizoen draait het om expressie zonder overdaad. Een verfijnde bag holder in je entree, een zacht kleuraccent op de juiste plek — stukken die spreken zonder te schreeuwen.
+      </p>
+
+      <blockquote class="pull-quote">
+        "De mooiste accessoires fluisteren. Ze schreeuwen nooit."
+      </blockquote>
+
+      <h2>Herfst &amp; Winter — Warmte, Diepte en een Rijke Uitstraling</h2>
+
+      <p>
+        Als de dagen korter worden, zoekt stijl naar diepte. Aardtinten, structuurvolle materialen en lagen die elkaar aanvullen. Accessoires krijgen in de herfst en winter een andere rol: ze ankeren een look. Ze voegen gewicht toe — in de mooiste betekenis van het woord.
+      </p>
+
+      <figure class="inline-image">
+        <img src="https://images.unsplash.com/photo-1632149877166-f75d49000351?w=900&h=480&q=80&fit=crop&auto=format"
+             alt="Herfstmode — vrouw in elegante witte jas met laarzen">
+        <figcaption>Herfst &amp; winter vragen om diepte en warme texturen</figcaption>
+      </figure>
+
+      <p>
+        Investeer in stukken die niet meegaan in elke microtrend. Kies voor een rijke, doordachte uitstraling die ook volgend seizoen nog klopt. Een bag holder in warme tinten doet dit seizoen hetzelfde als een kasjmier sjaal in je garderobe: hij maakt een ruimte af en geeft haar een sfeer die voelt als thuiskomen.
+      </p>
+
+      <div class="section-divider"></div>
+
+      <h2>De Bag Holder — Een Seizoenstrend die Elk Seizoen Standhoudt</h2>
+
+      <p>
+        Er zijn accessoires die meegaan met trends. En er zijn accessoires die boven trends staan. De bag holder is het tweede. Hij past zich aan — aan het seizoen, aan de sfeer, aan jouw interieur — zonder zijn karakter te verliezen.
+      </p>
+
+      <figure class="inline-image">
+        <img src="https://images.unsplash.com/photo-1682745230951-8a5aa9a474a0?w=900&h=480&q=80&fit=crop&auto=format"
+             alt="Elegante witte tas op tafel — verfijnd en tijdloos">
+        <figcaption>Een bag holder geeft je tas een vaste, elegante plek</figcaption>
+      </figure>
+
+      <p>
+        In de lente licht en delicaat naast een vaasje droogbloemen. In de zomer als rust in een luchtige entree. In de herfst als warm ankerpunt in een gelaagde hal. In de winter als het stille middelpunt van een verfijnde thuiskomst. Dat is geen trend die over een seizoen voorbij is. Dat is investeren in iets blijvends.
+      </p>
+
+      <h2>Trends Combineren met Tijdloze Stukken</h2>
+
+      <p>
+        De verleiding van elk nieuw seizoen is groot. Nieuwe kleuren, nieuwe vormen, nieuwe must-haves. Maar de meest stijlvolle vrouwen doen iets anders: ze investeren in een sterke basis van tijdloze stukken en voegen daar bewust één seizoensaccent aan toe.
+      </p>
+
+      <figure class="inline-image">
+        <img src="https://images.unsplash.com/photo-1574270585995-c7a2298fd84a?w=900&h=480&q=80&fit=crop&auto=format"
+             alt="Roze leren tas — tijdloos en verfijnd accessoire">
+        <figcaption>Investeer in kwaliteit — kies stukken die elk seizoen terugkeren</figcaption>
+      </figure>
+
+      <p>
+        Eén nieuw detail kan een complete look vernieuwen zonder dat je je garderobe omgooit. Dat geldt voor kleding, maar net zo goed voor je interieur. Een nieuw bloemenarrangement, een ander textiel, een Fleya bag holder die het hele jaar zijn plek heeft. Zo leef je met de seizoenen mee — zonder slachtoffer te worden van elke trend.
+      </p>
+
+      <div class="section-divider"></div>
+
+      <!-- FAQ -->
+      <h2>Veelgestelde Vragen</h2>
+
+      <p style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#E0828F;margin-bottom:32px;margin-top:-12px;">
+        Antwoorden op jouw stijlvragen
+      </p>
+
+      <div style="margin-bottom:32px;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:#2A2220;margin-bottom:10px;">
+          Welke accessoires zijn tijdloos, ongeacht het seizoen?
+        </h3>
+        <p>
+          Tijdloze accessoires kenmerken zich door eenvoudige vormen, neutrale of warme kleuren en kwalitatieve materialen. Stukken die elk jaar terugkeren zonder uit de mode te raken. Een bag holder van Fleya is daar een goed voorbeeld van: verfijnd, functioneel en seizoensonafhankelijk mooi.
+        </p>
+      </div>
+
+      <div style="margin-bottom:32px;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:#2A2220;margin-bottom:10px;">
+          Hoe pas ik mijn accessoires aan als het seizoen wisselt?
+        </h3>
+        <p>
+          Je hoeft niet alles te vervangen. Eén bewust seizoensaccent — een nieuwe kleur, een ander materiaal, een vers bloemenarrangement erbij — is genoeg. Zo voelt je ruimte en look elk seizoen fris, zonder grote investeringen.
+        </p>
+      </div>
+
+      <div style="margin-bottom:32px;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:#2A2220;margin-bottom:10px;">
+          Is een bag holder een accessoire of een interieurstuk?
+        </h3>
+        <p>
+          Allebei — en dat is precies wat hem zo waardevol maakt. Een bag holder functioneert als een persoonlijk accessoire voor je tas én als een decoratief element in je interieur. In je entree verbindt hij mode en wonen op een moeiteloze manier.
+        </p>
+      </div>
+
+      <div style="margin-bottom:32px;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;color:#2A2220;margin-bottom:10px;">
+          Welke kleuren werken het beste voor accessoires in de herfst?
+        </h3>
+        <p>
+          Aardtinten zoals terracotta, warm beige, camel en diep bordeaux doen het uitstekend in de herfst. Ze passen bij de sfeer van het seizoen en combineren goed met naturel- en linnen-achtige materialen. Een vleugje goud als accent maakt een herfstlook direct rijker en warmer.
+        </p>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Conclusie -->
+      <h2>Stijl die Blijft — Seizoen na Seizoen</h2>
+
+      <p>
+        Stijl is geen momentopname. Het is een taal die je het hele jaar spreekt — in elk seizoen, in elke ruimte, in elk detail dat je bewust kiest. De mooiste accessoires zijn die je niet moe wordt. Die je ziet bij thuiskomst en je even stil laten staan.
+      </p>
+
+      <p>
+        Seizoenstrends in accessoires geven je de taal. Fleya geeft je de woorden. Stukken die meegroeien met elk seizoen — zonder ooit hun elegantie te verliezen.
+      </p>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="fade-up cta-card" style="transition-delay:0.15s;">
+      <span class="deco-line deco-line-center" style="background:rgba(224,130,143,0.4);margin-bottom:24px;"></span>
+      <p style="font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:#E0828F;margin-bottom:14px;">Tijdloos. Verfijnd. Voor jou.</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);color:#F7F0EF;margin-bottom:16px;line-height:1.15;">
+        Ontdek de Fleya Collectie
+      </h2>
+      <p style="font-size:13px;font-weight:300;letter-spacing:0.08em;color:rgba(247,240,239,0.55);max-width:380px;margin:0 auto 32px;">
+        Accessoires die elk seizoen meegaan. Stukken die blijven.
+      </p>
+      <a href="product.html"
+         style="background-color:#E0828F;color:#F7F0EF;font-family:'Jost',sans-serif;
+                font-weight:400;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+                padding:14px 40px;border-radius:4px;display:inline-block;text-decoration:none;
+                transition:background-color 0.3s cubic-bezier(0.25,0.46,0.45,0.94),
+                            transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);"
+         onmouseover="this.style.backgroundColor='#B85A68';this.style.transform='translateY(-1px)'"
+         onmouseout="this.style.backgroundColor='#E0828F';this.style.transform='translateY(0)'">
+        Bekijk de collectie
+      </a>
+      <span class="deco-line deco-line-center" style="background:rgba(224,130,143,0.4);margin-top:28px;"></span>
+    </div>
+
+    <!-- Back to blog -->
+    <div class="fade-up" style="text-align:center;margin-top:16px;transition-delay:0.2s;">
+      <a href="journal.html" class="back-link" style="justify-content:center;">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none">
+          <path d="M14 5H2M5.5 1L1.5 5l4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Meer lezen op de Blog
+      </a>
+    </div>
+
+  </div>
+</article>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background:#2A2220;padding:64px 32px 48px;">
+  <div class="max-w-7xl mx-auto">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:28px;text-align:center;">
+      <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2rem;
+                   letter-spacing:0.22em;color:#E0828F;">FLEYA</span>
+      <span class="deco-line deco-line-center" style="background:rgba(224,130,143,0.4);"></span>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;">
+        <a href="index.html#collection"
+           style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+                  color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+           onmouseover="this.style.color='rgba(247,240,239,0.9)'"
+           onmouseout="this.style.color='rgba(247,240,239,0.45)'">Collectie</a>
+        <a href="about.html"
+           style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+                  color:rgba(247,240,239,0.45);text-decoration:none;transition:color 0.25s ease;"
+           onmouseover="this.style.color='rgba(247,240,239,0.9)'"
+           onmouseout="this.style.color='rgba(247,240,239,0.45)'">Over</a>
+        <a href="journal.html"
+           style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+                  color:#E0828F;text-decoration:none;">Blog</a>
+      </div>
+      <p style="font-size:11px;font-weight:300;letter-spacing:0.1em;
+                color:rgba(247,240,239,0.25);margin-top:16px;">
+        © 2026 Fleya. Met liefde gemaakt.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileClose = document.getElementById('mobile-menu-close');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => io.observe(el));
+</script>
+<script>
+(function(){
+  var n = parseInt(localStorage.getItem('fleya-cart-count') || '0', 10);
+  var b = document.getElementById('nav-cart-badge');
+  if (b && n > 0) { b.textContent = n; b.style.display = 'flex'; }
+  var wn = parseInt(localStorage.getItem('fleya-wishlist-count') || '0', 10);
+  var wb = document.getElementById('nav-wish-badge');
+  if (wb && wn > 0) { wb.textContent = wn; wb.style.display = 'flex'; }
+})();
+</script>
+
+</body>
+</html>
