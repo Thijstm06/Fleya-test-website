@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://fleya.nl/</loc><priority>1.0</priority></url>
+  <url><loc>https://fleya.nl/collectie.html</loc><priority>0.9</priority></url>
+  <url><loc>https://fleya.nl/product.html</loc><priority>0.9</priority></url>
+  <url><loc>https://fleya.nl/product-tote.html</loc><priority>0.9</priority></url>
+  <url><loc>https://fleya.nl/about.html</loc><priority>0.7</priority></url>
+  <url><loc>https://fleya.nl/duurzaamheid.html</loc><priority>0.6</priority></url>
+  <url><loc>https://fleya.nl/journal.html</loc><priority>0.7</priority></url>
+  <url><loc>https://fleya.nl/journal-bagholder.html</loc><priority>0.6</priority></url>
+  <url><loc>https://fleya.nl/journal-seizoenstrends-accessoires.html</loc><priority>0.6</priority></url>
+  <url><loc>https://fleya.nl/faq.html</loc><priority>0.6</priority></url>
+  <url><loc>https://fleya.nl/contact.html</loc><priority>0.5</priority></url>
+  <url><loc>https://fleya.nl/voor-bedrijven.html</loc><priority>0.5</priority></url>
+  <url><loc>https://fleya.nl/verzending-retour.html</loc><priority>0.4</priority></url>
+  <url><loc>https://fleya.nl/privacybeleid.html</loc><priority>0.3</priority></url>
+  <url><loc>https://fleya.nl/verlanglijst.html</loc><priority>0.3</priority></url>
+  <url><loc>https://fleya.nl/winkelwagen.html</loc><priority>0.3</priority></url>
+</urlset>
