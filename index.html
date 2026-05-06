@@ -691,14 +691,14 @@
         </a>
       </div>
 
-      <!-- Card 4 — Zwart -->
+      <!-- Card 4 — The Everyday Tote (Nieuw) -->
       <div class="product-card fade-up" style="border-radius:10px;overflow:hidden;
                   box-shadow:0 4px 24px rgba(224,130,143,0.12);">
-        <a href="product.html" style="display:block;position:relative;overflow:hidden;
-                    aspect-ratio:3/4;background:#2A2220;border-radius:10px;">
-          <img src="product_images/bagholder-zwart.jpg"
-               alt="Fleya Bag Holder — Zwart"
-               class="card-img w-full h-full object-cover">
+        <a href="product-tote.html" style="display:block;position:relative;overflow:hidden;
+                    aspect-ratio:3/4;background:#C8B99A;border-radius:10px;">
+          <img src="product_images/tote%20bag/Fleya%20tote%20bag%20los.png"
+               alt="Fleya The Everyday Tote"
+               class="card-img w-full h-full object-cover" style="object-position:center top;">
           <div class="absolute inset-0"
                style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
           <div class="card-hover-overlay absolute inset-0"
@@ -710,7 +710,7 @@
                          background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
           </div>
           <button class="wishlist-card-btn"
-                  onclick="event.preventDefault();toggleWishlistCard('zwart')"
+                  onclick="event.preventDefault();toggleWishlistCard('tote')"
                   style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
                          border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
                          display:flex;align-items:center;justify-content:center;opacity:0;"
@@ -719,18 +719,21 @@
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
           </button>
+          <!-- Badge -->
+          <div style="position:absolute;top:14px;left:14px;z-index:2;">
+            <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:rgba(247,240,239,0.9);
+                         background:rgba(42,34,32,0.4);backdrop-filter:blur(4px);
+                         padding:4px 10px;border-radius:20px;">Nieuw</span>
+          </div>
           <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
             <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
-                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">The Everyday Tote</h3>
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
               <p style="font-family:'Jost',sans-serif;font-size:11px;
-                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Zwart · € 39,99</p>
-              <div style="display:flex;gap:5px;align-items:center;">
-                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
-                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
-                <span style="width:11px;height:11px;border-radius:50%;background:#C9A84C;display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
-                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Zwart"></span>
-              </div>
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Naturel · € 29,99</p>
+              <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.15em;
+                           text-transform:uppercase;color:rgba(247,240,239,0.65);">100% katoen</span>
             </div>
           </div>
         </a>
@@ -1233,13 +1236,11 @@
 
 function toggleWishlistCard(kleur) {
   var wishlist = JSON.parse(localStorage.getItem('fleya_wishlist') || '[]');
-  var product = {
-    id: 'bag-holder-' + kleur,
-    name: 'Fleya Bag Holder',
-    variant: kleur,
-    price: 39.99,
-    img: 'product_images/bagholder-' + kleur + '.jpg'
-  };
+  var product = kleur === 'tote'
+    ? { id: 'tote-bag', name: 'The Everyday Tote', variant: 'naturel', price: 29.99,
+        img: 'product_images/tote bag/Fleya tote bag los.png' }
+    : { id: 'bag-holder-' + kleur, name: 'Fleya Bag Holder', variant: kleur,
+        price: 39.99, img: 'product_images/bagholder-' + kleur + '.jpg' };
   var idx = wishlist.findIndex(function(i){ return i.id === product.id; });
   if (idx === -1) { wishlist.push(product); } else { wishlist.splice(idx, 1); }
   localStorage.setItem('fleya_wishlist', JSON.stringify(wishlist));

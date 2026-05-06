@@ -68,7 +68,36 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 
 ## Prioriteit 1 — Volgende stap ⬅
 
-- [ ] **Tote Bag toevoegen aan homepage collectiegrid** — Vierde kaart in "De Collectie" op index.html bijwerken van placeholder naar echte tote-foto + link naar product-tote.html
+- [x] **Tote Bag toevoegen aan homepage collectiegrid** — Vierde kaart in "De Collectie" op index.html bijwerken van placeholder naar echte tote-foto + link naar product-tote.html
+- [ ] **Collectiepagina (`collectie.html`)** — Aparte pagina voor alle producten; zie details hieronder
+
+---
+
+## Collectiepagina — Ontwerp & Inhoud
+
+**Bestand:** `collectie.html`  
+**Doel:** Centrale winkelpagina nu we meerdere producten hebben. Alle navbar/footer "Collectie"-links wijzen hier naartoe (nu linken ze deels naar `product.html`).
+
+### Layout
+- Hero-banner bovenaan: klein, subtiel — merknaam + tagline "De volledige collectie"
+- Filterbalk: **Alles · Bag Holders · Tassen · Nieuw** — filtert kaarten zonder page reload (vanilla JS classList toggle)
+- Productgrid: zelfde kaart-stijl als homepage `collectie-grid` (3/4 aspect ratio, gradient overlay, hover "Bekijk Product", wishlist hartje, badge)
+- "Sorteer op"-dropdown (optioneel): Prijs laag–hoog / hoog–laag / Nieuwste
+
+### Producten op de pagina (bij lancering)
+| Product | Prijs | Badge | Categorie | Link |
+|---------|-------|-------|-----------|------|
+| Fleya Bag Holder — Roze | € 39,99 | Bestseller | Bag Holders | product.html |
+| Fleya Bag Holder — Zilver | € 39,99 | — | Bag Holders | product.html |
+| Fleya Bag Holder — Goud | € 39,99 | — | Bag Holders | product.html |
+| Fleya Bag Holder — Zwart | € 39,99 | — | Bag Holders | product.html |
+| The Everyday Tote | € 29,99 | Nieuw | Tassen | product-tote.html |
+
+### Navigatie-updates nodig bij aanmaken
+- Alle navbar "Collectie"-links → `collectie.html` (nu: `#` of `product.html`)
+- Footer "Collectie"-link → `collectie.html`
+- Homepage CTA "Bekijk de volledige collectie" → `collectie.html`
+- Breadcrumbs op productpagina's: "Collectie" → `collectie.html`
 
 ---
 
@@ -76,7 +105,6 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 
 - [x] **`product-tote.html`** — The Everyday Tote productpagina aangemaakt met 5 foto's, thumbnail gallery, add-to-cart & wishlist
 - [x] **product.html "Compleet de look"** — Tote Bag kaart bijgewerkt van "Binnenkort" placeholder naar echte foto + link naar product-tote.html
-- [ ] **Collectiepagina (`collectie.html`)** — Nu er 2 echte producten zijn heeft een aparte collectiepagina zin; met filterbalk (Alles / Bag Holders / Tassen / Nieuw) en alle kaarten
 - [ ] **Productkaart-reviews** — Sterrenrating (bijv. 4.9 ★) zichtbaar op kaarten in De Collectie voor social proof; kleine, subtiele badge naast de naam
 - [ ] **Echte Fleya-copy** — generieke placeholder-tekst vervangen door echte merktekst
   - Productnamen / beschrijvingen
