@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collectie — Fleya</title>
+  <meta name="description" content="Ontdek de volledige Fleya collectie. Bag holders en tassen, ontworpen met intentie voor de moderne vrouw.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose:     '#E0828F',
+            petal:    '#F2C4CE',
+            mauve:    '#B85A68',
+            cream:    '#F7F0EF',
+            espresso: '#2A2220',
+          },
+          fontFamily: {
+            heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            body:    ['Jost', '"Helvetica Neue"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #F7F0EF;
+      color: #2A2220;
+      font-family: 'Jost', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background-color: #E0828F;
+      color: #F7F0EF;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-primary:hover  { background-color: #B85A68; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #B85A68; outline-offset: 3px; }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #2A2220;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 36px;
+      border: 0.5px solid #2A2220;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-block;
+      text-decoration: none;
+      transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-outline:hover  { border-color: #E0828F; color: #E0828F; transform: translateY(-1px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    /* ── Decorative lines ── */
+    .deco-line {
+      display: block;
+      width: 52px;
+      height: 0.5px;
+      background-color: #E0828F;
+    }
+    .deco-line-center { margin: 0 auto; }
+
+    /* ── Nav ── */
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover { color: #E0828F; }
+    .nav-link:focus-visible { outline: 1px dotted #E0828F; }
+    .nav-link.active { color: #E0828F; }
+
+    #navbar {
+      background-color: rgba(247, 240, 239, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.14);
+      transition: background-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    #navbar.scrolled {
+      background-color: rgba(247, 240, 239, 0.98);
+      box-shadow: 0 1px 0 rgba(224,130,143,0.22);
+    }
+
+    /* ── Product cards ── */
+    .product-card { overflow: hidden; }
+    .product-card .card-img {
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .card-img { transform: scale(1.04); }
+    .product-card:hover .card-hover-overlay { opacity: 1 !important; }
+    .product-card:hover .wishlist-card-btn { opacity: 1 !important; }
+    .wishlist-card-btn:hover { background: #F2C4CE !important; transform: scale(1.1); }
+    .wishlist-card-btn { transition: opacity 0.3s ease, transform 0.2s ease; }
+
+    /* ── Grain ── */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.022;
+    }
+
+    /* ── Fade-up ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease,
+                  transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Filter pills ── */
+    .filter-pill {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.55);
+      background: transparent;
+      border: 0.5px solid rgba(42,34,32,0.18);
+      border-radius: 20px;
+      padding: 9px 22px;
+      cursor: pointer;
+      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .filter-pill:hover { color: #E0828F; border-color: #E0828F; }
+    .filter-pill.active {
+      color: #F7F0EF;
+      background: #E0828F;
+      border-color: #E0828F;
+    }
+
+    /* ── Sort select ── */
+    .sort-select {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.6);
+      background: transparent;
+      border: 0.5px solid rgba(42,34,32,0.18);
+      border-radius: 4px;
+      padding: 9px 32px 9px 14px;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%232A2220' stroke-width='0.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+    .sort-select:hover { border-color: #E0828F; color: #E0828F; }
+    .sort-select:focus { outline: none; border-color: #E0828F; }
+
+    /* ── Product card hidden ── */
+    .product-card[hidden] { display: none !important; }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: #F7F0EF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition: opacity 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .mobile-nav-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: #2A2220;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .mobile-nav-link:hover { color: #E0828F; }
+    #mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(42,34,32,0.42);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .breadcrumb-link:hover { color: #E0828F; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .collectie-grid { grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+      .filter-sort-bar { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+      footer { padding: 56px 24px 32px !important; }
+      .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    }
+    @media (max-width: 480px) {
+      .collectie-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigatiemenu">
+  <button id="mobile-menu-close" aria-label="Menu sluiten">
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(45deg) translate(3px,3px);"></span>
+    <span style="display:block;width:22px;height:0.5px;background:#2A2220;transform:rotate(-45deg) translate(3px,-3px);"></span>
+  </button>
+  <span class="deco-line deco-line-center" style="margin-bottom:12px;"></span>
+  <a href="collectie.html" class="mobile-nav-link" style="color:#E0828F;">Collectie</a>
+  <a href="about.html"     class="mobile-nav-link">Over</a>
+  <a href="journal.html"   class="mobile-nav-link">Blog</a>
+  <a href="voor-bedrijven.html" class="mobile-nav-link">Voor Bedrijven</a>
+  <a href="verlanglijst.html"   class="mobile-nav-link">Verlanglijst</a>
+  <a href="winkelwagen.html"    class="mobile-nav-link">Winkelwagen</a>
+  <span class="deco-line deco-line-center" style="margin-top:12px;"></span>
+</div>
+
+<!-- GRAIN -->
+<svg class="grain-overlay" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+</svg>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-8 lg:px-16">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="collectie.html" class="nav-link active">Collectie</a>
+      <a href="about.html"     class="nav-link">Over</a>
+    </div>
+    <div class="flex-1 lg:flex-none flex justify-start lg:justify-center">
+      <a href="index.html" aria-label="Fleya home"
+         style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;
+                letter-spacing:0.22em;color:#E0828F;text-decoration:none;">FLEYA</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-10">
+      <a href="journal.html"        class="nav-link">Blog</a>
+      <a href="voor-bedrijven.html" class="nav-link">Voor Bedrijven</a>
+      <a href="verlanglijst.html"   class="nav-link" aria-label="Verlanglijst" style="position:relative;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="nav-wish-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
+      <a href="winkelwagen.html" class="nav-link" style="position:relative;">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Winkelwagen
+        </span>
+        <span id="nav-cart-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
+      </a>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-1" aria-label="Menu openen">
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:22px;height:0.5px;background:#2A2220;"></span>
+      <span style="display:block;width:18px;height:0.5px;background:#2A2220;align-self:flex-end;"></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════
+     HERO BANNER — klein, subtiel
+════════════════════════════════════════════ -->
+<section style="padding-top:140px;padding-bottom:64px;text-align:center;
+                background:linear-gradient(180deg,rgba(242,196,206,0.18) 0%,rgba(247,240,239,0) 100%);">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" style="display:flex;align-items:center;justify-content:center;
+                                        gap:10px;margin-bottom:36px;">
+      <a href="index.html" class="breadcrumb-link">Home</a>
+      <span style="font-size:9px;color:rgba(42,34,32,0.25);">／</span>
+      <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;
+                   text-transform:uppercase;color:#E0828F;">Collectie</span>
+    </nav>
+
+    <span class="deco-line deco-line-center" style="margin-bottom:28px;"></span>
+    <h1 class="fade-up"
+        style="font-family:'Cormorant Garamond',serif;font-weight:300;
+               font-size:clamp(36px,5vw,58px);letter-spacing:0.06em;color:#2A2220;
+               margin-bottom:18px;">
+      De volledige collectie
+    </h1>
+    <p class="fade-up"
+       style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;
+              letter-spacing:0.12em;color:rgba(42,34,32,0.5);max-width:360px;
+              margin:0 auto 0;line-height:1.8;transition-delay:0.1s;">
+      Verfijnde accessoires, ontworpen met intentie.
+    </p>
+    <span class="deco-line deco-line-center" style="margin-top:28px;"></span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FILTER + SORT BAR
+════════════════════════════════════════════ -->
+<section style="padding:0 0 48px;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+    <div class="filter-sort-bar fade-up"
+         style="display:flex;align-items:center;justify-content:space-between;
+                flex-wrap:wrap;gap:16px;padding-bottom:28px;
+                border-bottom:0.5px solid rgba(224,130,143,0.18);">
+
+      <!-- Filter pills -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="filter-pill active" data-filter="all">Alles</button>
+        <button class="filter-pill" data-filter="bag-holders">Bag Holders</button>
+        <button class="filter-pill" data-filter="tassen">Tassen</button>
+        <button class="filter-pill" data-filter="nieuw">Nieuw</button>
+      </div>
+
+      <!-- Sort + count -->
+      <div style="display:flex;align-items:center;gap:16px;">
+        <span id="product-count"
+              style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.14em;
+                     color:rgba(42,34,32,0.35);">5 producten</span>
+        <div style="position:relative;">
+          <select id="sort-select" class="sort-select" aria-label="Sorteren">
+            <option value="default">Aanbevolen</option>
+            <option value="price-asc">Prijs: laag → hoog</option>
+            <option value="price-desc">Prijs: hoog → laag</option>
+            <option value="new">Nieuwste eerst</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PRODUCT GRID
+════════════════════════════════════════════ -->
+<section style="padding-bottom:120px;">
+  <div class="max-w-7xl mx-auto px-8 lg:px-16">
+
+    <div id="product-grid" class="collectie-grid"
+         style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+
+      <!-- ── Card: Roze (Bestseller) ── -->
+      <div class="product-card fade-up"
+           data-category="bag-holders"
+           data-price="39.99"
+           data-order="1"
+           style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product.html"
+           style="display:block;position:relative;overflow:hidden;
+                  aspect-ratio:3/4;background:#F2C4CE;border-radius:10px;">
+          <img src="product_images/bagholder-roze.jpg"
+               alt="Fleya Bag Holder — Roze"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('roze')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;top:14px;left:14px;z-index:2;">
+            <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:rgba(247,240,239,0.9);
+                         background:rgba(42,34,32,0.4);backdrop-filter:blur(4px);
+                         padding:4px 10px;border-radius:20px;">Bestseller</span>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Roze · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F0D080,#C9A84C);display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ── Card: Zilver ── -->
+      <div class="product-card fade-up"
+           data-category="bag-holders"
+           data-price="39.99"
+           data-order="2"
+           style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product.html"
+           style="display:block;position:relative;overflow:hidden;
+                  aspect-ratio:3/4;background:#D0D0D0;border-radius:10px;">
+          <img src="product_images/bagholder-zilver.jpg"
+               alt="Fleya Bag Holder — Zilver"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('zilver')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Zilver · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F0D080,#C9A84C);display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ── Card: Goud ── -->
+      <div class="product-card fade-up"
+           data-category="bag-holders"
+           data-price="39.99"
+           data-order="3"
+           style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product.html"
+           style="display:block;position:relative;overflow:hidden;
+                  aspect-ratio:3/4;background:#C9A84C;border-radius:10px;">
+          <img src="product_images/bagholder-goud.jpg"
+               alt="Fleya Bag Holder — Goud"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('goud')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Goud · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F0D080,#C9A84C);display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ── Card: Zwart ── -->
+      <div class="product-card fade-up"
+           data-category="bag-holders"
+           data-price="39.99"
+           data-order="4"
+           style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product.html"
+           style="display:block;position:relative;overflow:hidden;
+                  aspect-ratio:3/4;background:#2A2220;border-radius:10px;">
+          <img src="product_images/bagholder-zwart.jpg"
+               alt="Fleya Bag Holder — Zwart"
+               class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('zwart')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">Fleya Bag Holder</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Zwart · € 39,99</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span style="width:11px;height:11px;border-radius:50%;background:#E0828F;display:block;border:1px solid rgba(247,240,239,0.35);" title="Roze"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#B8B8B8;display:block;border:1px solid rgba(247,240,239,0.35);" title="Zilver"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F0D080,#C9A84C);display:block;border:1px solid rgba(247,240,239,0.35);" title="Goud"></span>
+                <span style="width:11px;height:11px;border-radius:50%;background:#2A2220;display:block;border:1.5px solid rgba(247,240,239,0.9);" title="Zwart"></span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ── Card: The Everyday Tote (Nieuw) ── -->
+      <div class="product-card fade-up"
+           data-category="tassen nieuw"
+           data-price="29.99"
+           data-order="0"
+           style="border-radius:10px;overflow:hidden;
+                  box-shadow:0 4px 24px rgba(224,130,143,0.12);">
+        <a href="product-tote.html"
+           style="display:block;position:relative;overflow:hidden;
+                  aspect-ratio:3/4;background:#C8B99A;border-radius:10px;">
+          <img src="product_images/tote%20bag/Fleya%20tote%20bag%20los.png"
+               alt="Fleya The Everyday Tote"
+               class="card-img w-full h-full object-cover"
+               style="object-position:center top;">
+          <div class="absolute inset-0"
+               style="background:linear-gradient(to top,rgba(42,34,32,0.72) 0%,transparent 50%);"></div>
+          <div class="card-hover-overlay absolute inset-0"
+               style="background:rgba(224,130,143,0.10);display:flex;align-items:center;
+                      justify-content:center;opacity:0;transition:opacity 0.3s ease;">
+            <span style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:#F7F0EF;padding:10px 24px;border-radius:4px;
+                         border:0.5px solid rgba(247,240,239,0.7);
+                         background:rgba(42,34,32,0.45);backdrop-filter:blur(4px);">Bekijk Product</span>
+          </div>
+          <button class="wishlist-card-btn"
+                  onclick="event.preventDefault();toggleWishlistCard('tote')"
+                  style="position:absolute;top:14px;right:14px;z-index:3;width:32px;height:32px;
+                         border-radius:50%;background:rgba(247,240,239,0.92);border:none;cursor:pointer;
+                         display:flex;align-items:center;justify-content:center;opacity:0;"
+                  aria-label="Voeg toe aan verlanglijst">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B85A68" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+          <div style="position:absolute;top:14px;left:14px;z-index:2;">
+            <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.2em;
+                         text-transform:uppercase;color:rgba(247,240,239,0.9);
+                         background:rgba(42,34,32,0.4);backdrop-filter:blur(4px);
+                         padding:4px 10px;border-radius:20px;">Nieuw</span>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;
+                       color:#F7F0EF;letter-spacing:0.04em;margin-bottom:6px;">The Everyday Tote</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+              <p style="font-family:'Jost',sans-serif;font-size:11px;
+                        color:rgba(247,240,239,0.55);letter-spacing:0.12em;">Naturel · € 29,99</p>
+              <span style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.15em;
+                           text-transform:uppercase;color:rgba(247,240,239,0.65);">100% katoen</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div><!-- /grid -->
+
+    <!-- Empty state -->
+    <div id="empty-state" style="display:none;text-align:center;padding:80px 0;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;
+                letter-spacing:0.06em;color:rgba(42,34,32,0.35);">
+        Geen producten gevonden in deze categorie.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background:#2A2220;padding:72px 64px 40px;">
+  <div class="max-w-7xl mx-auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:64px;margin-bottom:64px;"
+         class="footer-grid">
+
+      <!-- Brand -->
+      <div>
+        <img src="brand_assets/fleya-logo.svg" alt="Fleya"
+             style="height:52px;width:auto;margin-bottom:24px;filter:brightness(0.88);">
+        <p style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.07em;
+                  line-height:1.95;color:rgba(247,240,239,0.38);max-width:260px;margin-bottom:28px;">
+          Verfijnde accessoires voor de moderne vrouw. Ontworpen met intentie, gemaakt om te duren.
+        </p>
+        <div style="display:flex;gap:20px;">
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                             text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;
+                             transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">Instagram</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                             text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;
+                             transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">Pinterest</a>
+          <a href="#" style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.22em;
+                             text-transform:uppercase;color:rgba(247,240,239,0.38);text-decoration:none;
+                             transition:color 0.25s ease;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.38)'">TikTok</a>
+        </div>
+      </div>
+
+      <!-- Navigatie -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:rgba(247,240,239,0.28);margin-bottom:24px;">Navigatie</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="collectie.html" class="nav-link" style="color:#E0828F;font-size:12px;">Collectie</a>
+          <a href="about.html"     class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Over Fleya</a>
+          <a href="journal.html"   class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Blog</a>
+          <a href="voor-bedrijven.html" class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Voor Bedrijven</a>
+          <a href="contact.html"   class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Contact</a>
+        </div>
+      </div>
+
+      <!-- Klantenservice -->
+      <div>
+        <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.28em;
+                  text-transform:uppercase;color:rgba(247,240,239,0.28);margin-bottom:24px;">Klantenservice</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="verzending-retour.html" class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Verzending &amp; Retour</a>
+          <a href="faq.html" class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">FAQ</a>
+          <a href="privacybeleid.html" class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Privacybeleid</a>
+          <a href="duurzaamheid.html" class="nav-link" style="color:rgba(247,240,239,0.45);font-size:12px;"
+             onmouseover="this.style.color='#E0828F'" onmouseout="this.style.color='rgba(247,240,239,0.45)'">Duurzaamheid</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="border-top:0.5px solid rgba(224,130,143,0.15);padding-top:28px;
+                display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <p style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.1em;
+                color:rgba(247,240,239,0.2);">
+        © 2026 Fleya. Alle rechten voorbehouden.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;
+                color:rgba(224,130,143,0.3);letter-spacing:0.08em;">
+        Ontworpen met intentie.
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+// ── Mobile menu
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuClose  = document.getElementById('mobile-menu-close');
+function openMenu()  { mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMenu() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', openMenu);
+menuClose.addEventListener('click', closeMenu);
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
+
+// ── Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── Fade-up
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+// ── Nav badges from localStorage
+(function () {
+  var n  = parseInt(localStorage.getItem('fleya-cart-count') || '0', 10);
+  var b  = document.getElementById('nav-cart-badge');
+  if (b && n > 0) { b.textContent = n; b.style.display = 'flex'; }
+  var wn = parseInt(localStorage.getItem('fleya-wishlist-count') || '0', 10);
+  var wb = document.getElementById('nav-wish-badge');
+  if (wb && wn > 0) { wb.textContent = wn; wb.style.display = 'flex'; }
+}());
+
+// ── Wishlist toggle
+function toggleWishlistCard(kleur) {
+  var wishlist = JSON.parse(localStorage.getItem('fleya_wishlist') || '[]');
+  var product = kleur === 'tote'
+    ? { id: 'tote-bag', name: 'The Everyday Tote', variant: 'naturel', price: 29.99,
+        img: 'product_images/tote bag/Fleya tote bag los.png' }
+    : { id: 'bag-holder-' + kleur, name: 'Fleya Bag Holder', variant: kleur,
+        price: 39.99, img: 'product_images/bagholder-' + kleur + '.jpg' };
+  var idx = wishlist.findIndex(function(i){ return i.id === product.id; });
+  if (idx === -1) { wishlist.push(product); } else { wishlist.splice(idx, 1); }
+  localStorage.setItem('fleya_wishlist', JSON.stringify(wishlist));
+  var count = wishlist.length;
+  localStorage.setItem('fleya-wishlist-count', count);
+  var wb = document.getElementById('nav-wish-badge');
+  if (wb) { wb.textContent = count; wb.style.display = count > 0 ? 'flex' : 'none'; }
+}
+
+// ── Filter + Sort
+(function () {
+  var cards       = Array.from(document.querySelectorAll('#product-grid .product-card'));
+  var pills       = document.querySelectorAll('.filter-pill');
+  var sortSelect  = document.getElementById('sort-select');
+  var countEl     = document.getElementById('product-count');
+  var emptyState  = document.getElementById('empty-state');
+  var grid        = document.getElementById('product-grid');
+  var activeFilter = 'all';
+
+  function getVisible() {
+    return cards.filter(c => !c.hidden);
+  }
+
+  function applyFilter(filter) {
+    activeFilter = filter;
+    cards.forEach(function(card) {
+      var cats = card.dataset.category || '';
+      card.hidden = !(filter === 'all' || cats.indexOf(filter) !== -1);
+    });
+  }
+
+  function applySort(mode) {
+    var visible = getVisible();
+    visible.sort(function(a, b) {
+      if (mode === 'price-asc')  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      if (mode === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      if (mode === 'new')        return parseInt(a.dataset.order) - parseInt(b.dataset.order);
+      return parseInt(a.dataset.order) - parseInt(b.dataset.order);
+    });
+    visible.forEach(function(card) { grid.appendChild(card); });
+  }
+
+  function updateCount() {
+    var n = getVisible().length;
+    countEl.textContent = n + (n === 1 ? ' product' : ' producten');
+    emptyState.style.display = n === 0 ? 'block' : 'none';
+  }
+
+  function refresh() {
+    applyFilter(activeFilter);
+    applySort(sortSelect.value);
+    updateCount();
+  }
+
+  pills.forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      refresh();
+    });
+  });
+
+  sortSelect.addEventListener('change', function() { applySort(sortSelect.value); });
+
+  refresh();
+}());
+</script>
+
+</body>
+</html>

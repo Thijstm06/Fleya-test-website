@@ -69,7 +69,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 ## Prioriteit 1 — Volgende stap ⬅
 
 - [x] **Tote Bag toevoegen aan homepage collectiegrid** — Vierde kaart in "De Collectie" op index.html bijwerken van placeholder naar echte tote-foto + link naar product-tote.html
-- [ ] **Collectiepagina (`collectie.html`)** — Aparte pagina voor alle producten; zie details hieronder
+- [x] **Collectiepagina (`collectie.html`)** — Aparte pagina voor alle producten; zie details hieronder
 
 ---
 
