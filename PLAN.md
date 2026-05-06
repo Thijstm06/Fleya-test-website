@@ -12,6 +12,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 | `index.html` | Compleet — homepage met hero, producten, blog preview |
 | `about.html` | Compleet — over het merk |
 | `product.html` | Compleet — productpagina (Bag Holder) |
+| `product-tote.html` | Compleet — productpagina (The Everyday Tote) |
 | `winkelwagen.html` | Compleet — winkelwagen met localStorage |
 | `verlanglijst.html` | Compleet — verlanglijst met localStorage |
 | `journal.html` | Compleet — blog overzichtspagina |
@@ -65,10 +66,26 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
 
 ---
 
-## Prioriteit 3 — Later
+## Prioriteit 1 — Volgende stap ⬅
+
+- [ ] **Tote Bag toevoegen aan homepage collectiegrid** — Vierde kaart in "De Collectie" op index.html bijwerken van placeholder naar echte tote-foto + link naar product-tote.html
+
+---
+
+## Prioriteit 3 — Gedaan ✓ + later
+
+- [x] **`product-tote.html`** — The Everyday Tote productpagina aangemaakt met 5 foto's, thumbnail gallery, add-to-cart & wishlist
+- [x] **product.html "Compleet de look"** — Tote Bag kaart bijgewerkt van "Binnenkort" placeholder naar echte foto + link naar product-tote.html
+- [ ] **Collectiepagina (`collectie.html`)** — Nu er 2 echte producten zijn heeft een aparte collectiepagina zin; met filterbalk (Alles / Bag Holders / Tassen / Nieuw) en alle kaarten
+- [ ] **Productkaart-reviews** — Sterrenrating (bijv. 4.9 ★) zichtbaar op kaarten in De Collectie voor social proof; kleine, subtiele badge naast de naam
+- [ ] **Echte Fleya-copy** — generieke placeholder-tekst vervangen door echte merktekst
+  - Productnamen / beschrijvingen
+  - Blog-artikelen (journal.html + journal-bagholder.html)
+  - Hero-taglines (index.html) — al grotendeels brand-specifiek
+
+## Prioriteit 4 — Later
 
 - [ ] **Checkout flow** — werkende bestelpagina (checkout.html), eventueel koppeling met Stripe of Mollie
-- [ ] **Meer productpagina's** — extra producten / varianten, categoriepagina
 - [ ] **Echte sociale links** — Instagram, Pinterest, TikTok (nu allemaal `href="#"`)
 - [ ] **Meer blog-content** — extra artikelen in journal.html + detailpagina's — gebruik `/blog-write <onderwerp>` skill
 - [ ] **SEO basics**
@@ -76,9 +93,7 @@ Fleya is een webshop voor vrouwelijke accessoires (bag holders, later tassen & k
   - `<meta property="og:image">` voor social sharing
   - Unieke `<title>` tags nalopen
 - [ ] **Cookie/consent banner** — pas toevoegen als analytics of tracking live gaat
-- [ ] **Collectie-filterbalk** — tabs (Alles / Bag Holders / Nieuw) boven het grid in "De Collectie"; schaalt mee als het assortiment groeit
-- [ ] **Productkaart-reviews** — sterrenrating (bijv. 4.9 ★) zichtbaar op kaarten in De Collectie voor social proof
-- [ ] **"Binnenkort" teaser** — The Everyday Tote als coming-soon banner onder het collectiegrid, zodra er een productfoto beschikbaar is
+- [ ] **Mini Bag** — zodra productfoto's beschikbaar zijn: eigen productpagina aanmaken (zelfde aanpak als tote)
 
 ---
 

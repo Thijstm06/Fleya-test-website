@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fleya Bag Holder — Fleya</title>
+  <title>Fleya Tote Bag — Fleya</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -158,30 +158,6 @@
     .thumb-btn.active { border-color: #E0828F; }
     .thumb-btn:focus-visible { outline: 1px dotted #E0828F; }
 
-    /* ── Color swatches ── */
-    .swatch {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 1.5px solid transparent;
-      position: relative;
-      transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  box-shadow 0.2s ease;
-      outline: none;
-    }
-    .swatch::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 0.5px solid transparent;
-      transition: border-color 0.2s ease;
-    }
-    .swatch:hover  { transform: scale(1.1); }
-    .swatch.active::after { border-color: #E0828F; }
-    .swatch:focus-visible::after { border-color: #B85A68; }
-
     /* ── Accordion ── */
     .accordion-btn {
       width: 100%;
@@ -216,7 +192,7 @@
       opacity: 0;
     }
     .accordion-body.open {
-      max-height: 320px;
+      max-height: 340px;
       opacity: 1;
     }
 
@@ -443,7 +419,6 @@
 ════════════════════════════════════════════ -->
 <div id="cart-popup-overlay" aria-hidden="true"></div>
 <div id="cart-popup" role="dialog" aria-modal="true" aria-label="Winkelwagen">
-  <!-- Header -->
   <div id="cart-popup-header">
     <div>
       <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.5rem;letter-spacing:0.06em;color:#2A2220;margin-bottom:4px;">Winkelwagen</h2>
@@ -456,13 +431,7 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
-
-  <!-- Items list -->
-  <div id="cart-popup-items">
-    <!-- populated by JS -->
-  </div>
-
-  <!-- Footer -->
+  <div id="cart-popup-items"></div>
   <div id="cart-popup-footer">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;">
       <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.12em;color:rgba(42,34,32,0.55);">Subtotaal</span>
@@ -511,7 +480,7 @@
     </div>
 
     <div class="hidden lg:flex items-center gap-10">
-      <a href="journal.html"          class="nav-link">Blog</a>
+      <a href="journal.html"      class="nav-link">Blog</a>
       <a href="verlanglijst.html" class="nav-link" id="nav-wish-link" aria-label="Verlanglijst" style="position:relative;">
         <svg id="nav-heart-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         <span id="nav-wish-badge" style="position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:#E0828F;border-radius:50%;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;color:#fff;display:none;align-items:center;justify-content:center;letter-spacing:0;"></span>
@@ -542,7 +511,7 @@
       <span style="color:rgba(42,34,32,0.3);font-size:10px;">—</span>
       <a href="index.html#collection" class="breadcrumb-link">Collectie</a>
       <span style="color:rgba(42,34,32,0.3);font-size:10px;">—</span>
-      <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Bag Holder</span>
+      <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Tote Bag</span>
     </nav>
   </div>
 </div>
@@ -558,59 +527,76 @@
       <div class="sticky-image fade-up">
         <div class="flex gap-3">
 
-          <!-- Vertical thumbnail strip -->
+          <!-- Vertical thumbnail strip (5 angles) -->
           <div class="flex flex-col gap-2.5" style="flex-shrink:0;">
-            <button class="thumb-btn active" id="thumb-black" onclick="selectColor('black')"
-                    aria-label="View in Zwart">
-              <img src="product_images/bagholder-zwart.jpg"
-                   alt="Zwart" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+
+            <button class="thumb-btn active" id="thumb-0" onclick="selectPhoto(0)"
+                    aria-label="Fleya Tote Bag — Studio">
+              <img src="product_images/tote%20bag/Fleya%20tote%20bag%20los.png"
+                   alt="Studio" style="width:64px;height:78px;object-fit:cover;object-position:center;border-radius:3px;display:block;">
             </button>
-            <button class="thumb-btn" id="thumb-gold" onclick="selectColor('gold')"
-                    aria-label="View in Goud">
-              <img src="product_images/bagholder-goud.jpg"
-                   alt="Goud" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+
+            <button class="thumb-btn" id="thumb-1" onclick="selectPhoto(1)"
+                    aria-label="Fleya Tote Bag — Lifestyle">
+              <img src="product_images/tote%20bag/fleya%20tote%20bag%20vrouw.png"
+                   alt="Lifestyle" style="width:64px;height:78px;object-fit:cover;object-position:center 25%;border-radius:3px;display:block;">
             </button>
-            <button class="thumb-btn" id="thumb-silver" onclick="selectColor('silver')"
-                    aria-label="View in Zilver">
-              <img src="product_images/bagholder-zilver.jpg"
-                   alt="Zilver" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+
+            <button class="thumb-btn" id="thumb-2" onclick="selectPhoto(2)"
+                    aria-label="Fleya Tote Bag — Flat Lay">
+              <img src="product_images/tote%20bag/fleya%20tote%20bag%20grond.png"
+                   alt="Flat Lay" style="width:64px;height:78px;object-fit:cover;object-position:center;border-radius:3px;display:block;">
             </button>
-            <button class="thumb-btn" id="thumb-rose" onclick="selectColor('rose')"
-                    aria-label="View in Roze">
-              <img src="product_images/bagholder-roze.jpg"
-                   alt="Roze" style="width:64px;height:78px;object-fit:cover;border-radius:3px;display:block;">
+
+            <button class="thumb-btn" id="thumb-3" onclick="selectPhoto(3)"
+                    aria-label="Fleya Tote Bag — Binnenkant">
+              <img src="product_images/tote%20bag/fleya%20tote%20bag%20binnekant.png"
+                   alt="Binnenkant" style="width:64px;height:78px;object-fit:cover;object-position:center;border-radius:3px;display:block;">
             </button>
+
+            <button class="thumb-btn" id="thumb-4" onclick="selectPhoto(4)"
+                    aria-label="Fleya Tote Bag — Logo Detail">
+              <img src="product_images/tote%20bag/fleya%20tote%20bag%20logo%20close.png"
+                   alt="Logo" style="width:64px;height:78px;object-fit:cover;object-position:center;border-radius:3px;display:block;">
+            </button>
+
           </div>
 
           <!-- Main image -->
           <div id="main-image-wrap" class="relative overflow-hidden rounded-lg flex-1"
-               style="background: linear-gradient(145deg, #e8dedd 0%, #ddd0ce 100%);
+               style="background: linear-gradient(145deg, #ede6de 0%, #e0d8d0 100%);
                       box-shadow: 0 8px 48px rgba(224,130,143,0.14), 0 2px 12px rgba(42,34,32,0.07);">
             <div id="main-image" class="w-full aspect-[4/5] flex items-center justify-center relative"
                  style="transition: opacity 0.35s ease;">
-              <!-- Image color layers — switched by JS -->
-              <div id="img-black" class="absolute inset-0">
-                <img src="product_images/bagholder-zwart.jpg"
-                     alt="Fleya Bag Holder — Zwart"
-                     class="w-full h-full object-cover" style="border-radius:inherit;">
+
+              <div id="img-0" class="absolute inset-0">
+                <img src="product_images/tote%20bag/Fleya%20tote%20bag%20los.png"
+                     alt="Fleya Tote Bag — Studio"
+                     class="w-full h-full object-cover" style="border-radius:inherit;object-position:center;">
               </div>
 
-              <div id="img-gold" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
-                <img src="product_images/bagholder-goud.jpg"
-                     alt="Fleya Bag Holder — Goud"
-                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              <div id="img-1" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/tote%20bag/fleya%20tote%20bag%20vrouw.png"
+                     alt="Fleya Tote Bag — Lifestyle"
+                     class="w-full h-full object-cover" style="border-radius:inherit;object-position:center 25%;">
               </div>
 
-              <div id="img-silver" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
-                <img src="product_images/bagholder-zilver.jpg"
-                     alt="Fleya Bag Holder — Zilver"
-                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              <div id="img-2" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/tote%20bag/fleya%20tote%20bag%20grond.png"
+                     alt="Fleya Tote Bag — Flat Lay"
+                     class="w-full h-full object-cover" style="border-radius:inherit;object-position:center;">
               </div>
 
-              <div id="img-rose" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
-                <img src="product_images/bagholder-roze.jpg"
-                     alt="Fleya Bag Holder — Roze"
-                     class="w-full h-full object-cover" style="border-radius:inherit;">
+              <div id="img-3" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/tote%20bag/fleya%20tote%20bag%20binnekant.png"
+                     alt="Fleya Tote Bag — Binnenkant"
+                     class="w-full h-full object-cover" style="border-radius:inherit;object-position:center;">
+              </div>
+
+              <div id="img-4" class="absolute inset-0" style="opacity:0;transition:opacity 0.35s ease;">
+                <img src="product_images/tote%20bag/fleya%20tote%20bag%20logo%20close.png"
+                     alt="Fleya Tote Bag — Logo Detail"
+                     class="w-full h-full object-cover" style="border-radius:inherit;object-position:center;">
               </div>
             </div>
 
@@ -628,66 +614,31 @@
         <!-- Category tag -->
         <div class="flex items-center gap-3 mb-6">
           <span class="deco-line"></span>
-          <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#E0828F;">Accessoires</span>
+          <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#E0828F;">Tassen</span>
         </div>
 
         <!-- Product name -->
         <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.4rem,4vw,3.2rem);letter-spacing:0.04em;line-height:1.15;color:#2A2220;margin-bottom:16px;">
-          Fleya<br>Bag Holder
+          The Everyday<br>Tote
         </h1>
 
         <!-- Price -->
         <div class="flex items-baseline gap-3 mb-8">
-          <span style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 39,99</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 29,99</span>
           <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;color:rgba(42,34,32,0.4);text-transform:uppercase;">Incl. BTW</span>
         </div>
 
         <!-- Divider -->
         <div style="height:0.5px;background:rgba(42,34,32,0.1);margin-bottom:28px;"></div>
 
-        <!-- Color selector -->
+        <!-- Material badge row -->
         <div class="mb-8">
-          <div class="flex items-center justify-between mb-4">
-            <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Kleur</span>
-            <span id="color-label" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.14em;color:rgba(42,34,32,0.55);">Zwart</span>
+          <div class="flex items-center gap-3 mb-3">
+            <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.16em;text-transform:uppercase;color:#2A2220;">Materiaal</span>
           </div>
-          <div class="flex gap-4">
-            <!-- Black -->
-            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
-              <button class="swatch active" id="swatch-black" onclick="selectColor('black')"
-                      aria-label="Zwart"
-                      style="background: radial-gradient(circle at 35% 35%, #4a4a4a, #111111);
-                             box-shadow: 0 2px 8px rgba(0,0,0,0.25);">
-              </button>
-              <span id="cart-count-black" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
-            </div>
-            <!-- Gold -->
-            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
-              <button class="swatch" id="swatch-gold" onclick="selectColor('gold')"
-                      aria-label="Goud"
-                      style="background: radial-gradient(circle at 38% 38%, #f0d055 0%, #c89010 50%, #a07010 100%);
-                             box-shadow: 0 2px 8px rgba(184,146,42,0.3);">
-              </button>
-              <span id="cart-count-gold" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
-            </div>
-            <!-- Silver -->
-            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
-              <button class="swatch" id="swatch-silver" onclick="selectColor('silver')"
-                      aria-label="Zilver"
-                      style="background: radial-gradient(circle at 38% 38%, #d8d8d8 0%, #b4b4b4 50%, #787878 100%);
-                             box-shadow: 0 2px 8px rgba(0,0,0,0.14);">
-              </button>
-              <span id="cart-count-silver" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
-            </div>
-            <!-- Rose -->
-            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
-              <button class="swatch" id="swatch-rose" onclick="selectColor('rose')"
-                      aria-label="Roze"
-                      style="background: radial-gradient(circle at 35% 35%, #f0a0b0, #c9687a);
-                             box-shadow: 0 2px 8px rgba(224,130,143,0.35);">
-              </button>
-              <span id="cart-count-rose" style="display:none;font-family:'Jost',sans-serif;font-size:9px;font-weight:400;letter-spacing:0.08em;color:#F7F0EF;background:#E0828F;border-radius:10px;padding:1px 6px;line-height:1.6;"></span>
-            </div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(242,196,206,0.22);border-radius:4px;padding:10px 16px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.14em;color:#2A2220;">100% Biologisch katoen canvas</span>
           </div>
         </div>
 
@@ -711,7 +662,7 @@
 
         <!-- Short description -->
         <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:1.8;color:rgba(42,34,32,0.75);margin-bottom:28px;">
-          Een elegante bag holder die jouw tas veilig van de grond houdt. Gemaakt van hoogwaardig metaal met een zijdezacht afwerking — discreet, functioneel en onmisbaar.
+          Een ruime canvas tote bag met het iconische Fleya logo. Gemaakt van zwaar biologisch katoen — sterk, duurzaam en dagelijks draagbaar. Van markt tot kantoor, van weekend tot reisdag.
         </p>
 
         <!-- Trust badges row -->
@@ -719,7 +670,7 @@
              style="padding:14px 0;border-top:0.5px solid rgba(42,34,32,0.08);border-bottom:0.5px solid rgba(42,34,32,0.08);">
           <div class="flex items-center gap-2">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.55);">Premium kwaliteit</span>
+            <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(42,34,32,0.55);">Biologisch katoen</span>
           </div>
           <div class="flex items-center gap-2">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0828F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
@@ -761,11 +712,12 @@
           <div class="accordion-body" id="body-details">
             <div style="padding-bottom:20px;">
               <ul style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:2;color:rgba(42,34,32,0.7);list-style:none;">
-                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Grootte bag hanger: 51 mm</li>
-                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Materiaal: Zinklegering</li>
-                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Gewicht: ca. 108 g</li>
-                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Hangcapaciteit: 7,5 kg</li>
-                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Opvouwbaar ontwerp voor onderweg</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Materiaal: 100% biologisch katoen canvas</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Afmeting: ca. 38 × 42 cm</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Hengsellengte: ca. 25 cm</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Binnenzak met rits</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Gewicht: ca. 190 g</li>
+                <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Fleya logo opdruk in Rose Pink</li>
                 <li style="display:flex;align-items:flex-start;gap:10px;"><span style="color:#E0828F;font-size:10px;margin-top:6px;">—</span> Geleverd in Fleya signature giftbox</li>
               </ul>
             </div>
@@ -779,7 +731,7 @@
           <div class="accordion-body" id="body-care">
             <div style="padding-bottom:20px;">
               <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;letter-spacing:0.07em;line-height:1.9;color:rgba(42,34,32,0.7);">
-                Reinig met een zachte, droge doek. Vermijd contact met water, parfum en chemische reinigingsmiddelen. Bewaar in de bijgeleverde pouch om krassen te voorkomen.
+                Wasbaar op 30°C — keer de tas binnenstebuiten voor het wassen. Niet tumble-drogen; laat liggend drogen om de vorm te bewaren. Bij vlekken: bestip met mild zeepwater en laat drogen.
               </p>
             </div>
           </div>
@@ -823,19 +775,32 @@
 
     <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
-      <!-- Card 1 — Bag Holder Set (echte foto's) -->
+      <!-- Card 1 — Bag Holder -->
       <article class="related-card fade-up" style="transition-delay:0.05s;cursor:pointer;" onclick="location.href='product.html'">
         <div class="overflow-hidden rounded-lg mb-4"
              style="box-shadow:0 4px 24px rgba(224,130,143,0.1);position:relative;">
           <div class="card-img w-full aspect-[3/4]" style="position:relative;overflow:hidden;">
-            <!-- Twee foto's naast elkaar als "set" -->
+            <img src="product_images/bagholder-roze.jpg" alt="Fleya Bag Holder"
+                 style="width:100%;height:100%;object-fit:cover;object-position:center;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,34,32,0.28) 0%,transparent 55%);pointer-events:none;"></div>
+          </div>
+        </div>
+        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:#E0828F;margin-bottom:6px;">Bestseller</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">Fleya Bag Holder</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ 39,99</p>
+      </article>
+
+      <!-- Card 2 — Bag Holder Set -->
+      <article class="related-card fade-up" style="transition-delay:0.12s;cursor:pointer;" onclick="location.href='product.html'">
+        <div class="overflow-hidden rounded-lg mb-4"
+             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);position:relative;">
+          <div class="card-img w-full aspect-[3/4]" style="position:relative;overflow:hidden;">
             <div style="display:grid;grid-template-columns:1fr 1fr;height:100%;gap:2px;">
               <img src="product_images/bagholder-zwart.jpg" alt="Bag Holder Zwart"
                    style="width:100%;height:100%;object-fit:cover;object-position:center;">
               <img src="product_images/bagholder-goud.jpg" alt="Bag Holder Goud"
                    style="width:100%;height:100%;object-fit:cover;object-position:center;">
             </div>
-            <!-- overlay -->
             <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,34,32,0.28) 0%,transparent 55%);pointer-events:none;"></div>
           </div>
         </div>
@@ -844,15 +809,13 @@
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ 74,99</p>
       </article>
 
-      <!-- Card 2 — Mini Bag (binnenkort, editorial placeholder) -->
-      <article class="related-card fade-up" style="transition-delay:0.12s;">
+      <!-- Card 3 — Mini Bag (coming soon) -->
+      <article class="related-card fade-up" style="transition-delay:0.19s;">
         <div class="overflow-hidden rounded-lg mb-4"
              style="box-shadow:0 4px 24px rgba(224,130,143,0.1);">
           <div class="card-img w-full aspect-[3/4]"
                style="background:linear-gradient(160deg, #e8d8d4 0%, #d4c4c0 40%, #c8b4b0 100%);position:relative;overflow:hidden;">
-            <!-- Editorial texture layer -->
             <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 30% 40%, rgba(242,196,206,0.35) 0%, transparent 65%),radial-gradient(ellipse 50% 70% at 80% 80%, rgba(184,90,104,0.12) 0%, transparent 60%);"></div>
-            <!-- "Binnenkort" label centraal -->
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
               <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.25);">Mini</span>
               <span style="display:block;width:28px;height:0.5px;background:rgba(224,130,143,0.5);"></span>
@@ -865,21 +828,6 @@
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.4);">€ —</p>
       </article>
 
-      <!-- Card 3 — Tote Bag (live) -->
-      <article class="related-card fade-up" style="transition-delay:0.19s;cursor:pointer;" onclick="location.href='product-tote.html'">
-        <div class="overflow-hidden rounded-lg mb-4"
-             style="box-shadow:0 4px 24px rgba(224,130,143,0.1);position:relative;">
-          <div class="card-img w-full aspect-[3/4]" style="position:relative;overflow:hidden;">
-            <img src="product_images/tote%20bag/Fleya%20tote%20bag%20los.png" alt="Fleya Tote Bag"
-                 style="width:100%;height:100%;object-fit:cover;object-position:center;">
-            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,34,32,0.28) 0%,transparent 55%);pointer-events:none;"></div>
-          </div>
-        </div>
-        <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:#E0828F;margin-bottom:6px;">Nieuw</p>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">The Everyday Tote</h3>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ 29,99</p>
-      </article>
-
     </div>
   </div>
 </section>
@@ -889,7 +837,7 @@
 ════════════════════════════════════════════ -->
 <div id="mobile-sticky-cta" aria-hidden="true">
   <div>
-    <span style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 39,99</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 29,99</span>
     <span style="display:block;font-family:'Jost',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:rgba(42,34,32,0.4);">Incl. BTW</span>
   </div>
   <button onclick="handleAddToCart()"
@@ -913,39 +861,31 @@
      JAVASCRIPT
 ════════════════════════════════════════════ -->
 <script>
-  /* ── Color switcher ── */
-  const colorData = {
-    black:  { label: 'Zwart',  imgId: 'img-black',  swatchId: 'swatch-black',  thumbId: 'thumb-black' },
-    gold:   { label: 'Goud',   imgId: 'img-gold',   swatchId: 'swatch-gold',   thumbId: 'thumb-gold'  },
-    silver: { label: 'Zilver', imgId: 'img-silver', swatchId: 'swatch-silver', thumbId: 'thumb-silver'},
-    rose:   { label: 'Roze',   imgId: 'img-rose',   swatchId: 'swatch-rose',   thumbId: 'thumb-rose'  },
-  };
+  /* ── Gallery photo switcher ── */
+  const PHOTO_COUNT = 5;
+  let currentPhotoIdx = 0;
 
-  let currentColor = 'black';
-  let currentQty = 1;
-
-  function getCartQtyForColor(color) {
-    const cart = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
-    const id = 'bag-holder-' + color;
-    return cart[id] ? cart[id].qty : 0;
+  function selectPhoto(idx) {
+    if (idx === currentPhotoIdx) return;
+    document.getElementById('img-' + currentPhotoIdx).style.opacity = '0';
+    document.getElementById('thumb-' + currentPhotoIdx).classList.remove('active');
+    currentPhotoIdx = idx;
+    document.getElementById('img-' + currentPhotoIdx).style.opacity = '1';
+    document.getElementById('thumb-' + currentPhotoIdx).classList.add('active');
   }
 
-  function syncSwatchBadges() {
-    ['black', 'gold', 'silver', 'rose'].forEach(function(color) {
-      const qty = getCartQtyForColor(color);
-      const badge = document.getElementById('cart-count-' + color);
-      if (!badge) return;
-      if (qty > 0) {
-        badge.textContent = qty;
-        badge.style.display = 'inline-block';
-      } else {
-        badge.style.display = 'none';
-      }
-    });
+  /* ── Cart & qty ── */
+  const PRODUCT_ID = 'tote-bag';
+  const PRODUCT_PRICE = 29.99;
+  let currentQty = 1;
+
+  function getCartQty() {
+    const cart = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
+    return cart[PRODUCT_ID] ? cart[PRODUCT_ID].qty : 0;
   }
 
   function syncQtyStepper() {
-    const inCart = getCartQtyForColor(currentColor);
+    const inCart = getCartQty();
     currentQty = inCart > 0 ? inCart : 1;
     document.getElementById('qty-display').textContent = currentQty;
     updateAddBtn();
@@ -973,29 +913,6 @@
     updateAddBtn();
   }
 
-  function selectColor(color) {
-    if (color === currentColor) return;
-
-    // Fade out old image
-    document.getElementById(colorData[currentColor].imgId).style.opacity = '0';
-    // Remove active states
-    document.getElementById(colorData[currentColor].swatchId).classList.remove('active');
-    document.getElementById(colorData[currentColor].thumbId).classList.remove('active');
-
-    // Fade in new image
-    document.getElementById(colorData[color].imgId).style.opacity = '1';
-    // Add active states
-    document.getElementById(colorData[color].swatchId).classList.add('active');
-    document.getElementById(colorData[color].thumbId).classList.add('active');
-
-    // Update label
-    document.getElementById('color-label').textContent = colorData[color].label;
-
-    currentColor = color;
-    syncWishlistButton();
-    syncQtyStepper();
-  }
-
   /* ── Accordion ── */
   function toggleAccordion(id) {
     const btn  = document.getElementById('acc-' + id);
@@ -1013,11 +930,20 @@
 
   /* ── Cart popup ── */
   const productImages = {
-    black:  'product_images/bagholder-zwart.jpg',
-    gold:   'product_images/bagholder-goud.jpg',
-    silver: 'product_images/bagholder-zilver.jpg',
-    rose:   'product_images/bagholder-roze.jpg',
+    black:   'product_images/bagholder-zwart.jpg',
+    gold:    'product_images/bagholder-goud.jpg',
+    silver:  'product_images/bagholder-zilver.jpg',
+    rose:    'product_images/bagholder-roze.jpg',
+    natural: 'product_images/tote%20bag/Fleya%20tote%20bag%20los.png',
   };
+
+  const productLinks = {
+    'tote-bag': 'product-tote.html',
+  };
+
+  function getProductLink(item) {
+    return productLinks[item.id] || 'product.html';
+  }
 
   function popupCart() {
     return JSON.parse(localStorage.getItem('fleya-cart') || '{}');
@@ -1047,18 +973,18 @@
     }
 
     itemsEl.innerHTML = items.map(item => {
-      const imgSrc = productImages[item.colorKey] || productImages.black;
+      const imgSrc = productImages[item.colorKey] || productImages.natural;
+      const href   = getProductLink(item);
       const linePrice = (item.qty * item.price).toFixed(2).replace('.', ',');
       return `
         <div class="popup-cart-item" data-id="${item.id}">
-          <a href="product.html" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 16px rgba(224,130,143,0.12);">
+          <a href="${href}" style="display:block;border-radius:8px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 16px rgba(224,130,143,0.12);">
             <img src="${imgSrc}" alt="${item.name}" style="width:76px;height:96px;object-fit:cover;display:block;border-radius:8px;">
           </a>
           <div style="min-width:0;">
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;letter-spacing:0.04em;color:#2A2220;margin-bottom:2px;">${item.name}</h3>
-            <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.5);margin-bottom:10px;">Kleur: ${item.color}</p>
+            <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.1em;color:rgba(42,34,32,0.5);margin-bottom:10px;">${item.color ? 'Kleur: ' + item.color : ''}</p>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
-              <!-- Qty stepper -->
               <div style="display:inline-flex;align-items:center;border:0.5px solid rgba(42,34,32,0.18);border-radius:4px;overflow:hidden;">
                 <button class="popup-qty-btn" data-action="minus" data-id="${item.id}"
                   style="width:30px;height:30px;background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:#2A2220;display:flex;align-items:center;justify-content:center;transition:background-color 0.2s ease,color 0.2s ease;"
@@ -1070,7 +996,6 @@
                   onmouseover="this.style.backgroundColor='rgba(224,130,143,0.1)';this.style.color='#E0828F'"
                   onmouseout="this.style.backgroundColor='';this.style.color='#2A2220'">+</button>
               </div>
-              <!-- Price + remove -->
               <div style="display:flex;align-items:center;gap:12px;">
                 <span style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ ${linePrice}</span>
                 <button class="popup-remove-btn" data-id="${item.id}"
@@ -1102,7 +1027,6 @@
     document.body.style.overflow = '';
   }
 
-  // Delegated click handler for qty + remove buttons inside popup
   document.getElementById('cart-popup-items').addEventListener('click', function(e) {
     const qtyBtn    = e.target.closest('.popup-qty-btn');
     const removeBtn = e.target.closest('.popup-remove-btn');
@@ -1121,7 +1045,6 @@
       savePopupCart(data);
       renderPopupItems();
       syncQtyStepper();
-      syncSwatchBadges();
     }
 
     if (removeBtn) {
@@ -1131,7 +1054,6 @@
       savePopupCart(data);
       renderPopupItems();
       syncQtyStepper();
-      syncSwatchBadges();
     }
   });
 
@@ -1141,20 +1063,17 @@
 
   /* ── Add to cart ── */
   function handleAddToCart() {
-    const productId = 'bag-holder-' + currentColor;
     const cartData = JSON.parse(localStorage.getItem('fleya-cart') || '{}');
 
     if (currentQty === 0) {
-      // Remove from cart
-      delete cartData[productId];
+      delete cartData[PRODUCT_ID];
     } else {
-      // Set quantity (not add on top)
-      cartData[productId] = {
-        id: productId,
-        name: 'Fleya Bag Holder',
-        price: 39.99,
-        color: colorData[currentColor].label,
-        colorKey: currentColor,
+      cartData[PRODUCT_ID] = {
+        id: PRODUCT_ID,
+        name: 'Fleya Tote Bag',
+        price: PRODUCT_PRICE,
+        color: 'Naturel',
+        colorKey: 'natural',
         qty: currentQty
       };
     }
@@ -1171,18 +1090,16 @@
     } else {
       syncQtyStepper();
     }
-    syncSwatchBadges();
   }
 
+  /* ── Wishlist ── */
   function handleWishlist() {
     const btn = document.querySelector('.btn-outline');
     const heartSvg = btn.querySelector('svg');
     const wishlist = JSON.parse(localStorage.getItem('fleya-wishlist') || '[]');
-    const productId = 'bag-holder-' + currentColor;
-    const idx = wishlist.findIndex(p => p.id === productId);
+    const idx = wishlist.findIndex(p => p.id === PRODUCT_ID);
 
     if (idx > -1) {
-      // Already saved — remove it
       wishlist.splice(idx, 1);
       heartSvg.setAttribute('fill', 'none');
       heartSvg.setAttribute('stroke', 'currentColor');
@@ -1192,13 +1109,12 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Bewaar in verlanglijst`;
     } else {
-      // Add to wishlist
       wishlist.push({
-        id: productId,
-        name: 'Fleya Bag Holder',
-        price: 39.99,
-        color: colorData[currentColor].label,
-        colorKey: currentColor
+        id: PRODUCT_ID,
+        name: 'Fleya Tote Bag',
+        price: PRODUCT_PRICE,
+        color: 'Naturel',
+        colorKey: 'natural'
       });
       heartSvg.setAttribute('fill', '#E0828F');
       heartSvg.setAttribute('stroke', '#E0828F');
@@ -1212,7 +1128,6 @@
     localStorage.setItem('fleya-wishlist', JSON.stringify(wishlist));
     localStorage.setItem('fleya-wishlist-count', wishlist.length);
 
-    // Update navbar badge
     var badge = document.getElementById('nav-wish-badge');
     if (badge) {
       badge.textContent = wishlist.length;
@@ -1220,14 +1135,12 @@
     }
   }
 
-  // On page load, reflect wishlist state for current product/color
   function syncWishlistButton() {
     const btn = document.querySelector('.btn-outline');
     if (!btn) return;
     const heartSvg = btn.querySelector('svg');
     const wishlist = JSON.parse(localStorage.getItem('fleya-wishlist') || '[]');
-    const productId = 'bag-holder-' + currentColor;
-    const saved = wishlist.some(p => p.id === productId);
+    const saved = wishlist.some(p => p.id === PRODUCT_ID);
     if (saved) {
       heartSvg.setAttribute('fill', '#E0828F');
       heartSvg.setAttribute('stroke', '#E0828F');
@@ -1244,7 +1157,7 @@
     }
   }
 
-  // Mobile menu
+  /* ── Mobile menu ── */
   const hamburger  = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   const menuClose  = document.getElementById('mobile-menu-close');
@@ -1268,10 +1181,8 @@
   var wb = document.getElementById('nav-wish-badge');
   if (wb && wn > 0) { wb.textContent = wn; wb.style.display = 'flex'; }
 
-  // Sync wishlist button state on load
   syncWishlistButton();
   syncQtyStepper();
-  syncSwatchBadges();
 })();
 </script>
 </body>
