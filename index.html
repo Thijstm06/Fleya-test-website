@@ -508,7 +508,7 @@
         Waar elegantie intentie ontmoet.
       </p>
       <div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
-        <a href="#collection" class="btn-primary">Ontdek de Collectie</a>
+        <a href="#collection" class="btn-primary" id="hero-cta-primary">Ontdek de Collectie</a>
         <a href="about.html"  class="btn-ghost">Ons Verhaal</a>
       </div>
     </div>
@@ -1283,6 +1283,30 @@ function toggleWishlistCard(kleur) {
   var wb = document.getElementById('nav-wish-badge');
   if (wb) { wb.textContent = count; wb.style.display = count > 0 ? 'flex' : 'none'; }
 }
+</script>
+
+<script>
+// A/B test: Hero CTA — A = "Ontdek de Collectie" (control), B = "Shop de Bag Holder — €39,99" (variant)
+(function(){
+  var KEY = 'fleya-ab-hero-cta';
+  var variant = localStorage.getItem(KEY);
+  if (!variant) {
+    variant = Math.random() < 0.5 ? 'A' : 'B';
+    localStorage.setItem(KEY, variant);
+  }
+  document.body.setAttribute('data-ab-hero-cta', variant);
+  if (variant === 'B') {
+    var cta = document.getElementById('hero-cta-primary');
+    if (cta) {
+      cta.textContent = 'Shop de Bag Holder — €39,99';
+      cta.href = 'product.html';
+    }
+  }
+  console.log('[Fleya A/B] hero-cta variant:', variant);
+  document.getElementById('hero-cta-primary').addEventListener('click', function(){
+    console.log('[Fleya A/B] hero-cta click — variant:', variant);
+  });
+})();
 </script>
 
 </body>
