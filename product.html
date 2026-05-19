@@ -671,10 +671,19 @@
         </h1>
 
         <!-- Price -->
-        <div class="flex items-baseline gap-3 mb-8">
+        <div class="flex items-baseline gap-3 mb-4">
           <span style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:400;letter-spacing:0.06em;color:#2A2220;">€ 39,99</span>
           <span style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;letter-spacing:0.14em;color:rgba(42,34,32,0.4);text-transform:uppercase;">Incl. BTW</span>
         </div>
+
+        <!-- Rating badge -->
+        <a href="#reviews" onclick="document.getElementById('reviews').scrollIntoView({behavior:'smooth'});return false;"
+           style="display:inline-flex;align-items:center;gap:7px;margin-bottom:20px;text-decoration:none;cursor:pointer;">
+          <span style="color:#E0828F;font-size:13px;letter-spacing:1px;">★★★★★</span>
+          <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.06em;color:#2A2220;">4.7</span>
+          <span style="width:1px;height:10px;background:rgba(42,34,32,0.2);display:inline-block;"></span>
+          <span style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.06em;color:rgba(42,34,32,0.5);text-decoration:underline;text-underline-offset:3px;">3 beoordelingen</span>
+        </a>
 
         <!-- Divider -->
         <div style="height:0.5px;background:rgba(42,34,32,0.1);margin-bottom:28px;"></div>
@@ -913,6 +922,73 @@
         <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.25rem;letter-spacing:0.04em;color:#2A2220;margin-bottom:4px;">The Everyday Tote</h3>
         <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:rgba(42,34,32,0.65);">€ 29,99</p>
       </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     KLANTBEOORDELINGEN
+════════════════════════════════════════════ -->
+<section id="reviews" style="background:#F7F0EF;padding:80px 0;">
+  <div style="max-width:900px;margin:0 auto;padding:0 32px;">
+
+    <div style="text-align:center;margin-bottom:48px;">
+      <div style="width:40px;height:0.5px;background:#E0828F;margin:0 auto 20px;"></div>
+      <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#E0828F;margin-bottom:12px;">Klantbeoordelingen</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.2rem;letter-spacing:0.05em;color:#2A2220;margin:0 0 16px;">Wat onze klanten zeggen</h2>
+      <div style="width:40px;height:0.5px;background:#E0828F;margin:0 auto 24px;"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#2A2220;line-height:1;margin:0 0 8px;">4.7</p>
+      <div style="margin-bottom:6px;"><span style="color:#E0828F;font-size:18px;">★★★★★</span></div>
+      <p style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.12em;color:rgba(42,34,32,0.45);margin:0;">gebaseerd op 3 beoordelingen</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
+
+      <!-- Review 1 -->
+      <div style="background:#fff;border-radius:10px;padding:28px 24px;box-shadow:0 4px 24px rgba(224,130,143,0.08);border:0.5px solid rgba(224,130,143,0.18);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#F2C4CE,#E0828F);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#fff;">S</span>
+          </div>
+          <div>
+            <p style="font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.08em;color:#2A2220;margin:0 0 2px;">Sophia R.</p>
+            <p style="font-family:'Jost',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.06em;color:rgba(42,34,32,0.4);margin:0;">(nep review)</p>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;"><span style="color:#E0828F;font-size:14px;">★★★★★</span></div>
+        <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;line-height:1.75;letter-spacing:0.04em;color:rgba(42,34,32,0.75);margin:0;">"Nooit meer mijn tas op de grond in een restaurant. Hangt gewoon discreet aan de tafelrand — compact, stevig en ziet er ook nog eens mooi uit."</p>
+      </div>
+
+      <!-- Review 2 -->
+      <div style="background:#fff;border-radius:10px;padding:28px 24px;box-shadow:0 4px 24px rgba(224,130,143,0.08);border:0.5px solid rgba(224,130,143,0.18);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#F2C4CE,#E0828F);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#fff;">L</span>
+          </div>
+          <div>
+            <p style="font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.08em;color:#2A2220;margin:0 0 2px;">Laura V.</p>
+            <p style="font-family:'Jost',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.06em;color:rgba(42,34,32,0.4);margin:0;">(nep review)</p>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;"><span style="color:#E0828F;font-size:14px;">★★★★</span><span style="color:rgba(42,34,32,0.18);font-size:14px;">★</span></div>
+        <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;line-height:1.75;letter-spacing:0.04em;color:rgba(42,34,32,0.75);margin:0;">"Ziet er heel chic uit en werkt perfect. Alleen de levering duurde iets langer dan verwacht, maar het product zelf is het zeker waard."</p>
+      </div>
+
+      <!-- Review 3 -->
+      <div style="background:#fff;border-radius:10px;padding:28px 24px;box-shadow:0 4px 24px rgba(224,130,143,0.08);border:0.5px solid rgba(224,130,143,0.18);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#F2C4CE,#E0828F);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#fff;">N</span>
+          </div>
+          <div>
+            <p style="font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.08em;color:#2A2220;margin:0 0 2px;">Nina K.</p>
+            <p style="font-family:'Jost',sans-serif;font-size:9px;font-weight:300;letter-spacing:0.06em;color:rgba(42,34,32,0.4);margin:0;">(nep review)</p>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;"><span style="color:#E0828F;font-size:14px;">★★★★★</span></div>
+        <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;line-height:1.75;letter-spacing:0.04em;color:rgba(42,34,32,0.75);margin:0;">"Echt een aanrader. Ik heb hem al aan drie vriendinnen aanbevolen. De verpakking was ook erg mooi — voelt meteen als een cadeau."</p>
+      </div>
 
     </div>
   </div>
