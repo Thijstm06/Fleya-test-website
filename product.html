@@ -590,10 +590,10 @@
 
       <!-- ── LEFT: Image gallery ── -->
       <div class="sticky-image fade-up">
-        <div class="flex gap-3">
+        <div class="flex flex-col-reverse lg:flex-row gap-3">
 
-          <!-- Vertical thumbnail strip -->
-          <div class="flex flex-col gap-2.5" style="flex-shrink:0;">
+          <!-- Thumbnail strip: horizontal on mobile, vertical on desktop -->
+          <div class="flex flex-row lg:flex-col gap-2 lg:gap-2.5 overflow-x-auto pb-1 lg:pb-0" style="flex-shrink:0;scrollbar-width:none;-ms-overflow-style:none;">
             <button class="thumb-btn active" id="thumb-black" onclick="selectColor('black')"
                     aria-label="View in Zwart">
               <img src="product_images/bagholder-zwart.jpg"
